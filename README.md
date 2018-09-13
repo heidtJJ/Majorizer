@@ -12,6 +12,7 @@
   <li>Assign advisors to students</li>
   <li>Lock/unlock accounts</li>
   <li>Add curriculum</li>
+  <li>Gets alert when student <i>or</i> advisor is locked out of account.</li>
 </ul>
 <br>
 
@@ -21,6 +22,7 @@
   <li>View student course history</li>
   <li>Change student's schedule (add/remove courses)</li>
   <li>Can search students and classes</li>
+  <li>Gets alert when student is locked out of account.</li>
 </ul>
 <br>
 
