@@ -10,6 +10,8 @@
   <li>Create accounts</li>
   <li>Delete accounts</li>
   <li>Assign advisors to students</li>
+  <li>Lock/unlock accounts</li>
+  <li>Add curriculum</li>
 </ul>
 <br>
 
@@ -17,7 +19,7 @@
 <ul>
   <li>Approve/deny student major/minor addition/removal requests.</li>
   <li>View student course history</li>
-  <li>...</li>
+  <li>Change student's schedule (add/remove courses)</li>
 </ul>
 <br>
 
