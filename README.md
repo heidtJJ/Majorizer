@@ -23,6 +23,7 @@
   <li>Change student's schedule (add/remove courses)</li>
   <li>Can search students and classes</li>
   <li>Gets alert when student is locked out of account.</li>
+  <li>Request for change to drop a student.</li>
 </ul>
 <br>
 
