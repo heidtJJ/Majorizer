@@ -15,9 +15,9 @@
 
 <h2>What each <i>advisor</i> can do:</h1>
 <ul>
-  <li>View course history</li>
-  <li>View courses needed</li>
-  <li>Request to add/remove seminars/classes</li>
+  <li>Approve/deny student major/minor addition/removal requests.</li>
+  <li>View student course history</li>
+  <li>...</li>
 </ul>
 <br>
 
@@ -25,6 +25,7 @@
 <ul>
   <li>View course history</li>
   <li>View courses needed</li>
+  <li>View current schedule</li>
   <li>Request add/remove majors/minors</li>
   <li>Request to add/remove classes (to include knowledge area classes)</li>
 </ul>
@@ -34,6 +35,7 @@
 <ul>
   <li>View course history</li>
   <li>View courses needed</li>
+  <li>View current schedule</li>
   <li>Request to add/remove seminars/classes</li>
 </ul>
 
