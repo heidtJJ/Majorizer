@@ -13,6 +13,14 @@
 </ul>
 <br>
 
+<h2>What each <i>advisor</i> can do:</h1>
+<ul>
+  <li>View course history</li>
+  <li>View courses needed</li>
+  <li>Request to add/remove seminars/classes</li>
+</ul>
+<br>
+
 <h2>What each undergrad student can do:</h1>
 <ul>
   <li>View course history</li>
@@ -28,15 +36,6 @@
   <li>View courses needed</li>
   <li>Request to add/remove seminars/classes</li>
 </ul>
-<br>
-
-<h2>What each <i>grad</i> student can do:</h1>
-<ul>
-  <li>View course history</li>
-  <li>View courses needed</li>
-  <li>Request to add/remove seminars/classes</li>
-</ul>
-
 
 
 
