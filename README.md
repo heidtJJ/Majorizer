@@ -20,6 +20,7 @@
   <li>Approve/deny student major/minor addition/removal requests.</li>
   <li>View student course history</li>
   <li>Change student's schedule (add/remove courses)</li>
+  <li>Can search students and classes</li>
 </ul>
 <br>
 
@@ -30,6 +31,7 @@
   <li>View current schedule</li>
   <li>Request add/remove majors/minors</li>
   <li>Request to add/remove classes (to include knowledge area classes)</li>
+  <li>Can search classes</li>
 </ul>
 <br>
 
