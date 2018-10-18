@@ -1,104 +1,112 @@
-<html>
-    <head>
-        <title>Advisor</title>
-        <style>
-            body {
-                margin: 0;
-                text-align: center;
-            }
-            #page td {
-                padding:0; margin:0;
-            }
-            #page {
-                border-collapse: collapse;
-            }
-            ::placeholder {
-              color: white;
-            }
-            #profile {
-                border-radius: 50%;
-                height: 35px;
-                width: 35px;
-                background-color: ffffff;
-            }
-            .card {box-shadow: 0px 8px 12px 0px rgba(0,0,0,0.2); transition: 0.3s; height: 510px; width: 350px; background-color: rgba(255, 255, 255, 1); margin: auto; position: absolute; top: 0; bottom: 0; left: 0; right: 0; text-align: center; border-radius: 25px}
+<html lang="en">
+  <head>
+      <meta charset="utf-8"/>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <style type="text/css">
+        body {
+          background-color: #7a7a7a;
+        }
+        a {
+          text-decoration: none !important;
+        }
+        .card {
+          padding-bottom: 20px;
+        }
+
+        .card-img-top {
+          width: 60%;
+          height: 65%;
+        }
+
+        .h5 {
+          font-weight: bold;        
+        }
+
+        #navbar-title {
+          font-size: 1.3em !important;
+        }
+      </style>
+    </head>
+  <body >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-example">
+        
+        <div class="container-fluid">
             
-            .sidenav {
-                height: 90%;
-                width: 0px;
-                position: relative;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: #5998ff;
-                overflow-x: hidden;
-                transition: 0.5s;
-                padding-top: 60px;
-            }
+                <a class="navbar-brand" href="#">
+                  <img src="res/unnamed.png" width="32" height="35" class="d-inline-block align-top" alt="">
+                  <span id="navbar-title">Majorizer</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                
+                    <span class="navbar-toggler-icon"></span>
+                
+                </button>
+                
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
 
-            .sidenav a {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
+                <ul class="nav navbar-nav ml-auto">
 
-            .sidenav a:hover {
-                color: #f1f1f1;
-            }
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">About</a>
+                    </li>
 
-            .sidenav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                font-size: 36px;
-                margin-left: 50px;
-            }
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
 
-            @media screen and (max-height: 450px) {
-              .sidenav {padding-top: 15px;}
-              .sidenav a {font-size: 18px;}
-            }
-        </style>
-        <script>
-            function toggleNav() {
-                if (document.getElementById("mySidenav").style.width == "300px") {
-                    document.getElementById("mySidenav").style.width = "0px";
-                } else {
-                    document.getElementById("mySidenav").style.width = "300px";
-                }
-            }
-        </script>
-    <head>
-<body bgcolor="#f0f0f0">
-    <table id="page" style="width:100%">
-        <tr>
-            <td bgcolor="#5998ff" height="50" width="2%" style="padding-left: 10px; color: #ffffff; font-size: 23px"><input type="image" src="res/dehaze.png" height="30" onclick="toggleNav()"></td>
-            <td bgcolor="#5998ff" height="50" width="90%" style="padding-left: 10px; color: #ffffff; font-size: 23px">Majorizer</td>
-            <td bgcolor="#5998ff" height="50" width="6%" style="padding-left: 10px; color: #ffffff; font-size: 20px">Advisor</td>            
-            <td bgcolor="#5998ff" height="50" width="2%" align="right" style="padding-right: 7px"><input id="profile" type="image" src="res/avatar.png" alt="Avatar"></td>
-        </tr>
-    </table>
-    <div class="card" style="position: absolute; top: 0; bottom: 0; left: 0; right: 950">
-        <br>
-        <r style="font-size: 30px">Search Students</r>
-        <br><br><br>
-        <img height="350" src="res/search.png"/>
-    </div>
-    <div class="card">
-        <br>
-        <r style="font-size: 30px">My Students</r>
-        <br><br>
-    </div>
-    <div class="card" style="position: absolute; top: 0; bottom: 0; left: 950; right: 0">
-        <br>
-        <r style="font-size: 30px">Switch Advisee</r>
-        <br><br>
-    </div>
-    <div id="mySidenav" class="sidenav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Students</a>                
+                    </li>
+
+                </ul>
+
+            </div>                
+        
+        </div>
+          
+    </nav>
+
+    <br>
+
+    <div class="row" style="margin:15px;">
+
+      <div class="col-sm-4 text-center rounded">
+        <div class="card">
+          <a href="www.google.com">
+            <div class="card-body">
+              <h4 class="card-title" ><strong>Search Undergrad Students</strong></h5>
+            </div>
+            <img class="card-img-top" src="res/unnamed.png" alt="Card image cap">
+          </a>
+        </div>
+      </div>
+      
+      <div class="col-sm-4 text-center rounded">
+        <div class="card">
+          <a href="https://www.google.com">
+            <div class="card-body">
+              <h4 class="card-title"><strong>Search Grad Students</strong></h5>
+            </div>
+            <img class="card-img-top" src="res/unnamed.png" alt="Card image cap">
+          </a>
+        </div>
+      </div>
+      
+      <div class="col-sm-4 text-center rounded">
+        <div class="card">
+          <a href="https://www.google.com">
+            <div class="card-body">
+              <h4 class="card-title"><strong>Search Students</strong></h5>
+            </div>
+            <img class="card-img-top" src="res/unnamed.png" alt="Card image cap">
+          </a>
+        </div>
+      </div>
 
     </div>
-</body>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
