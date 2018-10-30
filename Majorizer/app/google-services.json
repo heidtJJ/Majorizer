@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "722003703017",
+    "firebase_url": "https://majorizor-70884.firebaseio.com",
+    "project_id": "majorizor-70884",
+    "storage_bucket": "majorizor-70884.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722003703017:android:36a171b7beee8cb0",
+        "android_client_info": {
+          "package_name": "com.teamrocket.majorizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722003703017-g7q2uutn76i68q1n5ka9q0t53ta6ctne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamrocket.majorizer",
+            "certificate_hash": "b12ecdb37512e54de2816ee3f906315011bb0b28"
+          }
+        },
+        {
+          "client_id": "722003703017-krsmlu0p36eltkmj5khsp25trgppmoj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnrtGgc78muhHCTMbuju_Rd--JnwunFLc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722003703017-krsmlu0p36eltkmj5khsp25trgppmoj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
