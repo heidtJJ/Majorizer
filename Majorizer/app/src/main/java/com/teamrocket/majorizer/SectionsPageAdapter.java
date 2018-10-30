@@ -14,13 +14,13 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragmentList;
     private final List<String> fragTitleList;
 
-    public SectionsPageAdapter(FragmentManager fragmentManager){
+    public SectionsPageAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         fragmentList = new ArrayList<>();
         fragTitleList = new ArrayList<>();
     }
 
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title) {
         fragmentList.add(fragment);
         fragTitleList.add(title);
     }
@@ -38,6 +38,6 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-       return fragmentList.size();
+        return fragmentList.size();
     }
 }
