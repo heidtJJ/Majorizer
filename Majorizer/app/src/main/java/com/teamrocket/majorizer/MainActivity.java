@@ -31,16 +31,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_dashboard_black_24dp);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_notifications_black_24dp);
-
-
     }
 
     // adds fragments to SectionsPageAdapter and give titles.
     public void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        sectionsPageAdapter.addFragment(new Tab1Fragment(), getResources().getString(R.string.tab_text_1));
-        sectionsPageAdapter.addFragment(new Tab2Fragment(), getResources().getString(R.string.tab_text_2));
-        sectionsPageAdapter.addFragment(new Tab3Fragment(), getResources().getString(R.string.tab_text_3));
+        sectionsPageAdapter.addFragment(new Tab1Fragment(), getResources().getString(R.string.title_home));
+        sectionsPageAdapter.addFragment(new Tab2Fragment(), getResources().getString(R.string.title_dashboard));
+        sectionsPageAdapter.addFragment(new Tab3Fragment(), getResources().getString(R.string.title_notifications));
         viewPager.setAdapter(sectionsPageAdapter);
     }
 

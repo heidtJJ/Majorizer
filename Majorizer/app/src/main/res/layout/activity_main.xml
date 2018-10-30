@@ -35,19 +35,19 @@
                 android:id="@+id/homeTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_1" />
+                android:text="@string/title_home" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/modulesTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_2" />
+                android:text="@string/title_dashboard" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/profileTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_3"
+                android:text="@string/title_notifications"
                 app:tabMode="scrollable" />
 
         </android.support.design.widget.TabLayout>
