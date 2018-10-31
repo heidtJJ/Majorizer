@@ -13,21 +13,21 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:contentDescription="@string/grad_cap"
-        app:layout_constraintBottom_toTopOf="@+id/UsernameField"
+        app:layout_constraintBottom_toTopOf="@+id/ClarksonIDField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/gradcap" />
 
     <EditText
-        android:id="@+id/UsernameField"
+        android:id="@+id/ClarksonIDField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint="@string/clarkson_id"
+        android:hint="@string/ClarksonId"
         android:inputType="textPersonName"
         android:padding="14dp"
         android:textColor="#000000"
@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/Password"
         android:inputType="textPassword"
         android:padding="14dp"
         android:textSize="25sp"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernameField" />
+        app:layout_constraintTop_toBottomOf="@+id/ClarksonIDField" />
 
     <Button
         android:id="@+id/LoginButton"
@@ -66,7 +66,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="50dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="login"
+        android:onClick="Login"
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="20sp"

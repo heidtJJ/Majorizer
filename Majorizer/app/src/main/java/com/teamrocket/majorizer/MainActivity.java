@@ -12,13 +12,15 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPageAdapter sectionsPageAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
+    private String clarksonId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        clarksonId = getIntent().getStringExtra(getText(R.string.ClarksonId).toString());
+
+        mTextMessage = findViewById(R.id.message);
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.

@@ -5,8 +5,13 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="login">LOGIN</string>
-    <string name="password">Password</string>
-    <string name="clarkson_id">Clarkson ID</string>
+    <string name="Password">Password</string>
+    <string name="ClarksonId">Clarkson ID</string>
     <string name="grad_cap">Graduation Cap</string>
+    <string name="Accounts">Accounts</string>
+    <string name="AccountType">Account Type</string>
+    <string name="CourseHistory">Course History</string>
+    <string name="CurrentCourses">Current Courses</string>
+    <string name="LoginAttempts">LoginAttempts</string>
 
 </resources>
