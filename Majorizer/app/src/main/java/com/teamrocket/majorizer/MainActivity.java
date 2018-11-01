@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         sectionsPageAdapter.addFragment(new Tab1Fragment(), getResources().getString(R.string.title_home));
-        sectionsPageAdapter.addFragment(new Tab2Fragment(), getResources().getString(R.string.title_dashboard));
+        sectionsPageAdapter.addFragment(new Tab2Fragment(), getResources().getString(R.string.title_account));
         sectionsPageAdapter.addFragment(new Tab3Fragment(), getResources().getString(R.string.title_notifications));
         viewPager.setAdapter(sectionsPageAdapter);
     }
