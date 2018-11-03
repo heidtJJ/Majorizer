@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Tab1Fragment extends Fragment {
-    private static final String TAG = "Tab1Fragment";
+public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
 
     @Nullable
     @Override
