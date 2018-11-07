@@ -1,6 +1,5 @@
 package com.teamrocket.majorizer.UserGroups;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -11,11 +10,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.teamrocket.majorizer.AdminMainActivity;
-import com.teamrocket.majorizer.DatabaseManager;
-import com.teamrocket.majorizer.LoginActivity;
+import com.teamrocket.majorizer.MainActivity;
+import com.teamrocket.majorizer.AppUtility.DatabaseManager;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.Utility;
+import com.teamrocket.majorizer.AppUtility.Utility;
 
 public class Account {
     private static final String BAD_CREDENTIALS = "Your username and/or password was incorrect!";
@@ -76,7 +74,7 @@ public class Account {
         // Make query to Firebase database to validate user.
         FirebaseDatabase.getInstance().getReference("/" + view.getContext().getText(R.string.Accounts) + "/" + enteredClarksonID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshot) {
                 Context context = view.getContext();
                 // Check if this clarkson ID exists in the database under /Accounts.
                 if (dataSnapshot.getChildrenCount() == 0) {
@@ -91,7 +89,7 @@ public class Account {
                 String actualPassword = dataSnapshot.child("/" + context.getText(R.string.Password)).getValue().toString();
                 if (actualPassword.equals(enteredPassword)) {
                     // Entered password is correct. Advance to main activity.
-                    Intent mainActivity = new Intent(context, AdminMainActivity.class);
+                    Intent mainActivity = new Intent(context, MainActivity.class);
 
                     // Reset the user's number of login attempts.
                     databaseManager.resetLoginAttempts(dataSnapshot, enteredClarksonID, view);
@@ -107,7 +105,7 @@ public class Account {
 
                     // Startup the main activity.
                     context.startActivity(mainActivity);
-                    ((Activity) context).finish();
+                    //((Activity) context).finish();
                 } else {
                     // Entered password was incorrect. Notify user.
                     Toast.makeText(context, BAD_CREDENTIALS, Toast.LENGTH_SHORT).show();
@@ -118,7 +116,7 @@ public class Account {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(final DatabaseError databaseError) {
                 // Database query was not successful.
                 Toast.makeText(view.getContext(), BAD_QUERY, Toast.LENGTH_SHORT).show();
             }

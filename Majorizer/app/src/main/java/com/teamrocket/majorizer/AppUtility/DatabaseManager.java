@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.AppUtility;
 
 import android.content.res.Resources;
 import android.view.View;
@@ -7,13 +7,14 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.teamrocket.majorizer.R;
 
 public class DatabaseManager {
 
     private static final int NUM_LOCKED_OUT_ATTEMPTS = 3;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-    public boolean isUserLockedOut(DataSnapshot dataSnapshot, final View view) {
+    public boolean isUserLockedOut(final DataSnapshot dataSnapshot, final View view) {
         Resources resources = view.getResources();
         // Check if this user is already locked out. Admins will not have LoginAttempts in their account fields.
         if (dataSnapshot.hasChild(resources.getString(R.string.LoginAttempts))) {
@@ -32,7 +33,7 @@ public class DatabaseManager {
         return false;
     }
 
-    public void incrementLoginAttempts(DataSnapshot dataSnapshot, String enteredClarksonId, final View view) {
+    public void incrementLoginAttempts(final DataSnapshot dataSnapshot, final String enteredClarksonId, final View view) {
         Resources resources = view.getResources();
         // Check if database has a LoginAttempts field for this user. Admins will not have this field.
         if (dataSnapshot.hasChild(view.getResources().getString(R.string.LoginAttempts))) {
@@ -47,7 +48,7 @@ public class DatabaseManager {
         }
     }
 
-    public void resetLoginAttempts(DataSnapshot dataSnapshot, String enteredClarksonId, final View view) {
+    public void resetLoginAttempts(final DataSnapshot dataSnapshot, final String enteredClarksonId, final View view) {
         Resources resources = view.getResources();
         // Check if database has a LoginAttempts field for this user. Admins will not have this field.
         if (dataSnapshot.hasChild(resources.getString(R.string.LoginAttempts))) {

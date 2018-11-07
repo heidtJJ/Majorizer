@@ -8,13 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class NotificationsFragment extends Fragment {
-    private static final String TAG = "NotificationsFragment";
+public class AdminNotificationsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notifications_fragment, container, false);
+        View view = inflater.inflate(R.layout.admin_notifications_fragment, container, false);
 
         return view;
     }

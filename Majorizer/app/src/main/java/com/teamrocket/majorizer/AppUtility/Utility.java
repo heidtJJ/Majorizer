@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.AppUtility;
 
 import android.content.Context;
 import android.view.View;

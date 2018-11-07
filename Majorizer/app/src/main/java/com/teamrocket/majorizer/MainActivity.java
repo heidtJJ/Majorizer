@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-public class AdminMainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private SectionsPageAdapter sectionsPageAdapter;
@@ -18,6 +18,7 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        clarksonId = getIntent().getStringExtra(getText(R.string.ClarksonId).toString());
         clarksonId = getIntent().getStringExtra(getText(R.string.ClarksonId).toString());
 
         mTextMessage = findViewById(R.id.message);
@@ -38,9 +39,9 @@ public class AdminMainActivity extends AppCompatActivity {
     // adds fragments to SectionsPageAdapter and give titles.
     public void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        sectionsPageAdapter.addFragment(new HomeFragment(), getResources().getString(R.string.title_home));
+        sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.title_home));
         sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.title_account));
-        sectionsPageAdapter.addFragment(new NotificationsFragment(), getResources().getString(R.string.title_notifications));
+        sectionsPageAdapter.addFragment(new AdminNotificationsFragment(), getResources().getString(R.string.title_notifications));
         viewPager.setAdapter(sectionsPageAdapter);
     }
 
