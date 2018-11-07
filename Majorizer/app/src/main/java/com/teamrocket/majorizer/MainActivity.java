@@ -12,10 +12,10 @@ import com.teamrocket.majorizer.UserGroups.Account;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private SectionsPageAdapter sectionsPageAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
     private String clarksonId;
     Account.AccountType accountType;
 
@@ -25,12 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         clarksonId = getIntent().getStringExtra(getText(R.string.ClarksonId).toString());
-
         String strAccountType = getIntent().getStringExtra(getText(R.string.Type).toString());
         accountType = Utility.getAccountType(strAccountType);
 
-
-        mTextMessage = findViewById(R.id.message);
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
