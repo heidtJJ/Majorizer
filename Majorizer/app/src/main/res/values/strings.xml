@@ -1,9 +1,12 @@
 <resources>
 
+    <!-- App Strings -->
     <string name="app_name">Majorizer</string>
     <string name="title_home">Home</string>
     <string name="title_account">Account</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Login Activity Strings -->
     <string name="login">LOGIN</string>
     <string name="Password">Password</string>
     <string name="ClarksonId">Clarkson ID</string>
@@ -13,5 +16,6 @@
     <string name="CourseHistory">Course History</string>
     <string name="CurrentCourses">Current Courses</string>
     <string name="LoginAttempts">LoginAttempts</string>
+    <string name="UserLockedOut">"Your account is locked! You have exceeded the number of login attempts."</string>
 
 </resources>
