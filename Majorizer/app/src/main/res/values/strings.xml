@@ -16,6 +16,9 @@
     <string name="CourseHistory">Course History</string>
     <string name="CurrentCourses">Current Courses</string>
     <string name="LoginAttempts">LoginAttempts</string>
-    <string name="UserLockedOut">"Your account is locked! You have exceeded the number of login attempts."</string>
+    <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>
+    <string name="Type">Type</string>
+
+
 
 </resources>

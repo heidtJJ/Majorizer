@@ -23,7 +23,7 @@ public class Account {
     DatabaseManager databaseManager = new DatabaseManager();
 
     public enum AccountType {
-        UNDERGRAD, GRAD, ADVISOR, ADMIN;
+        ERROR, UNDERGRAD, GRAD, ADVISOR, ADMIN;
     }
 
     private String id = null;
