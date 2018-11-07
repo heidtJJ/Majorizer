@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Account;
 
 import static com.teamrocket.majorizer.UserGroups.Account.AccountType.ADMIN;
@@ -28,8 +27,8 @@ public final class Utility {
         }
     }
 
-    public static Account.AccountType getAccountType(final String accountType){
-        switch (accountType){
+    public static Account.AccountType getAccountType(final String accountType) {
+        switch (accountType) {
             case databaseAdminKey:
                 return ADMIN;
             case databaseAdvisorKey:

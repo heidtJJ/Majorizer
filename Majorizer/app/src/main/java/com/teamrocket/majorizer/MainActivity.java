@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.title_home));
 
         // Admins will not have account tab. They do not have any personal information.
-        if (accountType != Account.AccountType.ADMIN)
+        if (accountType == Account.AccountType.UNDERGRAD || accountType == Account.AccountType.GRAD)
             sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.title_account));
 
         // Add notifications fragment.
