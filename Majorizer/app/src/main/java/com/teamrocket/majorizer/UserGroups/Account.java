@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
 
-
     // Enum for all types of accounts.
     public enum AccountType implements Serializable {
         ERROR, UNDERGRAD, GRAD, ADVISOR, ADMIN;
@@ -16,15 +15,22 @@ public class Account implements Serializable {
     private String lastName = null;
     private String username = null;
     private AccountType accountType;
-    private boolean accountLocked = false;
 
     // SET METHODS
     public void setId(final String id) {
         this.id = id;
     }
 
-    public void setUsername(final String username) {
+    public void setUserName(final String username) {
         this.username = username;
+    }
+
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
     }
 
     public void setAccountType(final AccountType accountType) {
@@ -51,10 +57,6 @@ public class Account implements Serializable {
 
     public AccountType getAccountType() {
         return this.accountType;
-    }
-
-    public boolean isLocked() {
-        return this.accountLocked;
     }
 
 
