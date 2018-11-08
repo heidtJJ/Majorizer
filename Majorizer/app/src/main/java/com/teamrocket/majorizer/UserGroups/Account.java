@@ -1,46 +1,52 @@
 package com.teamrocket.majorizer.UserGroups;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.teamrocket.majorizer.MainActivity;
-import com.teamrocket.majorizer.AppUtility.DatabaseManager;
-import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.AppUtility.Utility;
-
 import java.io.Serializable;
 
 public class Account implements Serializable {
-    private static final String BAD_CREDENTIALS = "Your username and/or password was incorrect!";
-    private static final String EMPTY_FIELD = "Your username and/or password was empty!";
-    private static final String BAD_QUERY = "Could not verify your credentials!";
 
-    DatabaseManager databaseManager = new DatabaseManager();
 
+    // Enum for all types of accounts.
     public enum AccountType implements Serializable {
         ERROR, UNDERGRAD, GRAD, ADVISOR, ADMIN;
     }
 
+    // DATA MEMBERS
     private String id = null;
+    private String firstName = null;
+    private String lastName = null;
     private String username = null;
-    private String password = null;// PROBABLY A BAD IDEA TO HAVE THIS IN MEMORY
     private AccountType accountType;
     private boolean accountLocked = false;
 
+    // SET METHODS
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public void setUsername(final String username) {
+        this.username = username;
+    }
+
+    public void setAccountType(final AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+
+    // GET METHODS
     public String getId() {
         return this.id;
     }
 
     public String getUsername() {
         return this.username;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
     }
 
     public AccountType getAccountType() {
@@ -51,6 +57,8 @@ public class Account implements Serializable {
         return this.accountLocked;
     }
 
+
+    // SYSTEM METHODS
     public void receiveNotification() {
 
     }
@@ -59,74 +67,5 @@ public class Account implements Serializable {
 
     }
 
-    // Launch main activity if credentials are correct.
-    public void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
-        // Retrieve entered clarksonId and password from EditTexts.
-        final String enteredClarksonID = clarksonUsernameField.getText().toString();
-        final String enteredPassword = passwordField.getText().toString();
 
-        final Account account = this;
-        // Hide the keyboard for user visibility.
-        Utility.hideKeyboard(view);
-
-        // Check if either user field is empty.
-        if (enteredClarksonID.isEmpty() || enteredPassword.isEmpty()) {
-            Toast.makeText(view.getContext(), EMPTY_FIELD, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Make query to Firebase database to validate user.
-        FirebaseDatabase.getInstance().getReference("/" + view.getContext().getText(R.string.Accounts) + "/" + enteredClarksonID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                Context context = view.getContext();
-                // Check if this clarkson ID exists in the database under /Accounts.
-                if (dataSnapshot.getChildrenCount() == 0) {
-                    // Entered clarkson ID was incorrect. Notify user.
-                    Toast.makeText(context, BAD_CREDENTIALS, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (databaseManager.isUserLockedOut(dataSnapshot, view)) return;
-
-                // Check if actual password matches entered password.
-                String actualPassword = dataSnapshot.child("/" + context.getText(R.string.Password)).getValue().toString();
-                if (actualPassword.equals(enteredPassword)) {
-                    // Entered password is correct. Advance to main activity.
-                    Intent mainActivity = new Intent(context, MainActivity.class);
-
-                    // Reset the user's number of login attempts.
-                    databaseManager.resetLoginAttempts(dataSnapshot, enteredClarksonID, view);
-
-                    databaseManager.populateAccount(dataSnapshot, account);
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String key = snapshot.getKey();
-                        if (!key.equals(context.getText(R.string.CourseHistory)) && !key.equals(context.getText(R.string.CurrentCourses))) {
-                            String value = snapshot.getValue().toString();
-                            mainActivity.putExtra(key, value);
-                        }
-                    }
-
-                    mainActivity.putExtra("MyClass", account);
-                    // Startup the main activity.
-                    context.startActivity(mainActivity);
-                    //((Activity) context).finish();
-                } else {
-                    // Entered password was incorrect. Notify user.
-                    Toast.makeText(context, BAD_CREDENTIALS, Toast.LENGTH_SHORT).show();
-
-                    // If user is not an admin, increment LoginAttempts field in their account.
-                    databaseManager.incrementLoginAttempts(dataSnapshot, enteredClarksonID, view);
-                }
-            }
-
-            @Override
-            public void onCancelled(final DatabaseError databaseError) {
-                // Database query was not successful.
-                Toast.makeText(view.getContext(), BAD_QUERY, Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-    }
 }

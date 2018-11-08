@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.teamrocket.majorizer.AppUtility.Utility;
 import com.teamrocket.majorizer.UserGroups.Account;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,34 +16,16 @@ public class MainActivity extends AppCompatActivity {
 
     private Account account = null;
     Account.AccountType accountType;
-    private String clarksonId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        clarksonId = getIntent().getStringExtra(getText(R.string.ClarksonUsername).toString());
-        String strAccountType = getIntent().getStringExtra(getText(R.string.Type).toString());
 
-        // Put all of the user's data into the intent. This may save need for bandwidth use later.
-        String advisor1 = getIntent().getStringExtra("Advisor1").toString();
-        String advisor2 = getIntent().getStringExtra("Advisor2").toString();
-        String firstName = getIntent().getStringExtra("FirstName").toString();
-        String lastName = getIntent().getStringExtra("LastName").toString();
-        String major1 = getIntent().getStringExtra("Major1").toString();
-        String major2 = getIntent().getStringExtra("Major2").toString();
-        String minor1 = getIntent().getStringExtra("Minor1").toString();
-        String minor2 = getIntent().getStringExtra("Minor2").toString();
-        String username = getIntent().getStringExtra("Username").toString();
-        accountType = Utility.getAccountType(getIntent().getStringExtra("Type").toString());
         account = (Account) getIntent().getSerializableExtra("MyClass");
+        Toast.makeText(this, "ID: " + account.getId() + " firstName: " + account.getFirstName(), Toast.LENGTH_SHORT).show();
 
-
-        Toast.makeText(this, "ID: " + account.getId(), Toast.LENGTH_SHORT).show();
-
-        System.out.println("afdsasfdsfdadsad" + advisor1 + " " + advisor2 + " " + firstName + " " + lastName + " " + major1 + " " + username);
-        System.out.println("afdsasfdsfdadsad2" + major2 + " " + minor1 + " " + minor2 + " " + accountType);
 
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
@@ -52,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.container);
         setupViewPager(viewPager);
 
-        tabLayout = findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
@@ -70,19 +51,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // adds fragments to SectionsPageAdapter and give titles.
+    // Adds fragments to SectionsPageAdapter and give titles.
     public void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+
         // Add title fragment.
         sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.title_home));
 
         // Admins will not have account tab. They do not have any personal information.
-        if (accountType == Account.AccountType.UNDERGRAD || accountType == Account.AccountType.GRAD)
+        if (accountType != Account.AccountType.ADMIN)
             sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.title_account));
 
         // Add notifications fragment.
         sectionsPageAdapter.addFragment(new AdminNotificationsFragment(), getResources().getString(R.string.title_notifications));
 
+        // Set the adapter for the viewPager.
         viewPager.setAdapter(sectionsPageAdapter);
     }
 

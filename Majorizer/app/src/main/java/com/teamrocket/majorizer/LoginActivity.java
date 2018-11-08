@@ -1,5 +1,6 @@
 package com.teamrocket.majorizer;
 
+import com.teamrocket.majorizer.AppUtility.LoginManager;
 import com.teamrocket.majorizer.UserGroups.Account;
 
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText clarksonUsernameField;
     private EditText passwordField;
-    Account account = new Account();
+    LoginManager loginManager = new LoginManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(final View view) {
         // The Account login methods handles user validation, account
         // locking, and activitiy redirection, and error notifications.
-        account.Login(view, clarksonUsernameField, passwordField);
+        loginManager.Login(view, clarksonUsernameField, passwordField);
     }
 
 
