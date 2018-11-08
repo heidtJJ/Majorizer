@@ -22,12 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // Retreive the Account object passed from the LoginManager.
         account = (Account) getIntent().getSerializableExtra("MyClass");
         Toast.makeText(this, "ID: " + account.getId() + " firstName: " + account.getFirstName(), Toast.LENGTH_SHORT).show();
-
-
-        sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         viewPager = findViewById(R.id.container);
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Adds fragments to SectionsPageAdapter and give titles.
     public void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Add title fragment.
         sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.title_home));
