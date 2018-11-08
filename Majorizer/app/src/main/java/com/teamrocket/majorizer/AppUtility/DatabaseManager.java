@@ -8,11 +8,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.teamrocket.majorizer.R;
+import com.teamrocket.majorizer.UserGroups.Account;
 
-public class DatabaseManager {
+import java.io.Serializable;
+
+public class DatabaseManager implements Serializable {
 
     private static final int NUM_LOCKED_OUT_ATTEMPTS = 3;
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public boolean isUserLockedOut(final DataSnapshot dataSnapshot, final View view) {
         Resources resources = view.getResources();
@@ -56,5 +59,9 @@ public class DatabaseManager {
             mDatabase.child("/" + resources.getText(R.string.Accounts) + "/" + enteredClarksonId + "/" +
                     resources.getString(R.string.LoginAttempts)).setValue(String.valueOf(0));
         }
+    }
+
+    public void populateAccount(final DataSnapshot dataSnapshot, final Account account) {
+
     }
 }

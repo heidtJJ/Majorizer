@@ -1,5 +1,6 @@
 package com.teamrocket.majorizer.UserGroups;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -15,14 +16,16 @@ import com.teamrocket.majorizer.AppUtility.DatabaseManager;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.AppUtility.Utility;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     private static final String BAD_CREDENTIALS = "Your username and/or password was incorrect!";
     private static final String EMPTY_FIELD = "Your username and/or password was empty!";
     private static final String BAD_QUERY = "Could not verify your credentials!";
 
     DatabaseManager databaseManager = new DatabaseManager();
 
-    public enum AccountType {
+    public enum AccountType implements Serializable {
         ERROR, UNDERGRAD, GRAD, ADVISOR, ADMIN;
     }
 
@@ -32,36 +35,37 @@ public class Account {
     private AccountType accountType;
     private boolean accountLocked = false;
 
-    String getId() {
+    public String getId() {
         return this.id;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return this.username;
     }
 
-    AccountType getAccountType() {
+    public AccountType getAccountType() {
         return this.accountType;
     }
 
-    boolean isLocked() {
+    public boolean isLocked() {
         return this.accountLocked;
     }
 
-    void receiveNotification() {
+    public void receiveNotification() {
 
     }
 
-    void sendNotification() {
+    public void sendNotification() {
 
     }
 
     // Launch main activity if credentials are correct.
-    public void Login(final View view, final EditText clarksonIdField, final EditText passwordField) {
+    public void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
         // Retrieve entered clarksonId and password from EditTexts.
-        final String enteredClarksonID = clarksonIdField.getText().toString();
+        final String enteredClarksonID = clarksonUsernameField.getText().toString();
         final String enteredPassword = passwordField.getText().toString();
 
+        final Account account = this;
         // Hide the keyboard for user visibility.
         Utility.hideKeyboard(view);
 
@@ -94,7 +98,7 @@ public class Account {
                     // Reset the user's number of login attempts.
                     databaseManager.resetLoginAttempts(dataSnapshot, enteredClarksonID, view);
 
-                    // Put all of the user's data into the intent. This may save need for bandwidth use later.
+                    databaseManager.populateAccount(dataSnapshot, account);
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String key = snapshot.getKey();
                         if (!key.equals(context.getText(R.string.CourseHistory)) && !key.equals(context.getText(R.string.CurrentCourses))) {
@@ -103,6 +107,7 @@ public class Account {
                         }
                     }
 
+                    mainActivity.putExtra("MyClass", account);
                     // Startup the main activity.
                     context.startActivity(mainActivity);
                     //((Activity) context).finish();

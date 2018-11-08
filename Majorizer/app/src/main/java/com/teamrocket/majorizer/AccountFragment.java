@@ -10,14 +10,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.teamrocket.majorizer.UserGroups.Account;
+
 import java.util.ArrayList;
 
 public class AccountFragment extends Fragment {
+
+    Account account = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_account_fragment, container, false);
+
+        MainActivity account = (MainActivity) getActivity();
+
 
         ListView listView = view.findViewById(R.id.listView);
 

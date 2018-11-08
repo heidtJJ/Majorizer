@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText clarksonIdField;
+    private EditText clarksonUsernameField;
     private EditText passwordField;
     Account account = new Account();
 
@@ -19,14 +19,14 @@ public class LoginActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        clarksonIdField = findViewById(R.id.ClarksonIDField);
+        clarksonUsernameField = findViewById(R.id.UsernameField);
         passwordField = findViewById(R.id.PasswordField);
     }
 
     public void Login(final View view) {
         // The Account login methods handles user validation, account
         // locking, and activitiy redirection, and error notifications.
-        account.Login(view, clarksonIdField, passwordField);
+        account.Login(view, clarksonUsernameField, passwordField);
     }
 
 

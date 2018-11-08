@@ -9,7 +9,7 @@
     <!-- Login Activity Strings -->
     <string name="login">LOGIN</string>
     <string name="Password">Password</string>
-    <string name="ClarksonId">Clarkson ID</string>
+    <string name="ClarksonUsername">Clarkson Username</string>
     <string name="grad_cap">Graduation Cap</string>
     <string name="Accounts">Accounts</string>
     <string name="AccountType">Account Type</string>
