@@ -107,7 +107,7 @@ public class LoginManager implements Serializable {
             ((Student) account).setAdvisor1(advisor1);
 
             String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
-            if (advisor2.equals(resources.getText(R.string.NullString)))
+            if (!advisor2.equals(resources.getText(R.string.NullString)))
                 ((Student) account).setAdvisor2(advisor2);
         }
 
@@ -161,9 +161,9 @@ public class LoginManager implements Serializable {
 
     // Launch main activity if credentials are correct.
     public void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
-        // Retrieve entered clarksonId and password from EditTexts.
-        final String enteredClarksonID = clarksonUsernameField.getText().toString();
-        final String enteredPassword = passwordField.getText().toString();
+        // Retrieve entered trimmed clarksonId and password from EditTexts.
+        final String enteredClarksonID = clarksonUsernameField.getText().toString().trim();
+        final String enteredPassword = passwordField.getText().toString().trim();
 
         // Hide the keyboard for user visibility.
         Utility.hideKeyboard(view);
