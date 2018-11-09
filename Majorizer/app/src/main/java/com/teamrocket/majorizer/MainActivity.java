@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addAccount(View view) {
-        Intent mainActivity = new Intent(view.getContext(), AddAccountActivity.class);
-        view.getContext().startActivity(mainActivity);
+        Intent selectAccountActivity = new Intent(view.getContext(), SelectAccountTypeActivity.class);
+        view.getContext().startActivity(selectAccountActivity);
     }
 }

@@ -14,7 +14,6 @@ import android.widget.ListView;
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Account;
-import com.teamrocket.majorizer.UserGroups.Administrator;
 import com.teamrocket.majorizer.UserGroups.Advisor;
 import com.teamrocket.majorizer.UserGroups.GradStudent;
 import com.teamrocket.majorizer.UserGroups.Student;
@@ -29,7 +28,7 @@ public class AccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.account_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
         ListView listView = view.findViewById(R.id.listView);
         ImageView imageView = view.findViewById(R.id.accountImage);
 

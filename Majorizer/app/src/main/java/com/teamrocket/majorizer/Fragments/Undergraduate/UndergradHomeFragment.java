@@ -15,7 +15,7 @@ public class UndergradHomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.undergrad_home_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_undergrad_home, container, false);
 
         return view;
     }
