@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.teamrocket.majorizer.MainActivity;
+import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Account;
 import com.teamrocket.majorizer.UserGroups.Administrator;
 import com.teamrocket.majorizer.UserGroups.Advisor;
