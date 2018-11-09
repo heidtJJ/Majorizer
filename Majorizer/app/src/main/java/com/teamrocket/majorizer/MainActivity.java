@@ -83,8 +83,17 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPageAdapter);
     }
 
-    public void addAccount(View view) {
+    public void createAccount(View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), SelectAccountTypeActivity.class);
         view.getContext().startActivity(selectAccountActivity);
+    }
+
+    public void unlockAccount(View view) {
+    }
+
+    public void searchAccount(View view) {
+    }
+
+    public void changeCourses(View view) {
     }
 }

@@ -1,121 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical|top"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-
-    <GridLayout
-        android:foregroundGravity="center"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:columnCount="2"
-        android:rowCount="2">
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:clickable="true"
+                android:onClick="unlockAccount"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/unlock" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Unlock Accounts"
-                android:textAlignment="center"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:clickable="false"
+                android:text="Unlock an\nAccount"
                 android:textStyle="bold" />
+        </FrameLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/unlock"
-                app:civ_border_color="@color/black"
-                app:civ_border_width="1dp" />
-        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
 
-        <LinearLayout
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:onClick="addAccount">
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:clickable="true"
+                android:onClick="searchAccount"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/magnifyingglassicon" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Account"
-                android:textAlignment="center"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:clickable="false"
+                android:text="Search\nAccount"
                 android:textStyle="bold" />
+        </FrameLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/addaccount"
-                app:civ_border_color="@color/black"
-                app:civ_border_width="1dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-        </LinearLayout>
+            android:layout_margin="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:clickable="true"
+                android:onClick="createAccount"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/adminicon" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Course To Semester"
-                android:textAlignment="center"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="15dp"
+                android:clickable="false"
+                android:text="Create an\nAccount"
                 android:textStyle="bold" />
+        </FrameLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/addaccount"
-                app:civ_border_color="@color/black"
-                app:civ_border_width="1dp" />
-        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:clickable="true"
+                android:onClick="changeCourses"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/book" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Course to Master Course List"
-                android:textAlignment="center"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="15dp"
+                android:clickable="false"
+                android:text="Change Courses"
                 android:textStyle="bold" />
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/addaccount"
-                app:civ_border_color="@color/black"
-                app:civ_border_width="1dp" />
-        </LinearLayout>
-
-    </GridLayout>
-
-</android.support.constraint.ConstraintLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

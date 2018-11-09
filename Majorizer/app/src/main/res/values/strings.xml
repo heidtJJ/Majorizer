@@ -35,5 +35,6 @@
     <string name="Id">Id</string>
     <string name="Department">Department</string>
 
+    <string name="PasswordRules">Passwords must have at least length 6, one lowercase letter, one uppercase letter, and one special character.</string>
 
 </resources>

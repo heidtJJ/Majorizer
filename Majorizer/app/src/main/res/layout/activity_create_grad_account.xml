@@ -12,12 +12,12 @@
         android:layout_margin="4dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:textColor="@color/black"
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Create an Advisor Account"
+            android:text="Create a Graduate Student Account"
             android:textAlignment="center"
             android:textSize="23sp"
             android:textStyle="bold" />

@@ -9,86 +9,98 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:orientation="vertical">
 
-        <FrameLayout
+        <TextView
+            android:id="@+id/titleSelectType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Which type of account would you like to create?"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1">
+            android:orientation="vertical"
+            android:weightSum="3">
 
-            <ImageButton
-                android:id="@+id/advisorButton"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:clickable="true"
-                android:onClick="createAdvisorAccount"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/advisoricon" />
+                android:layout_margin="10dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="20dp"
-                android:clickable="false"
-                android:text="Advisor"
-                android:textStyle="bold" />
-        </FrameLayout>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:clickable="true"
+                    android:onClick="createAdvisorAccount"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@mipmap/advisoricon" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:clickable="false"
+                    android:text="Advisor"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/studentButton"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:clickable="true"
-                android:onClick="createStudentAccount"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/studenticon" />
+                android:layout_margin="10dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="20dp"
-                android:clickable="false"
-                android:text="Student"
-                android:textStyle="bold" />
-        </FrameLayout>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:clickable="true"
+                    android:onClick="createStudentAccount"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@mipmap/studenticon" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:clickable="false"
+                    android:text="Student"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/adminButton"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:clickable="true"
-                android:onClick="createAdminAccount"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/adminicon" />
+                android:layout_margin="10dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="15dp"
-                android:clickable="false"
-                android:text="Administrator"
-                android:textStyle="bold" />
-        </FrameLayout>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:clickable="true"
+                    android:onClick="createAdminAccount"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@mipmap/adminicon" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:clickable="false"
+                    android:text="Administrator"
+                    android:textStyle="bold" />
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
