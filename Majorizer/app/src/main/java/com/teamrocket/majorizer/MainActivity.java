@@ -8,11 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.teamrocket.majorizer.Fragments.AccountFragment;
-import com.teamrocket.majorizer.Fragments.AdminHomeFragment;
-import com.teamrocket.majorizer.Fragments.AdminNotificationsFragment;
-import com.teamrocket.majorizer.Fragments.AdvisorHomeFragment;
-import com.teamrocket.majorizer.Fragments.GradHomeFragment;
-import com.teamrocket.majorizer.Fragments.UndergradHomeFragment;
+import com.teamrocket.majorizer.Fragments.Admin.AdminHomeFragment;
+import com.teamrocket.majorizer.Fragments.Admin.AdminNotificationsFragment;
+import com.teamrocket.majorizer.Fragments.Advisor.AdvisorHomeFragment;
+import com.teamrocket.majorizer.Fragments.Graduate.GradHomeFragment;
+import com.teamrocket.majorizer.Fragments.Undergraduate.UndergradHomeFragment;
 import com.teamrocket.majorizer.UserGroups.Account;
 import com.teamrocket.majorizer.UserGroups.Administrator;
 import com.teamrocket.majorizer.UserGroups.Advisor;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void setupViewPager(ViewPager viewPager) {
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        // Add title fragment.
+        // Add title fragment depending on the type of account.
         if (account instanceof Advisor)
             sectionsPageAdapter.addFragment(new AdvisorHomeFragment(), getResources().getString(R.string.title_home));
         else if (account instanceof UndergradStudent)

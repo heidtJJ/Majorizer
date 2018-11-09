@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments;
+package com.teamrocket.majorizer.Fragments.Advisor;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 
 import com.teamrocket.majorizer.R;
 
-public class AdminNotificationsFragment extends Fragment {
+public class AdvisorHomeFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.admin_notifications_fragment, container, false);
+        View view = inflater.inflate(R.layout.advisor_home_fragment, container, false);
 
         return view;
     }
+
+
 }

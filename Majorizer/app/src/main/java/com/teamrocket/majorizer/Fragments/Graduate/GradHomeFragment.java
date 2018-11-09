@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments;
+package com.teamrocket.majorizer.Fragments.Graduate;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.teamrocket.majorizer.R;
 
-public class AdvisorHomeFragment extends Fragment {
+public class GradHomeFragment extends Fragment {
 
     @Nullable
     @Override

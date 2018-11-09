@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments;
+package com.teamrocket.majorizer.Fragments.Undergraduate;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
