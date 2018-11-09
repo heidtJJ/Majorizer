@@ -29,6 +29,11 @@
     <string name="Minor1">Minor1</string>
     <string name="Minor2">Minor2</string>
     <string name="Username">Username</string>
+    <string name="NullString">NULL</string>
+    <string name="StudentUserNames">StudentUsernames</string>
+    <string name="StudentNames">StudentNames</string>
+    <string name="Id">Id</string>
+    <string name="Department">Department</string>
 
 
 </resources>

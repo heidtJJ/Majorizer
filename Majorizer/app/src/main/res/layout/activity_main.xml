@@ -33,22 +33,22 @@
 
             <android.support.design.widget.TabItem
                 android:id="@+id/homeTab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/title_home" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/modulesTab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_account" />
-
-            <android.support.design.widget.TabItem
                 android:id="@+id/profileTab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/title_notifications"
                 app:tabMode="scrollable" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/accountTab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/title_account" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

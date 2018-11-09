@@ -7,15 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.teamrocket.majorizer.UserGroups.Account;
+import com.teamrocket.majorizer.UserGroups.Administrator;
 
 public class MainActivity extends AppCompatActivity {
 
     private SectionsPageAdapter sectionsPageAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
-    private Account account = null;
-    Account.AccountType accountType;
+    public Account account = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Retreive the Account object passed from the LoginManager.
         account = (Account) getIntent().getSerializableExtra("MyClass");
-        Toast.makeText(this, "ID: " + account.getId() + " firstName: " + account.getFirstName(), Toast.LENGTH_SHORT).show();
+
 
         // Set up the ViewPager with the sections adapter.
         viewPager = findViewById(R.id.container);
@@ -39,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up tabs depending on whether user is an admin or not. Admins have only 2 tabs.
         // Admins do not have an account tab because they do not carry any personal information.
-        if (accountType != Account.AccountType.ADMIN) {
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_dashboard_black_24dp);
-            tabLayout.getTabAt(2).setIcon(R.drawable.ic_notifications_black_24dp);
+        if (!(account instanceof Administrator)) {
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_notifications_black_24dp);
+            tabLayout.getTabAt(2).setIcon(R.drawable.ic_dashboard_black_24dp);
         } else {
             tabLayout.getTabAt(1).setIcon(R.drawable.ic_notifications_black_24dp);
         }
@@ -55,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         // Add title fragment.
         sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.title_home));
 
-        // Admins will not have account tab. They do not have any personal information.
-        if (accountType != Account.AccountType.ADMIN)
-            sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.title_account));
-
         // Add notifications fragment.
         sectionsPageAdapter.addFragment(new AdminNotificationsFragment(), getResources().getString(R.string.title_notifications));
+
+        // Admins will not have account tab. They do not have any personal information.
+        if (!(account instanceof Administrator))
+            sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.title_account));
 
         // Set the adapter for the viewPager.
         viewPager.setAdapter(sectionsPageAdapter);

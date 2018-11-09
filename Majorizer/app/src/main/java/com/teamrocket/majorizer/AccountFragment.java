@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.teamrocket.majorizer.UserGroups.Account;
+import com.teamrocket.majorizer.UserGroups.Administrator;
+import com.teamrocket.majorizer.UserGroups.Advisor;
 
 import java.util.ArrayList;
 
@@ -21,21 +24,39 @@ public class AccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.student_account_fragment, container, false);
-
-        MainActivity account = (MainActivity) getActivity();
-
-
+        View view = inflater.inflate(R.layout.account_fragment, container, false);
         ListView listView = view.findViewById(R.id.listView);
+        ImageView imageView = view.findViewById(R.id.accountImage);
 
-        ArrayList<String> list = new ArrayList<>();
+        // Get account object from the MainActivity.
+        MainActivity mainActivity = (MainActivity) getActivity();
+        account = mainActivity.account;
 
-        list.add("Yo1");
-        list.add("Yo2");
-        list.add("Yo3");
-        list.add("Yo4");list.add("Yo4");list.add("Yo4");list.add("Yo4");list.add("Yo4");list.add("Yo4");list.add("Yo4");list.add("Yo4");list.add("Yo4");
+        if (account instanceof Advisor)
+            imageView.setImageResource(R.mipmap.advisoricon);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
+        if (account instanceof Administrator)
+            imageView.setImageResource(R.mipmap.adminicon);
+
+        // Populate the userDataList with the user's information.
+        ArrayList<String> userDataList = new ArrayList<>();
+        userDataList.add("Name: " + account.getFirstName() + " " + account.getLastName());
+        userDataList.add("Clarkson ID: " + account.getId());
+        userDataList.add("Clarkson username: " + account.getUserName());
+        if (account instanceof Advisor) {
+            String studentsList = "Students: ";
+            boolean firstPass = true;
+            for (String student : ((Advisor) account).getStudents().values()) {
+                if (!firstPass) studentsList += ", ";
+                studentsList += student;
+                firstPass = false;
+            }
+            userDataList.add(studentsList);
+            userDataList.add("Department: " + ((Advisor) account).getDepartment());
+        }
+
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, userDataList);
         listView.setAdapter(arrayAdapter);
 
         return view;

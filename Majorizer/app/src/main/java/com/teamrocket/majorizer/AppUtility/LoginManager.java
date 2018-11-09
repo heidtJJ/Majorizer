@@ -22,6 +22,7 @@ import com.teamrocket.majorizer.UserGroups.Student;
 import com.teamrocket.majorizer.UserGroups.UndergradStudent;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import static com.teamrocket.majorizer.AppUtility.Utility.getAccountType;
 
@@ -88,23 +89,72 @@ public class LoginManager implements Serializable {
     public void populateAccount(final View view, final DataSnapshot dataSnapshot, Account account) {
         Resources resources = view.getResources();
 
-        if(account instanceof Student){
+        // Set all data members for the account.
+        String clarksonUserName = dataSnapshot.child(resources.getText(R.string.Username).toString()).getValue().toString();
+        account.setUserName(clarksonUserName);
 
+        String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();
+        account.setId(clarksonId);
+
+        String firstName = dataSnapshot.child(resources.getText(R.string.FirstName).toString()).getValue().toString();
+        account.setFirstName(firstName);
+
+        String lastName = dataSnapshot.child(resources.getText(R.string.LastName).toString()).getValue().toString();
+        account.setLastName(lastName);
+
+        if (account instanceof Student) {
+            String advisor1 = dataSnapshot.child(resources.getText(R.string.Advisor1).toString()).getValue().toString();
+            ((Student) account).setAdvisor1(advisor1);
+
+            String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
+            if (advisor2.equals(resources.getText(R.string.NullString)))
+                ((Student) account).setAdvisor2(advisor2);
         }
 
-        // Put all of the user's data into the intent. This may save need for bandwidth use later.
-        String clarksonUsername = dataSnapshot.child(resources.getText(R.string.Username).toString()).getValue().toString();
-        String advisor1 = dataSnapshot.child(resources.getText(R.string.Advisor1).toString()).getValue().toString();
-        String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
-        String firstName = dataSnapshot.child(resources.getText(R.string.FirstName).toString()).getValue().toString();
-        String lastName = dataSnapshot.child(resources.getText(R.string.LastName).toString()).getValue().toString();
-        String major1 = dataSnapshot.child(resources.getText(R.string.Major1).toString()).getValue().toString();
-        String major2 = dataSnapshot.child(resources.getText(R.string.Major2).toString()).getValue().toString();
-        String minor1 = dataSnapshot.child(resources.getText(R.string.Minor1).toString()).getValue().toString();
-        String minor2 = dataSnapshot.child(resources.getText(R.string.Minor2).toString()).getValue().toString();
+        if (account instanceof UndergradStudent) {
+            String major1 = dataSnapshot.child(resources.getText(R.string.Major1).toString()).getValue().toString();
+            ((UndergradStudent) account).setMajor1(major1);
 
-        String clarksonId = dataSnapshot.getKey();
-        account.setId(clarksonId);
+            String major2 = dataSnapshot.child(resources.getText(R.string.Major2).toString()).getValue().toString();
+            if (!major2.equals(resources.getText(R.string.NullString)))
+                ((UndergradStudent) account).setMajor2(major2);
+
+            String minor1 = dataSnapshot.child(resources.getText(R.string.Minor1).toString()).getValue().toString();
+            if (!minor1.equals(resources.getText(R.string.NullString)))
+                ((UndergradStudent) account).setMinor1(minor1);
+
+            String minor2 = dataSnapshot.child(resources.getText(R.string.Minor2).toString()).getValue().toString();
+            if (!minor2.equals(resources.getText(R.string.NullString)))
+                ((UndergradStudent) account).setMinor2(minor2);
+        }
+
+        if (account instanceof GradStudent) {
+            String major = dataSnapshot.child(resources.getText(R.string.Major1).toString()).getValue().toString();
+            ((GradStudent) account).setMajor(major);
+        }
+
+
+        // Populate hashmap for the advisors students. Key is student id, value is students full name.
+        if (account instanceof Advisor) {
+            // Get list of student usernames.
+            DataSnapshot studentUserNames = dataSnapshot.child(resources.getText(R.string.StudentUserNames).toString());
+            ArrayList<String> userNameList = new ArrayList();
+            for (DataSnapshot studentUserName : studentUserNames.getChildren()) {
+                String userName = studentUserName.getValue().toString();
+                userNameList.add(userName);
+            }
+            // Iterate through student names and populate map.
+            DataSnapshot studentNames = dataSnapshot.child(resources.getText(R.string.StudentNames).toString());
+            int index = 0;
+            for (DataSnapshot studentName : studentNames.getChildren()) {
+                String name = studentName.getValue().toString();
+                ((Advisor) account).addStudent(userNameList.get(index++), name);
+            }
+
+            String department = dataSnapshot.child(resources.getText(R.string.Department).toString()).getValue().toString();
+            ((Advisor) account).setDepartment(department);
+
+        }
 
     }
 
@@ -157,8 +207,6 @@ public class LoginManager implements Serializable {
                     // Determine which type of user this account is. Instantiate that Account type.
                     if (accountType.equals(Account.AccountType.ADMIN))
                         account = new Administrator();
-                    else if (accountType.equals(Account.AccountType.UNDERGRAD))
-                        account = new UndergradStudent();
                     else if (accountType.equals(Account.AccountType.UNDERGRAD))
                         account = new UndergradStudent();
                     else if (accountType.equals(Account.AccountType.GRAD))

@@ -13,7 +13,7 @@ public class Account implements Serializable {
     private String id = null;
     private String firstName = null;
     private String lastName = null;
-    private String username = null;
+    private String userName = null;
     private AccountType accountType;
 
     // SET METHODS
@@ -21,8 +21,8 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public void setUserName(final String username) {
-        this.username = username;
+    public void setUserName(final String userName) {
+        this.userName = userName;
     }
 
     public void setFirstName(final String firstName) {
@@ -43,8 +43,8 @@ public class Account implements Serializable {
         return this.id;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getUserName() {
+        return this.userName;
     }
 
     public String getFirstName() {
