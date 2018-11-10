@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments.Admin;
+package com.teamrocket.majorizer.Admin;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

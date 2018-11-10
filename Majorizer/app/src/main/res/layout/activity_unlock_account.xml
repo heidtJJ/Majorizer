@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".UnlockAccountActivity">
+    tools:context=".Admin.UnlockAccountActivity">
 
     <TextView
         android:id="@+id/titleSelectType"
@@ -39,5 +39,23 @@
         android:layout_gravity="center"
         android:onClick="unlockAccount"
         android:text="Press to Unlock Account" />
+
+    <TextView
+        android:id="@+id/lockedAccounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Locked Accounts:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/usernameListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp" />
 
 </LinearLayout>

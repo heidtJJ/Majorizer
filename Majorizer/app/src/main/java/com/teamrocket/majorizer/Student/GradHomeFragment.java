@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments.Admin;
+package com.teamrocket.majorizer.Student;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 
 import com.teamrocket.majorizer.R;
 
-public class AdminNotificationsFragment extends Fragment {
+public class GradHomeFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admin_notifications, container, false);
+        View view = inflater.inflate(R.layout.fragment_advisor_home, container, false);
 
         return view;
     }
+
+
 }

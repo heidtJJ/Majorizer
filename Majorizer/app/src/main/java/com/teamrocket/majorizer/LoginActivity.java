@@ -24,6 +24,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.PasswordField);
     }
 
+    /**
+     * This function is a listener to the login-button on the login screen.
+     * This calls the LoginManager class to log the user in, if possible.
+     *
+     * @param view the login button
+     */
     public void Login(final View view) {
         // The Account login methods handles user validation, account
         // locking, and activitiy redirection, and error notifications.

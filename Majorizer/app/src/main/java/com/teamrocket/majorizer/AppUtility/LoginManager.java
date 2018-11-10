@@ -162,7 +162,8 @@ public class LoginManager implements Serializable {
 
 
     // Launch main activity if credentials are correct.
-    public void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
+    public
+    void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
         // Retrieve entered trimmed clarksonId and password from EditTexts.
         final String enteredClarksonID = clarksonUsernameField.getText().toString().trim();
         final String enteredPassword = passwordField.getText().toString().trim();

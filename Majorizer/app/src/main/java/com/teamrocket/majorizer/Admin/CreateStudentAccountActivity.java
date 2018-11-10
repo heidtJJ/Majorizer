@@ -1,9 +1,11 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.Admin;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.teamrocket.majorizer.R;
 
 public class CreateStudentAccountActivity extends AppCompatActivity {
 

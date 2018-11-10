@@ -26,11 +26,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustPan|stateHidden" />
         <activity android:name=".SelectAccountTypeActivity" />
-        <activity android:name=".CreateStudentAccountActivity" />
-        <activity android:name=".CreateAdvisorAccountActivity" />
-        <activity android:name=".CreateUndergradActivity" />
-        <activity android:name=".CreateGradAccountActivity" />
-        <activity android:name=".UnlockAccountActivity"></activity>
+        <activity android:name=".Admin.CreateStudentAccountActivity" />
+        <activity android:name=".Admin.CreateAdvisorAccountActivity" />
+        <activity android:name=".Admin.CreateUndergradActivity" />
+        <activity android:name=".Admin.CreateGradAccountActivity" />
+        <activity android:name=".Admin.UnlockAccountActivity"></activity>
     </application>
 
 </manifest>

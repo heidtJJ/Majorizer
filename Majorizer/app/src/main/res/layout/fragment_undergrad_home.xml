@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:orientation="vertical">
 
         <LinearLayout
@@ -63,7 +64,7 @@
                     android:layout_gravity="left|center_vertical"
                     android:layout_marginLeft="12dp"
                     android:clickable="false"
-                    android:text="Graduate\nStudent"
+                    android:text="Some\nOption"
                     android:textStyle="bold" />
             </FrameLayout>
 

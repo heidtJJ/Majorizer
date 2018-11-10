@@ -1,7 +1,9 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.Admin;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.teamrocket.majorizer.R;
 
 public class CreateUndergradActivity extends AppCompatActivity {
 

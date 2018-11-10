@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments.Advisor;
+package com.teamrocket.majorizer.Student;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.teamrocket.majorizer.R;
 
-public class AdvisorHomeFragment extends Fragment {
+public class UndergradHomeFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_advisor_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_undergrad_home, container, false);
 
         return view;
     }

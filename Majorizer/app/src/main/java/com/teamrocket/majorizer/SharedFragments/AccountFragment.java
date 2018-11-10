@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.Fragments;
+package com.teamrocket.majorizer.SharedFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -57,6 +57,8 @@ public class AccountFragment extends Fragment {
             */
             userDataList.add("Department: " + ((Advisor) account).getDepartment());
         }
+
+        // Show information for student if the user is a student.
         if (account instanceof Student) {
             if (((Student) account).getAdvisor2() == null) {
                 // Student has one advisor.
@@ -67,6 +69,7 @@ public class AccountFragment extends Fragment {
                 userDataList.add("Advisor 2: " + ((Student) account).getAdvisor2());
             }
         }
+        // Show information for undergrad student if the user is a student.
         if (account instanceof UndergradStudent) {
             if (((UndergradStudent) account).getMajor2() == null) {
                 // UndergradStudent has one major.
