@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(final View view) {
         // The Account login methods handles user validation, account
         // locking, and activitiy redirection, and error notifications.
-        loginManager.Login(view, clarksonUsernameField, passwordField);
+        loginManager.Login(clarksonUsernameField, passwordField);
     }
 
 

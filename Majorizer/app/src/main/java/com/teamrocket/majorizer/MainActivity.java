@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.teamrocket.majorizer.Admin.SelectAccountTypeActivity;
 import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
 import com.teamrocket.majorizer.SharedFragments.AccountFragment;
 import com.teamrocket.majorizer.Admin.AdminHomeFragment;

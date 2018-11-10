@@ -12,14 +12,13 @@ import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Account;
 import com.teamrocket.majorizer.UserGroups.Administrator;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static com.teamrocket.majorizer.AppUtility.Utility.hideKeyboard;
 
 public class UnlockAccountActivity extends AppCompatActivity {
     private Account account = null;
 
-    private List<String> usernameList = null;
+    private List<String> lockedUsernameList = null;
     private ArrayAdapter<String> arrayAdapter = null;
 
     @Override
@@ -31,13 +30,16 @@ public class UnlockAccountActivity extends AppCompatActivity {
         account = (Account) getIntent().getSerializableExtra("MyClass");
 
         // Get list of locked accounts.
-        usernameList = ((Administrator) account).getLockedAccounts();
+        lockedUsernameList = new ArrayList<>();
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lockedUsernameList);
 
-        // Create array adapter for the list of usernames and assign it to
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, usernameList);
-        arrayAdapter.notifyDataSetChanged();
+        ((Administrator) account).getLockedAccounts(lockedUsernameList, arrayAdapter);
+
+        // Create array adapter for the list of usernames.
+
         ListView userNameListView = findViewById(R.id.usernameListView);
         userNameListView.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
     }
 
     public void unlockAccount(View view) {
@@ -51,7 +53,7 @@ public class UnlockAccountActivity extends AppCompatActivity {
             ((Administrator) account).unlockAccount(userNameToUnlock.trim(), this);
 
             // Update the UI's listview.
-            usernameList.remove(userNameToUnlock);
+            lockedUsernameList.remove(userNameToUnlock);
             arrayAdapter.notifyDataSetChanged();
 
             // Set the user's text (username field) to be empty.

@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.Admin;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.teamrocket.majorizer.Admin.CreateAdvisorAccountActivity;
 import com.teamrocket.majorizer.Admin.CreateStudentAccountActivity;
+import com.teamrocket.majorizer.R;
 
 public class SelectAccountTypeActivity extends AppCompatActivity {
 

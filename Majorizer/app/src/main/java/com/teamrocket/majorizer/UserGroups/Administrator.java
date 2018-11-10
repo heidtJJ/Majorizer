@@ -2,6 +2,7 @@ package com.teamrocket.majorizer.UserGroups;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,18 +25,18 @@ public class Administrator extends Account {
         accountsReference.setValue("0");
     }
 
-    public List<String> getLockedAccounts() {
+    public List<String> getLockedAccounts(final List<String> usernameList, final ArrayAdapter arrayAdapter) {
         DatabaseReference accountsRef = FirebaseDatabase.getInstance().getReference("/Accounts/");
         Query query = accountsRef.orderByChild("LoginAttempts").equalTo("3");
 
-        final List<String> usernameSet = new ArrayList<>();
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot username : snapshot.getChildren()) {
-                    usernameSet.add(username.getKey());
+                    usernameList.add(username.getKey());
+                    System.out.println("asffsdLocked1: " + username.getKey());
                 }
-
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -44,7 +45,7 @@ public class Administrator extends Account {
             }
         });
 
-        return usernameSet;
+        return usernameList;
     }
 
 }

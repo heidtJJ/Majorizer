@@ -162,7 +162,15 @@ public class LoginManager implements Serializable {
 
 
     // Launch main activity if credentials are correct.
-    public void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
+
+    /**
+     * If credentials are correct, create an account object of the correct type and pass this object to the main activity.
+     *
+     * @param clarksonUsernameField
+     * @param passwordField
+     */
+    public void Login(final EditText clarksonUsernameField, final EditText passwordField) {
+        final View view = clarksonUsernameField;
         // Retrieve entered trimmed clarksonId and password from EditTexts.
         final String enteredClarksonID = clarksonUsernameField.getText().toString().trim();
         final String enteredPassword = passwordField.getText().toString().trim();
