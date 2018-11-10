@@ -162,14 +162,13 @@ public class LoginManager implements Serializable {
 
 
     // Launch main activity if credentials are correct.
-    public
-    void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
+    public void Login(final View view, final EditText clarksonUsernameField, final EditText passwordField) {
         // Retrieve entered trimmed clarksonId and password from EditTexts.
         final String enteredClarksonID = clarksonUsernameField.getText().toString().trim();
         final String enteredPassword = passwordField.getText().toString().trim();
 
         // Hide the keyboard for user visibility.
-        Utility.hideKeyboard(view);
+        Utility.hideKeyboard(view.getContext(), view);
 
         // Check if either user field is empty.
         if (enteredClarksonID.isEmpty() || enteredPassword.isEmpty()) {

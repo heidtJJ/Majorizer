@@ -1,9 +1,7 @@
 package com.teamrocket.majorizer.UserGroups;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,9 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.teamrocket.majorizer.R;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static android.support.constraint.Constraints.TAG;
 

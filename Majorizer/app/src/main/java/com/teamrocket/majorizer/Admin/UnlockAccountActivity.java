@@ -14,6 +14,8 @@ import com.teamrocket.majorizer.UserGroups.Administrator;
 
 import java.util.List;
 
+import static com.teamrocket.majorizer.AppUtility.Utility.hideKeyboard;
+
 public class UnlockAccountActivity extends AppCompatActivity {
     private Account account = null;
 

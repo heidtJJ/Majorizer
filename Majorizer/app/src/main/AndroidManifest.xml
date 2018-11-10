@@ -30,7 +30,9 @@
         <activity android:name=".Admin.CreateAdvisorAccountActivity" />
         <activity android:name=".Admin.CreateUndergradActivity" />
         <activity android:name=".Admin.CreateGradAccountActivity" />
-        <activity android:name=".Admin.UnlockAccountActivity"></activity>
+        <activity
+            android:name=".Admin.UnlockAccountActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

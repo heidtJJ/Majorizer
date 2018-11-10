@@ -5,7 +5,11 @@ import java.util.Map;
 
 public class Advisor extends Account {
 
+    // This is a map of the Advisor's advisees.
+    // The key is the student's username, the value is the student's full name.
     private Map<String, String> studentsMap = new HashMap<>();
+
+    // This string is the Advisors department. Example: CS, PH, CE
     private String department;
 
     // Student map methods.

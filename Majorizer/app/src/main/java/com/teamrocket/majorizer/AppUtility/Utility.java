@@ -1,5 +1,6 @@
 package com.teamrocket.majorizer.AppUtility;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,13 +21,16 @@ public final class Utility {
     private static final String databaseGradKey = "grad";
 
     // A utility method for hiding the keyboard on the screen.
-    public static void hideKeyboard(final View view) {
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
+    public static void hideKeyboard(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * @param accountType comes from the database. It is converted into AccountType.
+     * @return the account of type AccountType based on the string given. The string
+     * accountType comes from the database.
+     */
     public static Account.AccountType getAccountType(final String accountType) {
         switch (accountType) {
             case databaseAdminKey:
