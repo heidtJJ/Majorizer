@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:clickable="true"
-                android:onClick="unlockAccount"
+                android:onClick="unlockAccountActivity"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/unlock" />
 
@@ -63,7 +63,7 @@
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginLeft="20dp"
                 android:clickable="false"
-                android:text="Search\nAccount"
+                android:text="Search\nAccounts"
                 android:textStyle="bold" />
         </FrameLayout>
 

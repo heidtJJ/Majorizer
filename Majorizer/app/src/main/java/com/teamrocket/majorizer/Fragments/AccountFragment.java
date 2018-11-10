@@ -45,7 +45,8 @@ public class AccountFragment extends Fragment {
 
         if (account instanceof Advisor) {
             imageView.setImageResource(R.mipmap.advisoricon);
-            String studentsList = "Students: ";
+            /*String studentsList = "Students: ";
+             // Show listing of students.
             boolean firstPass = true;
             for (String student : ((Advisor) account).getStudents().values()) {
                 if (!firstPass) studentsList += ", ";
@@ -53,6 +54,7 @@ public class AccountFragment extends Fragment {
                 firstPass = false;
             }
             userDataList.add(studentsList);// Add this list of advisees to the listView.
+            */
             userDataList.add("Department: " + ((Advisor) account).getDepartment());
         }
         if (account instanceof Student) {

@@ -14,13 +14,6 @@ public class SelectAccountTypeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_account_type);
-        TextView title = findViewById(R.id.titleSelectType);
-        //title.bringToFront();
-    }
-
-    public void createAdminAccount(View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), CreateAdminAccountActivity.class);
-        view.getContext().startActivity(selectAccountActivity);
     }
 
     public void createStudentAccount(View view) {

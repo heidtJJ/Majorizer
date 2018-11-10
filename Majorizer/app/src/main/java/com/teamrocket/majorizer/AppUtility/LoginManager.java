@@ -96,12 +96,6 @@ public class LoginManager implements Serializable {
         String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();
         account.setId(clarksonId);
 
-        String firstName = dataSnapshot.child(resources.getText(R.string.FirstName).toString()).getValue().toString();
-        account.setFirstName(firstName);
-
-        String lastName = dataSnapshot.child(resources.getText(R.string.LastName).toString()).getValue().toString();
-        account.setLastName(lastName);
-
         if (account instanceof Student) {
             String advisor1 = dataSnapshot.child(resources.getText(R.string.Advisor1).toString()).getValue().toString();
             ((Student) account).setAdvisor1(advisor1);
@@ -109,6 +103,14 @@ public class LoginManager implements Serializable {
             String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
             if (!advisor2.equals(resources.getText(R.string.NullString)))
                 ((Student) account).setAdvisor2(advisor2);
+        }
+
+        if (!(account instanceof Administrator)) {
+            String firstName = dataSnapshot.child(resources.getText(R.string.FirstName).toString()).getValue().toString();
+            account.setFirstName(firstName);
+
+            String lastName = dataSnapshot.child(resources.getText(R.string.LastName).toString()).getValue().toString();
+            account.setLastName(lastName);
         }
 
         if (account instanceof UndergradStudent) {

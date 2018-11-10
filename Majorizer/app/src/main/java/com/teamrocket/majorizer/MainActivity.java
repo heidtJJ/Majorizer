@@ -88,12 +88,19 @@ public class MainActivity extends AppCompatActivity {
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void unlockAccount(View view) {
+    public void unlockAccountActivity(View view) {
+        Intent selectAccountActivity = new Intent(view.getContext(), UnlockAccountActivity.class);
+        // Pass this Account object to the main activity.
+        selectAccountActivity.putExtra("MyClass", account);
+        view.getContext().startActivity(selectAccountActivity);
     }
 
     public void searchAccount(View view) {
     }
 
     public void changeCourses(View view) {
+    }
+
+    public void viewAcademicProgress(View view) {
     }
 }
