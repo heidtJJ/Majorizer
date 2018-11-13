@@ -32,7 +32,8 @@
         <activity android:name=".Admin.CreateGradAccountActivity" />
         <activity
             android:name=".Admin.UnlockAccountActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Student.UndergradTile1Activity"></activity>
     </application>
 
 </manifest>
