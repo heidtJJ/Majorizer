@@ -97,12 +97,23 @@ public class LoginManager implements Serializable {
         account.setId(clarksonId);
 
         if (account instanceof Student) {
+            // Load the student's advisors.
             String advisor1 = dataSnapshot.child(resources.getText(R.string.Advisor1).toString()).getValue().toString();
             ((Student) account).setAdvisor1(advisor1);
 
             String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
             if (!advisor2.equals(resources.getText(R.string.NullString)))
                 ((Student) account).setAdvisor2(advisor2);
+
+            // Load the student's course history.
+            DataSnapshot courseHistory = dataSnapshot.child(resources.getText(R.string.CourseHistory).toString());
+            for (DataSnapshot course : courseHistory.getChildren()) {
+                String courseCode = course.getKey();
+                String courseName = course.child("CourseName").getValue().toString();
+                String grade = course.child("Grade").getValue().toString();
+                Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
+                ((Student) account).addCourseTaken(courseName, courseCode, grade, numCredits);
+            }
         }
 
         if (!(account instanceof Administrator)) {

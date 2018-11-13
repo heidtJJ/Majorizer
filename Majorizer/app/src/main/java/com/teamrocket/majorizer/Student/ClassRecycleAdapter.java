@@ -6,27 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.R;
 import java.util.ArrayList;
-
-class ClassData {
-    private String name, grade;
-    private int credits;
-    ClassData(String name, String grade, int credits) {
-        this.name = name;
-        this.grade = grade;
-        this.credits = credits;
-    }
-    String getName() {
-        return name;
-    }
-    String getGrade() {
-        return grade;
-    }
-    int getCredits() {
-        return credits;
-    }
-}
 
 public class ClassRecycleAdapter extends RecyclerView.Adapter<ClassRecycleAdapter.ClassViewHolder> {
     private ArrayList<ClassData> data;
@@ -53,7 +36,7 @@ public class ClassRecycleAdapter extends RecyclerView.Adapter<ClassRecycleAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
-        holder.nameView.setText(data.get(position).getName());
+        holder.nameView.setText(data.get(position).getCourseName());
         holder.gradeView.setText(data.get(position).getGrade());
         holder.creditView.setText(String.valueOf(data.get(position).getCredits()));
     }

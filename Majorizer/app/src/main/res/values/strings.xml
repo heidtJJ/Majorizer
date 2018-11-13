@@ -15,13 +15,14 @@
 
     <!-- Database Keys -->
     <string name="AccountType">Account Type</string>
-    <string name="CourseHistory">Course History</string>
+    <string name="Course_History">Course History</string>
     <string name="CurrentCourses">Current Courses</string>
     <string name="LoginAttempts">LoginAttempts</string>
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>
     <string name="Type">Type</string>
     <string name="Advisor1">Advisor1</string>
     <string name="Advisor2">Advisor2</string>
+    <string name="CourseHistory">CourseHistory</string>
     <string name="FirstName">FirstName</string>
     <string name="LastName">LastName</string>
     <string name="Major1">Major1</string>

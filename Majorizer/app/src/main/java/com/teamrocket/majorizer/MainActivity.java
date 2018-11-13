@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         // Retreive the Account object passed from the LoginManager.
         account = (Account) getIntent().getSerializableExtra("MyClass");
 
-
         // Set up the ViewPager with the sections adapter.
         viewPager = findViewById(R.id.container);
         setupViewPager(viewPager);
