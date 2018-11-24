@@ -9,6 +9,17 @@
         android:layout_margin="15dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="@string/UsernameRules"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +39,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/UsernameField"
+                android:id="@+id/accountUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_row="0"
@@ -37,7 +48,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
-                android:hint="@string/Username"
+                android:hint="@string/UsernameKey"
                 android:inputType="textPersonName"
                 android:padding="5dp"
                 android:textSize="20sp" />
@@ -75,7 +86,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/PasswordField"
+                android:id="@+id/accountPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_row="0"
@@ -84,14 +95,13 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
-                android:hint="@string/Password"
+                android:hint="@string/PasswordKey"
                 android:inputType="textPassword"
                 android:padding="5dp"
                 android:textSize="20sp" />
         </GridLayout>
 
         <GridLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_row="3"
@@ -111,7 +121,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/PasswordAgainField"
+                android:id="@+id/accountPasswordRetry"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_row="0"
@@ -120,8 +130,78 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
-                android:hint="@string/Password"
+                android:hint="@string/PasswordKey"
                 android:inputType="textPassword"
+                android:padding="5dp"
+                android:textSize="20sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_marginTop="8dp"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="1">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:paddingRight="10dp"
+                android:text="First Name: "
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/accountFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/white"
+                android:hint="@string/FirstNameKey"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textSize="20sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_marginTop="8dp"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="1">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:paddingRight="10dp"
+                android:text="Last Name: "
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/accountLastName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/white"
+                android:hint="@string/LastNameKey"
+                android:inputType="textPersonName"
                 android:padding="5dp"
                 android:textSize="20sp" />
         </GridLayout>

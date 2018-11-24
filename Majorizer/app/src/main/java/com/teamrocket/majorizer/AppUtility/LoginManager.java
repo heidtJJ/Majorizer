@@ -90,7 +90,7 @@ public class LoginManager implements Serializable {
         Resources resources = view.getResources();
 
         // Set all data members for the account.
-        String clarksonUserName = dataSnapshot.child(resources.getText(R.string.Username).toString()).getValue().toString();
+        String clarksonUserName = dataSnapshot.child(resources.getText(R.string.UsernameKey).toString()).getValue().toString();
         account.setUserName(clarksonUserName);
 
         String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();
@@ -117,10 +117,10 @@ public class LoginManager implements Serializable {
         }
 
         if (!(account instanceof Administrator)) {
-            String firstName = dataSnapshot.child(resources.getText(R.string.FirstName).toString()).getValue().toString();
+            String firstName = dataSnapshot.child(resources.getText(R.string.FirstNameKey).toString()).getValue().toString();
             account.setFirstName(firstName);
 
-            String lastName = dataSnapshot.child(resources.getText(R.string.LastName).toString()).getValue().toString();
+            String lastName = dataSnapshot.child(resources.getText(R.string.LastNameKey).toString()).getValue().toString();
             account.setLastName(lastName);
         }
 
@@ -183,20 +183,20 @@ public class LoginManager implements Serializable {
     public void Login(final EditText clarksonUsernameField, final EditText passwordField) {
         final View view = clarksonUsernameField;
         // Retrieve entered trimmed clarksonId and password from EditTexts.
-        final String enteredClarksonID = clarksonUsernameField.getText().toString().trim();
+        final String enteredClarksonUsername = clarksonUsernameField.getText().toString().trim();
         final String enteredPassword = passwordField.getText().toString().trim();
 
         // Hide the keyboard for user visibility.
         Utility.hideKeyboard(view.getContext(), view);
 
         // Check if either user field is empty.
-        if (enteredClarksonID.isEmpty() || enteredPassword.isEmpty()) {
+        if (enteredClarksonUsername.isEmpty() || enteredPassword.isEmpty()) {
             Toast.makeText(view.getContext(), EMPTY_FIELD, Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Make query to Firebase database to validate user.
-        FirebaseDatabase.getInstance().getReference("/" + view.getContext().getText(R.string.Accounts) + "/" + enteredClarksonID).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("/" + view.getContext().getText(R.string.Accounts) + "/" + enteredClarksonUsername).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 Context context = view.getContext();
@@ -210,13 +210,13 @@ public class LoginManager implements Serializable {
                 if (isUserLockedOut(dataSnapshot, view)) return;
 
                 // Check if actual password matches entered password.
-                String actualPassword = dataSnapshot.child(context.getText(R.string.Password).toString()).getValue().toString();
+                String actualPassword = dataSnapshot.child(context.getText(R.string.PasswordKey).toString()).getValue().toString();
                 if (actualPassword.equals(enteredPassword)) {
                     // Entered password is correct. Advance to main activity.
                     Intent mainActivity = new Intent(context, MainActivity.class);
 
                     // Reset the user's number of login attempts.
-                    resetLoginAttempts(dataSnapshot, enteredClarksonID, view);
+                    resetLoginAttempts(dataSnapshot, enteredClarksonUsername, view);
 
                     // This account object will be passed to the MainActivity.
                     Account account = null;
@@ -247,7 +247,7 @@ public class LoginManager implements Serializable {
                     Toast.makeText(context, BAD_CREDENTIALS, Toast.LENGTH_SHORT).show();
 
                     // If user is not an admin, increment LoginAttempts field in their account.
-                    incrementLoginAttempts(dataSnapshot, enteredClarksonID, view);
+                    incrementLoginAttempts(dataSnapshot, enteredClarksonUsername, view);
                 }
             }
 

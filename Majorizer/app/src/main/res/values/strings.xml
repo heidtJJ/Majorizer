@@ -7,10 +7,10 @@
     <string name="title_notifications">Notifications</string>
 
     <!-- Login Activity Strings -->
-    <string name="login">LOGIN</string>
-    <string name="Password">Password</string>
+    <string name="Login">LOGIN</string>
+    <string name="PasswordKey">Password</string>
     <string name="ClarksonUsername">Clarkson Username</string>
-    <string name="grad_cap">Graduation Cap</string>
+    <string name="GradCap">Graduation Cap</string>
     <string name="Accounts">Accounts</string>
 
     <!-- Database Keys -->
@@ -20,22 +20,42 @@
     <string name="LoginAttempts">LoginAttempts</string>
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>
     <string name="Type">Type</string>
+    <string name="Advisor">advisor</string>
     <string name="Advisor1">Advisor1</string>
     <string name="Advisor2">Advisor2</string>
     <string name="CourseHistory">CourseHistory</string>
-    <string name="FirstName">FirstName</string>
-    <string name="LastName">LastName</string>
+    <string name="FirstNameKey">FirstName</string>
+    <string name="LastNameKey">LastName</string>
     <string name="Major1">Major1</string>
     <string name="Major2">Major2</string>
     <string name="Minor1">Minor1</string>
     <string name="Minor2">Minor2</string>
-    <string name="Username">Username</string>
+    <string name="UsernameKey">Username</string>
     <string name="NullString">NULL</string>
     <string name="StudentUserNames">StudentUsernames</string>
     <string name="StudentNames">StudentNames</string>
     <string name="Id">Id</string>
     <string name="Department">Department</string>
 
+    <!-- Create Account Page Strings -->
+    <string name="CreateAccount">Create Account</string>
+    <string name="ComputerScience">Computer Science</string>
+    <string name="ComputerScienceCode">CS</string>
+    <string name="Mathematics">Mathematics</string>
+    <string name="MathematicsCode">MA</string>
+    <string name="Physics">Physics</string>
+    <string name="PhysicsCode">PH</string>
+    <string name="ComputerEngineering">Computer Engineering</string>
     <string name="PasswordRules">Passwords must have at least length 6, one lowercase letter, one uppercase letter, and one special character.</string>
+    <string name="UsernameRules">Passwords must have six lowercase letters.</string>
+    <string name="DepartmentNotSelected">A department was not selected. Please select a department.</string>
+    <string name="PasswordMismatch">The passwords which you entered do not match!</string>
+    <string name="RequiredFieldEmpty">At least one of the fields are empty!</string>
+    <string name="InvalidUsername">The entered username must contain 6 lowercase letters!</string>
+    <string name="InvalidName">The entered first name and last name must contain letters only!</string>
+    <string name="BadCreation">Could not insert your credentials into our records! Please try again.</string>
+    <string name="UsernameExists">The username which you entered already exists! Please try again.</string>
+    <string name="SuccessfulAccountCreation">Account successfully created!</string>
+
 
 </resources>

@@ -27,7 +27,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="@color/white"
-        android:hint="@string/Username"
+        android:hint="@string/UsernameKey"
         android:inputType="text"
         android:padding="5dp"
         android:textAlignment="center"

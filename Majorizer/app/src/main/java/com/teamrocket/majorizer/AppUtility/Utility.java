@@ -19,6 +19,7 @@ public final class Utility {
     private static final String databaseAdvisorKey = "advisor";
     private static final String databaseUndergradKey = "undergrad";
     private static final String databaseGradKey = "grad";
+    private static final int requiredUsernameLength = 6;
 
     // A utility method for hiding the keyboard on the screen.
     public static void hideKeyboard(Context context, View view) {
@@ -44,6 +45,45 @@ public final class Utility {
             default:
                 return ERROR;
         }
+    }
+
+    /**
+     * Checks if an entered username is of length 6 and lowercase letters.
+     *
+     * @param username the name of the string to check.
+     * @return whether the input string is valid or not.
+     */
+    public static boolean isValidUserName(final String username) {
+        if (username.length() != requiredUsernameLength || !isLowerAlpha(username))
+            return false;
+        else
+            return true;
+    }
+
+    /**
+     * Checks if a string is lowercase and alphabetic.
+     *
+     * @param name the name of the string to check.
+     * @return whether the input string is lowercase and alphabetic or not.
+     */
+    public static boolean isLowerAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars)
+            if (!Character.isLetter(c) || Character.isUpperCase(c))
+                return false;
+
+        return true;
+    }
+
+    public static boolean isValidName(final String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars)
+            if (!Character.isLetter(c))
+                return false;
+
+        return true;
     }
 
 }
