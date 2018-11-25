@@ -12,13 +12,13 @@
         android:layout_margin="4dp"
         android:orientation="vertical">
 
-    <TextView
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Create a Graduate Student Account"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="23sp"
             android:textStyle="bold" />
 
@@ -26,6 +26,61 @@
             layout="@layout/starter_create_account"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="12dp"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="1">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:paddingRight="10dp"
+                android:text="@string/Major"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/accountMajor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioMajor1_CS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ComputerScience" />
+
+                <RadioButton
+                    android:id="@+id/radioMajor1_math"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Mathematics" />
+            </RadioGroup>
+
+        </GridLayout>
+
+        <Button
+            android:id="@+id/CreateAccountButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="bottom"
+            android:onClick="createNewGradStudentAccount"
+            android:text="@string/CreateAccount"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 

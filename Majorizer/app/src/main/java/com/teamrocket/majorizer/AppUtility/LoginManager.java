@@ -99,7 +99,8 @@ public class LoginManager implements Serializable {
         if (account instanceof Student) {
             // Load the student's advisors.
             String advisor1 = dataSnapshot.child(resources.getText(R.string.Advisor1).toString()).getValue().toString();
-            ((Student) account).setAdvisor1(advisor1);
+            if (!advisor1.equals(resources.getText(R.string.NullString)))
+                ((Student) account).setAdvisor1(advisor1);
 
             String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
             if (!advisor2.equals(resources.getText(R.string.NullString)))

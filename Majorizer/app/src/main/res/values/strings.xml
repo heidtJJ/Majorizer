@@ -21,6 +21,8 @@
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>
     <string name="Type">Type</string>
     <string name="Advisor">advisor</string>
+    <string name="Grad">grad</string>
+    <string name="Undergrad">undergrad</string>
     <string name="Advisor1">Advisor1</string>
     <string name="Advisor2">Advisor2</string>
     <string name="CourseHistory">CourseHistory</string>
@@ -48,14 +50,26 @@
     <string name="ComputerEngineering">Computer Engineering</string>
     <string name="PasswordRules">Passwords must have at least length 6, one lowercase letter, one uppercase letter, and one special character.</string>
     <string name="UsernameRules">Passwords must have six lowercase letters.</string>
+    <string name="SuccessfulAccountCreation">Account successfully created!</string>
+    <string name="Major">Major</string>
+
+    <!-- Create Account Page Error Messages -->
     <string name="DepartmentNotSelected">A department was not selected. Please select a department.</string>
-    <string name="PasswordMismatch">The passwords which you entered do not match!</string>
-    <string name="RequiredFieldEmpty">At least one of the fields are empty!</string>
     <string name="InvalidUsername">The entered username must contain 6 lowercase letters!</string>
     <string name="InvalidName">The entered first name and last name must contain letters only!</string>
     <string name="BadCreation">Could not insert your credentials into our records! Please try again.</string>
     <string name="UsernameExists">The username which you entered already exists! Please try again.</string>
-    <string name="SuccessfulAccountCreation">Account successfully created!</string>
+    <string name="RequiredFieldEmpty">At least one of the fields are empty!</string>
+    <string name="PasswordMismatch">The passwords which you entered do not match!</string>
+    <string name="MajorNotSelected">A major was not selected. Please select a major.</string>
+    <string name="FirstMajorNotSelected">A first major was not selected. Please select a major.</string>
+    <string name="SecondMajorNotSelected">A second major was not selected. Please select a major.</string>
+    <string name="FirstMinorNotSelected">A first minor was not selected. Please select a minor.</string>
+    <string name="SecondMinorNotSelected">A second minor was not selected. Please select a minor.</string>
+    <string name="SameMajorError">A student may not have the same first and second major. Please revise your selections.</string>
+    <string name="SameMinorError">A student may not have the same first and second minor. Please revise your selections.</string>
+    <string name="SameMajorMinorError">A student may not have the same major and minor. Please revise your selections.</string>
+    <string name="Minor1NotSelected">You may not choose a second minor without choosing a first minor. Please revise your selections.</string>
 
 
 </resources>

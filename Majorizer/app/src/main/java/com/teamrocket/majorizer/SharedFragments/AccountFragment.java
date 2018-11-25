@@ -60,9 +60,11 @@ public class AccountFragment extends Fragment {
 
         // Show information for student if the user is a student.
         if (account instanceof Student) {
-            if (((Student) account).getAdvisor2() == null) {
+            if (((Student) account).getAdvisor1() == null && ((Student) account).getAdvisor2() == null) {
+                userDataList.add("Advisor: No Current Advisor");
+            } else if (((Student) account).getAdvisor2() == null) {
                 // Student has one advisor.
-                userDataList.add("Advisor : " + ((Student) account).getAdvisor1());
+                userDataList.add("Advisor: " + ((Student) account).getAdvisor1());
             } else {
                 // Student has two advisors.
                 userDataList.add("Advisor 1: " + ((Student) account).getAdvisor1());
@@ -79,6 +81,18 @@ public class AccountFragment extends Fragment {
                 userDataList.add("Major 1: " + ((UndergradStudent) account).getMajor1());
                 userDataList.add("Major 2: " + ((UndergradStudent) account).getMajor2());
             }
+            int minorCount = 1;
+            if (((UndergradStudent) account).getMinor1() != null) {
+                // UndergradStudent has one major.
+                userDataList.add("Minor " + String.valueOf(minorCount) + ": " + ((UndergradStudent) account).getMinor1());
+                ++minorCount;
+            }
+            if (((UndergradStudent) account).getMinor2() != null) {
+                // UndergradStudent has one major.
+                userDataList.add("Minor " + String.valueOf(minorCount) + ": " + ((UndergradStudent) account).getMinor2());
+            }
+
+
         }
 
         // Graduate student has only one major.

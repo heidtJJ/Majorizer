@@ -10,9 +10,6 @@ import android.widget.Toast;
 import com.teamrocket.majorizer.AppUtility.AccountCreationManager;
 import com.teamrocket.majorizer.R;
 
-import static com.teamrocket.majorizer.AppUtility.Utility.isValidName;
-import static com.teamrocket.majorizer.AppUtility.Utility.isValidUserName;
-
 public class CreateAdvisorAccountActivity extends AppCompatActivity {
 
     private EditText usernameField = null;
@@ -41,11 +38,11 @@ public class CreateAdvisorAccountActivity extends AppCompatActivity {
         int radioButtonId = departmentRadioGroup.getCheckedRadioButtonId();
         String department = null;
         switch (radioButtonId) {
-            case R.id.radio_CS:
-                department = getText(R.string.ComputerScienceCode).toString();
+            case R.id.radioMajor1_CS:
+                department = getText(R.string.ComputerScience).toString();
                 break;
-            case R.id.radio_math:
-                department = getText(R.string.MathematicsCode).toString();
+            case R.id.radioMajor1_math:
+                department = getText(R.string.Mathematics).toString();
                 break;
             default:
                 // Department was not selected. Alert the user and leave this method.
@@ -55,4 +52,6 @@ public class CreateAdvisorAccountActivity extends AppCompatActivity {
 
         AccountCreationManager.createNewAdvisorAccount(this, usernameField, passwordField, passwordRetryField, firstNameField, lastNameField, department);
     }
+
+
 }
