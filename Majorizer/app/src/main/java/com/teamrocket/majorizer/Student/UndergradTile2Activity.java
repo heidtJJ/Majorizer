@@ -12,25 +12,21 @@ import com.teamrocket.majorizer.UserGroups.Student;
 
 import java.util.ArrayList;
 
-public class UndergradTile1Activity extends AppCompatActivity {
+public class UndergradTile2Activity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_undergrad_tile1);
+        setContentView(R.layout.activity_undergrad_tile2);
 
         // Retrieve needed Textviews to show user information.
-        TextView classesTakenView = findViewById(R.id.classesTakenView);
-        TextView creditsTakenView = findViewById(R.id.creditsTakenView);
-        TextView gpaView = findViewById(R.id.gpaView);
+        TextView classesRemainingView = findViewById(R.id.classesRemainingView);
+        TextView creditsRemaingingView = findViewById(R.id.creditsRemainingView);
 
         // Retrieve the Account object passed from the LoginManager.
         Student student = (Student) getIntent().getSerializableExtra("MyClass");
 
         ArrayList<ClassData> userClassList = new ArrayList<>();
-
-        // Set the text for the user's GPA, number of credits taken, and classes taken.
-        gpaView.setText(student.getGPA());
-        creditsTakenView.setText(String.valueOf(student.getCreditsTaken()));
 
         // Set all classes taken in the recycler view.
         RecyclerView cRecyclerView = findViewById(R.id.classesRecyclerView);
@@ -42,6 +38,6 @@ public class UndergradTile1Activity extends AppCompatActivity {
         RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(userClassList);
         cRecyclerView.setAdapter(cAdapter);
 
-        classesTakenView.setText(String.valueOf(userClassList.size()));
+        classesRemainingView.setText(String.valueOf(userClassList.size()));
     }
 }

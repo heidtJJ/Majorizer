@@ -42,14 +42,11 @@ public class UndergradHomeFragment extends Fragment {
         tile2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Tile2", Toast.LENGTH_SHORT).show();
+                Intent schedulerIntent = new Intent(getActivity(), UndergradTile2Activity.class);
+                schedulerIntent.putExtra("MyClass", account);
+                startActivity(schedulerIntent);
             }
         });
         return view;
     }
-
-    public void onTileOneClicked(View view) {
-
-    }
-
 }

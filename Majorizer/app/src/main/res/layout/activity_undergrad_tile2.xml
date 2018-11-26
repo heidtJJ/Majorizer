@@ -7,45 +7,45 @@
     tools:context=".Student.UndergradTile1Activity">
 
     <TextView
-        android:id="@+id/classesTakenLabel"
+        android:id="@+id/classesRemainingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Classes taken:"
+        android:text="Classes remaining:"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/classesTakenView"
+        android:id="@+id/classesRemainingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="10"
         android:textSize="22sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/classesTakenLabel"
-        app:layout_constraintStart_toEndOf="@+id/classesTakenLabel" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/classesRemainingLabel"
+        app:layout_constraintStart_toEndOf="@+id/classesRemainingLabel" />
 
     <TextView
-        android:id="@+id/creditsTakenLabel"
+        android:id="@+id/creditsRemainingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Credits taken:"
+        android:text="Credits remaining:"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classesTakenLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/classesRemainingLabel" />
 
     <TextView
-        android:id="@+id/creditsTakenView"
+        android:id="@+id/creditsRemainingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="44"
         android:textSize="22sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/creditsTakenLabel"
-        app:layout_constraintStart_toEndOf="@+id/creditsTakenLabel" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/creditsRemainingLabel"
+        app:layout_constraintStart_toEndOf="@+id/creditsRemainingLabel" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/classesRecyclerView"
@@ -55,31 +55,13 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseHistoryLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/coursesRemainingLabel" />
+
 
     <TextView
-        android:id="@+id/gpaLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="GPA:"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditsTakenLabel" />
-
-    <TextView
-        android:id="@+id/gpaView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="3.54"
-        android:textSize="22sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/gpaLabel"
-        app:layout_constraintStart_toEndOf="@+id/gpaLabel" />
-
-    <TextView
-        android:id="@+id/courseHistoryLabel"
+        android:id="@+id/coursesRemainingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -89,10 +71,10 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/divider2"
         android:layout_width="368dp"
         android:layout_height="1dp"
         android:layout_marginStart="8dp"
@@ -101,6 +83,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gpaView" />
+        app:layout_constraintTop_toBottomOf="@+id/creditsRemainingLabel" />
+
 
 </android.support.constraint.ConstraintLayout>
