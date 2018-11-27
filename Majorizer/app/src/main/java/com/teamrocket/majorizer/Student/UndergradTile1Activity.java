@@ -35,7 +35,8 @@ public class UndergradTile1Activity extends AppCompatActivity {
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
         cRecyclerView.setLayoutManager(cLayoutManager);
 
-        for (int i = 0; i < student.numCoursesTaken(); ++i) classesTakenList.add(student.getCourseInformation(i));
+        for (int i = 0; i < student.numCoursesTaken(); ++i)
+            classesTakenList.add(student.getCourseInformation(i));
 
         // Set the text for the user's number of courses/classes taken and GPA.
         String circleText = String.valueOf(classesTakenList.size()) + "\ncourses";
@@ -54,7 +55,7 @@ public class UndergradTile1Activity extends AppCompatActivity {
         gpaView.setText(ss);
 
         // Create RecyclerView with data.
-        RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(classesTakenList);
+        RecyclerView.Adapter cAdapter = new ClassDataRecycleAdapter(classesTakenList);
         cRecyclerView.setAdapter(cAdapter);
     }
 }

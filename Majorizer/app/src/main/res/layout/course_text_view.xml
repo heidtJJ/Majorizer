@@ -13,34 +13,35 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Software Design and Development"
+        android:textAlignment="center"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/classGradeLabel"
+        android:id="@+id/classCodeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Grade:"
+        android:text="Code:"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/classCreditView"
-        app:layout_constraintEnd_toStartOf="@+id/classGradeView"
+        app:layout_constraintEnd_toStartOf="@+id/classCodeView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/classCreditView" />
 
     <TextView
-        android:id="@+id/classGradeView"
+        android:id="@+id/classCodeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="A+"
+        android:text=""
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/classGradeLabel"
+        app:layout_constraintBaseline_toBaselineOf="@+id/classCodeLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/classGradeLabel" />
+        app:layout_constraintStart_toEndOf="@+id/classCodeLabel" />
 
     <TextView
         android:id="@+id/classCreditsLabel"
@@ -58,10 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="3"
+        android:text=""
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/classCreditsLabel"
-        app:layout_constraintEnd_toStartOf="@+id/classGradeLabel"
+        app:layout_constraintEnd_toStartOf="@+id/classCodeLabel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/classCreditsLabel" />
 </android.support.constraint.ConstraintLayout>

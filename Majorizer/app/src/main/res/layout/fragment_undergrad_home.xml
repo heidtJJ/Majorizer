@@ -70,7 +70,7 @@
             android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="12dp"
             android:clickable="false"
-            android:text="Scheduler"
+            android:text="Courses Needed"
             android:textStyle="bold" />
     </FrameLayout>
 

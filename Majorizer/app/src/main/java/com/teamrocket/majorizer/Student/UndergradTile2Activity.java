@@ -6,12 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.teamrocket.majorizer.AppUtility.ClassData;
-import com.teamrocket.majorizer.AppUtility.MasterCourseList;
-import com.teamrocket.majorizer.R;
+import com.teamrocket.majorizer.AppUtility.MasterCourseListUtil;
 import com.teamrocket.majorizer.UserGroups.Student;
-
-import java.util.ArrayList;
+import com.teamrocket.majorizer.R;
 
 public class UndergradTile2Activity extends AppCompatActivity {
 
@@ -20,28 +17,20 @@ public class UndergradTile2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_undergrad_tile2);
 
-        MasterCourseList masterCourseList = new MasterCourseList(this);
-
         // Retrieve needed Textviews to show user information.
         TextView classesRemainingView = findViewById(R.id.classesRemainingView);
 
         // Retrieve the Account object passed from the LoginManager.
         Student student = (Student) getIntent().getSerializableExtra("MyClass");
 
-        // Create a list for the list of classes taken.
-        ArrayList<ClassData> classesTakenList = new ArrayList<>();
-
         // Set all classes taken in the recycler view.
         RecyclerView classesTakenRecyclerView = findViewById(R.id.classesRecyclerView);
-        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
-        classesTakenRecyclerView.setLayoutManager(cLayoutManager);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        classesTakenRecyclerView.setLayoutManager(layoutManager);
 
-        for (int i = 0; i < student.numCoursesTaken(); ++i)
-            classesTakenList.add(student.getCourseInformation(i));
+        // The masterCourseList pulls the master course list from the database and populates the classesTakenRecyclerView.
+        MasterCourseListUtil masterCourseList = new MasterCourseListUtil(this, classesTakenRecyclerView);
 
-        RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(classesTakenList);
-        classesTakenRecyclerView.setAdapter(cAdapter);
-
-        classesRemainingView.setText(String.valueOf(classesTakenList.size()));
+        classesRemainingView.setText(String.valueOf(student.numCoursesTaken()));
     }
 }
