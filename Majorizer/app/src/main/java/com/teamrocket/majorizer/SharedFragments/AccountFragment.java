@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
@@ -30,21 +31,25 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         ListView listView = view.findViewById(R.id.listView);
-        ImageView imageView = view.findViewById(R.id.accountImage);
 
         // Get account object from the MainActivity.
         MainActivity mainActivity = (MainActivity) getActivity();
         account = mainActivity.account;
 
+        TextView nameView = view.findViewById(R.id.nameView);
+        TextView userNameView = view.findViewById(R.id.userNameView);
+        TextView numberView = view.findViewById(R.id.numberView);
+
+        // Populate name, user, and id number views on header
+        nameView.setText(account.getFirstName() + " " + account.getLastName());
+        userNameView.setText(account.getUserName() + "@clarkson.edu");
+        numberView.setText(account.getId());
+
         // Populate the userDataList with the user's general information.
         ArrayList<String> userDataList = new ArrayList<>();
-        userDataList.add("Name: " + account.getFirstName() + " " + account.getLastName());
-        userDataList.add("Clarkson ID: " + account.getId());
-        userDataList.add("Clarkson Username: " + account.getUserName());
 
 
         if (account instanceof Advisor) {
-            imageView.setImageResource(R.mipmap.advisoricon);
             /*String studentsList = "Students: ";
              // Show listing of students.
             boolean firstPass = true;

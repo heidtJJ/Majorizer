@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
 
 import com.teamrocket.majorizer.AppUtility.ClassData;
@@ -28,9 +30,7 @@ public class UndergradTile1Activity extends AppCompatActivity {
 
         ArrayList<ClassData> userClassList = new ArrayList<>();
 
-        // Set the text for the user's GPA, number of credits taken, and classes taken.
-        gpaView.setText(student.getGPA());
-        creditsTakenView.setText(String.valueOf(student.getCreditsTaken()));
+
 
         // Set all classes taken in the recycler view.
         RecyclerView cRecyclerView = findViewById(R.id.classesRecyclerView);
@@ -39,9 +39,24 @@ public class UndergradTile1Activity extends AppCompatActivity {
 
         for (int i = 0; i < student.numCoursesTaken(); ++i) userClassList.add(student.getCourseInformation(i));
 
+        // Set the text for the user's number of courses/classes taken and GPA.
+        String circleText = String.valueOf(userClassList.size()) + "\ncourses";
+        SpannableString ss = new SpannableString(circleText);
+        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(userClassList.size()).length(), 0);
+        classesTakenView.setText(ss);
+
+        circleText = student.getCreditsTaken() + "\ncredits";
+        ss = new SpannableString(circleText);
+        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(student.getCreditsTaken()).length(), 0);
+        creditsTakenView.setText(ss);
+
+        circleText = student.getGPA() + "\nGPA";
+        ss = new SpannableString(circleText);
+        ss.setSpan(new RelativeSizeSpan(1.7f), 0, student.getGPA().length(), 0);
+        gpaView.setText(ss);
+
+        // Create RecyclerView with data.
         RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(userClassList);
         cRecyclerView.setAdapter(cAdapter);
-
-        classesTakenView.setText(String.valueOf(userClassList.size()));
     }
 }

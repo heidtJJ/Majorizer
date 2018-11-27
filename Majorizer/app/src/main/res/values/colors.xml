@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="circleRed">#ff5c5c</color>
+    <color name="circleBlue">#5c72ff</color>
+    <color name="circleGreen">#41b67e</color>
+    <color name="test">#0000ff</color>
 </resources>
