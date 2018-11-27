@@ -9,4 +9,8 @@ public class ClassData extends Course implements Serializable {
         super(courseName, courseCode, credits);
         this.grade = grade;
     }
+
+    public String getGrade() {
+        return this.grade;
+    }
 }

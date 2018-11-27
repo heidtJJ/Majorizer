@@ -20,7 +20,7 @@ import java.util.Map;
 public class MasterCourseList {
     private final List<Course> masterCourseList = new ArrayList<>();
 
-    MasterCourseList(final Context context) {
+    public MasterCourseList(final Context context) {
         final Resources resources = context.getResources();
         // Make query to Firebase database fill master course list
         FirebaseDatabase.getInstance().getReference("/MasterCourseList").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -43,5 +43,7 @@ public class MasterCourseList {
         });
     }
 
-
+    public List<Course> getMasterCourseList() {
+        return masterCourseList;
+    }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.teamrocket.majorizer.AppUtility.ClassData;
+import com.teamrocket.majorizer.AppUtility.MasterCourseList;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Student;
 
@@ -18,6 +19,9 @@ public class UndergradTile2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_undergrad_tile2);
+
+        MasterCourseList mcl = new MasterCourseList(this);
+        System.out.println(mcl.getMasterCourseList());
 
         // Retrieve needed Textviews to show user information.
         TextView classesRemainingView = findViewById(R.id.classesRemainingView);

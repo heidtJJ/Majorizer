@@ -1,6 +1,8 @@
 package com.teamrocket.majorizer.AppUtility;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String courseName = null;
     private String courseCode = null;
     private int credits;
