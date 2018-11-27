@@ -26,18 +26,19 @@ public class UndergradTile2Activity extends AppCompatActivity {
         // Retrieve the Account object passed from the LoginManager.
         Student student = (Student) getIntent().getSerializableExtra("MyClass");
 
-        ArrayList<ClassData> userClassList = new ArrayList<>();
+        // Create a list for the list of classes taken.
+        ArrayList<ClassData> classesTakenList = new ArrayList<>();
 
         // Set all classes taken in the recycler view.
         RecyclerView cRecyclerView = findViewById(R.id.classesRecyclerView);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
         cRecyclerView.setLayoutManager(cLayoutManager);
 
-        for (int i = 0; i < student.numCoursesTaken(); ++i) userClassList.add(student.getCourseInformation(i));
+        for (int i = 0; i < student.numCoursesTaken(); ++i) classesTakenList.add(student.getCourseInformation(i));
 
-        RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(userClassList);
+        RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(classesTakenList);
         cRecyclerView.setAdapter(cAdapter);
 
-        classesRemainingView.setText(String.valueOf(userClassList.size()));
+        classesRemainingView.setText(String.valueOf(classesTakenList.size()));
     }
 }

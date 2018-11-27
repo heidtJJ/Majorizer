@@ -20,7 +20,6 @@ public class Student extends Account {
     // in each index. These arrays will always be the same length.
     private final List<ClassData> coursesTakenList = new ArrayList<>();
 
-
     // GET METHODS
     public String getAdvisor1() {
         return this.advisor1;
