@@ -32,15 +32,15 @@ public class UndergradTile2Activity extends AppCompatActivity {
         ArrayList<ClassData> classesTakenList = new ArrayList<>();
 
         // Set all classes taken in the recycler view.
-        RecyclerView cRecyclerView = findViewById(R.id.classesRecyclerView);
+        RecyclerView classesTakenRecyclerView = findViewById(R.id.classesRecyclerView);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
-        cRecyclerView.setLayoutManager(cLayoutManager);
+        classesTakenRecyclerView.setLayoutManager(cLayoutManager);
 
         for (int i = 0; i < student.numCoursesTaken(); ++i)
             classesTakenList.add(student.getCourseInformation(i));
 
         RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(classesTakenList);
-        cRecyclerView.setAdapter(cAdapter);
+        classesTakenRecyclerView.setAdapter(cAdapter);
 
         classesRemainingView.setText(String.valueOf(classesTakenList.size()));
     }
