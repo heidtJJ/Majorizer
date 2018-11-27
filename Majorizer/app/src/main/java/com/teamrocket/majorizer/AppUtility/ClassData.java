@@ -2,7 +2,7 @@ package com.teamrocket.majorizer.AppUtility;
 
 import java.io.Serializable;
 
-public class ClassData extends Course implements Serializable {
+public class ClassData extends Course {
     private String grade = null;
 
     public ClassData(final String courseName, final String courseCode, final String grade, final int credits) {

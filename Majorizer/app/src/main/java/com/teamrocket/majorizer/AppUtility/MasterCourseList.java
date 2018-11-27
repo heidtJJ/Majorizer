@@ -13,12 +13,10 @@ import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Student;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MasterCourseList {
-    private final List<Course> masterCourseList = new ArrayList<>();
+    public final List<Course> masterCourseList = new ArrayList<>();
 
     public MasterCourseList(final Context context) {
         final Resources resources = context.getResources();
@@ -30,6 +28,7 @@ public class MasterCourseList {
                     String courseCode = course.getKey();
                     String courseName = course.child("Name").getValue().toString();
                     Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
+                    System.out.println("YES: " + courseCode + " " + courseName + " " + numCredits);
                     masterCourseList.add(new Course(courseCode, courseName, numCredits));
                 }
             }
@@ -43,7 +42,13 @@ public class MasterCourseList {
         });
     }
 
-    public List<Course> getMasterCourseList() {
-        return masterCourseList;
+    public Course getMasterCourseListItem(int index) {
+        return masterCourseList.get(index);
     }
+
+    public void addMasterCourseListItem(Course course) {
+        masterCourseList.add(course);
+    }
+
+
 }

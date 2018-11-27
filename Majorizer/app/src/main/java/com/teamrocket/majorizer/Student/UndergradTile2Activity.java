@@ -20,12 +20,10 @@ public class UndergradTile2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_undergrad_tile2);
 
-        MasterCourseList mcl = new MasterCourseList(this);
-        System.out.println(mcl.getMasterCourseList());
+        MasterCourseList masterCourseList = new MasterCourseList(this);
 
         // Retrieve needed Textviews to show user information.
         TextView classesRemainingView = findViewById(R.id.classesRemainingView);
-        TextView creditsRemaingingView = findViewById(R.id.creditsRemainingView);
 
         // Retrieve the Account object passed from the LoginManager.
         Student student = (Student) getIntent().getSerializableExtra("MyClass");
@@ -38,7 +36,8 @@ public class UndergradTile2Activity extends AppCompatActivity {
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
         cRecyclerView.setLayoutManager(cLayoutManager);
 
-        for (int i = 0; i < student.numCoursesTaken(); ++i) classesTakenList.add(student.getCourseInformation(i));
+        for (int i = 0; i < student.numCoursesTaken(); ++i)
+            classesTakenList.add(student.getCourseInformation(i));
 
         RecyclerView.Adapter cAdapter = new ClassRecycleAdapter(classesTakenList);
         cRecyclerView.setAdapter(cAdapter);
