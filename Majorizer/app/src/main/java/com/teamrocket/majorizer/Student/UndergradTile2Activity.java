@@ -35,20 +35,8 @@ public class UndergradTile2Activity extends AppCompatActivity {
         classesTakenRecyclerView.setLayoutManager(layoutManager);
 
         // The masterCourseList pulls the master course list from the database and populates the classesTakenRecyclerView based on classes taken.
-        MasterCourseListManager masterCourseList = new MasterCourseListManager(this, classesTakenRecyclerView, classesTakenList);
-
-        // Set classesRemaining textview based on list data.
         TextView classesRemainingView = findViewById(R.id.classesRemainingView);
-        String circleText = String.valueOf(classesTakenList.size()) + "\ncourses";
-        SpannableString ss = new SpannableString(circleText);
-        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(classesTakenList.size()).length(), 0);
-        classesRemainingView.setText(ss);
-
-        // Set creditsRemaining textview based on list data.
         TextView creditsRemainingView = findViewById(R.id.creditsRemainingView);
-        circleText = String.valueOf(classesTakenList.size()) + "\ncredits";
-        ss = new SpannableString(circleText);
-        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(classesTakenList.size()).length(), 0);
-        creditsRemainingView.setText(ss);
+        MasterCourseListManager masterCourseList = new MasterCourseListManager(this, classesTakenRecyclerView, classesTakenList, classesRemainingView, creditsRemainingView);
     }
 }

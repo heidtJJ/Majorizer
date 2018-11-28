@@ -3,6 +3,9 @@ package com.teamrocket.majorizer.AppUtility;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,7 +19,9 @@ import java.util.List;
 
 public class MasterCourseListManager {
     public final List<Course> masterCourseList = new ArrayList<>();
-    public MasterCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView, final ArrayList<ClassData> classesTakenList) {
+    int courseCount = 0, creditsCount = 0;
+    public MasterCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView,
+                                   final ArrayList<ClassData> classesTakenList, final TextView coursesRemainingView, final TextView creditsRemainingView) {
         final Resources resources = context.getResources();
         // Make asynchronous query to Firebase database fill master course list.
         FirebaseDatabase.getInstance().getReference("/MasterCourseList").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -28,11 +33,25 @@ public class MasterCourseListManager {
                     String courseCode = course.getKey();
                     String courseName = course.child("Name").getValue().toString();
                     Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
-                    if (!checkCourseCode(courseCode, classesTakenList)) masterCourseList.add(new Course(courseName, courseCode, numCredits));
+                    if (!checkCourseCode(courseCode, classesTakenList)) {
+                        masterCourseList.add(new Course(courseName, courseCode, numCredits));
+                        courseCount++;
+                        creditsCount += numCredits;
+                    }
                 }
 
                 RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(masterCourseList);
                 classesTakenRecyclerView.setAdapter(cAdapter);
+
+                String circleText = String.valueOf(courseCount) + "\ncourses";
+                SpannableString ss = new SpannableString(circleText);
+                ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(courseCount).length(), 0);
+                coursesRemainingView.setText(ss);
+
+                circleText = String.valueOf(creditsCount) + "\ncredits";
+                ss = new SpannableString(circleText);
+                ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(creditsCount).length(), 0);
+                creditsRemainingView.setText(ss);
             }
 
             @Override
