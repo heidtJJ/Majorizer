@@ -21,7 +21,7 @@ public class UndergradTile2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_undergrad_tile2);
-
+        getSupportActionBar().hide();
 
         // Retrieve the Account object passed from the LoginManager and populate classesTaken list.
         Student student = (Student) getIntent().getSerializableExtra("MyClass");

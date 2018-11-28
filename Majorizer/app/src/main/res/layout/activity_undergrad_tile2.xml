@@ -6,22 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".Student.UndergradTile1Activity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remaining"
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
+
+    </android.support.v7.widget.Toolbar>
+
     <TextView
         android:id="@+id/classesRemainingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:gravity="center"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_view"
         android:backgroundTint="@color/circleRed"
-        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="10"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/creditsRemainingView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="368dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classesRemainingView" />
 
     <TextView
         android:id="@+id/creditsRemainingView"
@@ -51,18 +83,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />"
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="368dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classesRemainingView" />
 
 
 </android.support.constraint.ConstraintLayout>
