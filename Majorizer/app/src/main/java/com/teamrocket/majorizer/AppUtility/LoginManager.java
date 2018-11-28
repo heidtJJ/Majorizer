@@ -93,6 +93,13 @@ public class LoginManager implements Serializable {
         String clarksonUserName = dataSnapshot.child(resources.getText(R.string.UsernameKey).toString()).getValue().toString();
         account.setUserName(clarksonUserName);
 
+        DataSnapshot notificationsSnapshot = dataSnapshot.child(resources.getText(R.string.title_notifications).toString());
+        for (DataSnapshot notification : notificationsSnapshot.getChildren()) {
+            String notificationHeader = notification.getKey();
+            String notificationMessage = notification.getValue().toString();
+            account.addNotification(new Notification(notificationHeader, notificationMessage));
+        }
+
         String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();
         account.setId(clarksonId);
 

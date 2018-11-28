@@ -8,15 +8,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.teamrocket.majorizer.Student.CourseRecycleAdapter;
+import com.teamrocket.majorizer.Adapters.CourseRecycleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasterCourseListUtil {
+public class MasterCourseListManager {
     public final List<Course> masterCourseList = new ArrayList<>();
 
-    public MasterCourseListUtil(final Context context, final RecyclerView classesTakenRecyclerView) {
+    public MasterCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView) {
         final Resources resources = context.getResources();
         // Make asynchronous query to Firebase database fill master course list.
         FirebaseDatabase.getInstance().getReference("/MasterCourseList").addListenerForSingleValueEvent(new ValueEventListener() {

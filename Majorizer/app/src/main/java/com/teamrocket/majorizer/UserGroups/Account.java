@@ -1,6 +1,10 @@
 package com.teamrocket.majorizer.UserGroups;
 
+import com.teamrocket.majorizer.AppUtility.Notification;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Account implements Serializable {
 
@@ -14,7 +18,8 @@ public class Account implements Serializable {
     private String firstName = null;
     private String lastName = null;
     private String userName = null;
-    private AccountType accountType;
+    private AccountType accountType = null;
+    private List<Notification> notifications = new ArrayList<>();
 
     // SET METHODS
     public void setId(final String id) {
@@ -61,13 +66,12 @@ public class Account implements Serializable {
 
 
     // SYSTEM METHODS
-    public void receiveNotification() {
-
+    public void addNotification(final Notification notification) {
+        notifications.add(notification);
     }
 
-    public void sendNotification() {
-
+    public List<Notification> getNotifications() {
+        return this.notifications;
     }
-
 
 }

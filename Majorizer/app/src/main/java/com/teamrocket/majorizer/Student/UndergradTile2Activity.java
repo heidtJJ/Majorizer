@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.teamrocket.majorizer.AppUtility.MasterCourseListUtil;
+import com.teamrocket.majorizer.AppUtility.MasterCourseListManager;
 import com.teamrocket.majorizer.UserGroups.Student;
 import com.teamrocket.majorizer.R;
 
@@ -29,7 +29,7 @@ public class UndergradTile2Activity extends AppCompatActivity {
         classesTakenRecyclerView.setLayoutManager(layoutManager);
 
         // The masterCourseList pulls the master course list from the database and populates the classesTakenRecyclerView.
-        MasterCourseListUtil masterCourseList = new MasterCourseListUtil(this, classesTakenRecyclerView);
+        MasterCourseListManager masterCourseList = new MasterCourseListManager(this, classesTakenRecyclerView);
 
         classesRemainingView.setText(String.valueOf(student.numCoursesTaken()));
     }

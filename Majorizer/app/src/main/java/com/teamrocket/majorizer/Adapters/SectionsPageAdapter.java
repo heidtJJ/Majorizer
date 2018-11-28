@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer;
+package com.teamrocket.majorizer.Adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

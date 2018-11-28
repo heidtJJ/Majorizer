@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#4286f4</color>
     <color name="colorPrimaryDark">#3973d1</color>
     <color name="colorAccent">#D81B60</color>
@@ -9,4 +10,6 @@
     <color name="circleBlue">#5c72ff</color>
     <color name="circleGreen">#41b67e</color>
     <color name="test">#0000ff</color>
+    <color name="Grey">#f2f2f2</color>
+
 </resources>

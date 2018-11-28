@@ -7,12 +7,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.teamrocket.majorizer.Adapters.SectionsPageAdapter;
 import com.teamrocket.majorizer.Admin.SelectAccountTypeActivity;
 import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
+import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
 import com.teamrocket.majorizer.SharedFragments.AccountFragment;
 import com.teamrocket.majorizer.Admin.AdminHomeFragment;
 import com.teamrocket.majorizer.Admin.AdminNotificationsFragment;
-import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
+import com.teamrocket.majorizer.SharedFragments.NotificationsFragment;
 import com.teamrocket.majorizer.Student.GradHomeFragment;
 import com.teamrocket.majorizer.Student.UndergradHomeFragment;
 import com.teamrocket.majorizer.UserGroups.Account;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Add notifications fragment.
         // TO-DO: Make notification fragments for each account if necessary.
-        sectionsPageAdapter.addFragment(new AdminNotificationsFragment(), getResources().getString(R.string.title_notifications));
+        sectionsPageAdapter.addFragment(new NotificationsFragment(), getResources().getString(R.string.title_notifications));
 
         // Admins will not have account tab. They do not have any personal information.
         if (!(account instanceof Administrator))

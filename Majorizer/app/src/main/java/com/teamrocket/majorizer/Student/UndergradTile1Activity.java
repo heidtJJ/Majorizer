@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
 
+import com.teamrocket.majorizer.Adapters.ClassDataRecycleAdapter;
 import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Student;
@@ -55,7 +56,7 @@ public class UndergradTile1Activity extends AppCompatActivity {
         gpaView.setText(ss);
 
         // Create RecyclerView with data.
-        RecyclerView.Adapter cAdapter = new ClassDataRecycleAdapter(classesTakenList);
-        cRecyclerView.setAdapter(cAdapter);
+        RecyclerView.Adapter classAdapter = new ClassDataRecycleAdapter(classesTakenList);
+        cRecyclerView.setAdapter(classAdapter);
     }
 }
