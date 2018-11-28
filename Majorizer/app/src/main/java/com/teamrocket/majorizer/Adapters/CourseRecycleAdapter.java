@@ -21,7 +21,7 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
         ClassViewHolder(final View view) {
             super(view);
             nameView = view.findViewById(R.id.classNameView);
-            classCodeView = view.findViewById(R.id.classCodeLabel);
+            classCodeView = view.findViewById(R.id.classCodeView);
             creditView = view.findViewById(R.id.classCreditView);
         }
     }

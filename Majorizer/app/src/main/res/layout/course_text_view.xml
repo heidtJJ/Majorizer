@@ -20,6 +20,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/classCreditsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Credits:"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/classCreditView"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classNameView" />
+
+    <TextView
+        android:id="@+id/classCreditView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/classCreditsLabel"
+        app:layout_constraintEnd_toStartOf="@+id/classCodeLabel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/classCreditsLabel" />
+
+    <TextView
         android:id="@+id/classCodeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,26 +66,4 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/classCodeLabel" />
 
-    <TextView
-        android:id="@+id/classCreditsLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Credits:"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/classCreditView"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classNameView" />
-
-    <TextView
-        android:id="@+id/classCreditView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text=""
-        android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/classCreditsLabel"
-        app:layout_constraintEnd_toStartOf="@+id/classCodeLabel"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/classCreditsLabel" />
 </android.support.constraint.ConstraintLayout>

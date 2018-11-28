@@ -6,72 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".Student.UndergradTile1Activity">
 
-    <TextView
-        android:id="@+id/classesRemainingLabel"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Classes remaining:"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remaining"
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/classesRemainingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="10"
-        android:textSize="22sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/classesRemainingLabel"
-        app:layout_constraintStart_toEndOf="@+id/classesRemainingLabel" />
-
-    <TextView
-        android:id="@+id/creditsRemainingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Credits remaining:"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classesRemainingLabel" />
-
-    <TextView
-        android:id="@+id/creditsRemainingView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="44"
-        android:textSize="22sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/creditsRemainingLabel"
-        app:layout_constraintStart_toEndOf="@+id/creditsRemainingLabel" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/classesRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coursesRemainingLabel" />
-
-
-    <TextView
-        android:id="@+id/coursesRemainingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Courses Needed"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/rounded_view"
+        android:backgroundTint="@color/circleRed"
+        android:gravity="center"
+        android:text="10"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/creditsRemainingView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <View
         android:id="@+id/divider2"
@@ -83,7 +53,36 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditsRemainingLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/classesRemainingView" />
+
+    <TextView
+        android:id="@+id/creditsRemainingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="44"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/rounded_view"
+        android:backgroundTint="@color/circleBlue"
+        app:layout_constraintBaseline_toBaselineOf="@+id/classesRemainingView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/classesRemainingView" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/classesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />"
 
 
 </android.support.constraint.ConstraintLayout>
