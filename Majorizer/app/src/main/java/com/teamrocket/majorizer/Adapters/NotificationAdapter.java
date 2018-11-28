@@ -12,11 +12,16 @@ import android.widget.Toast;
 import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.AppUtility.Notification;
 import com.teamrocket.majorizer.R;
+import com.teamrocket.majorizer.UserGroups.Account;
 
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationHolder> {
-    private List<Notification> notificationsList = null;
+    private Account account = null;
+
+    public NotificationAdapter(Account account) {
+        this.account = account;
+    }
 
     static class NotificationHolder extends RecyclerView.ViewHolder {
         TextView notificationHeaderView, notificationMessageView;
@@ -27,11 +32,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             notificationHeaderView = view.findViewById(R.id.notificationHeader);
             notificationMessageView = view.findViewById(R.id.notificationMessage);
             deleteNotificationButton = view.findViewById(R.id.removeNotificationButton);
-        }
-    }
+            deleteNotificationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-    public NotificationAdapter(List<Notification> notificationsList) {
-        this.notificationsList = notificationsList;
+                }
+            });
+        }
     }
 
     @NonNull
@@ -43,12 +50,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NotificationHolder holder, int position) {
-        holder.notificationHeaderView.setText(notificationsList.get(position).getHeader());
-        holder.notificationMessageView.setText(notificationsList.get(position).getMessage());
+        List<Notification> notifications = account.getNotifications();
+        holder.notificationHeaderView.setText(notifications.get(position).getHeader());
+        holder.notificationMessageView.setText(notifications.get(position).getMessage());
     }
 
     @Override
     public int getItemCount() {
-        return notificationsList.size();
+        return account.getNotifications().size();
     }
 }
