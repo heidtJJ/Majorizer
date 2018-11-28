@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.AppUtility.Notification;
+import com.teamrocket.majorizer.AppUtility.NotificationManager;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.UserGroups.Account;
 
@@ -18,24 +17,38 @@ import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationHolder> {
     private Account account = null;
+    private static NotificationManager notificationManager = null;
 
     public NotificationAdapter(Account account) {
         this.account = account;
+        this.notificationManager = new NotificationManager(account);
     }
 
-    static class NotificationHolder extends RecyclerView.ViewHolder {
-        TextView notificationHeaderView, notificationMessageView;
-        Button deleteNotificationButton;
+    public void removeAt(final int position, final String notificationId) {
+        // Remove notification from database.
+        notificationManager.removeNotification(notificationId);
+        account.removeNotification(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
 
-        NotificationHolder(final View view) {
+    protected class NotificationHolder extends RecyclerView.ViewHolder {
+        private TextView notificationHeaderView;
+        private TextView notificationMessageView;
+        private TextView notificationId;
+        private Button deleteNotificationButton;
+
+        private NotificationHolder(final View view) {
             super(view);
             notificationHeaderView = view.findViewById(R.id.notificationHeader);
             notificationMessageView = view.findViewById(R.id.notificationMessage);
             deleteNotificationButton = view.findViewById(R.id.removeNotificationButton);
+            notificationId = view.findViewById(R.id.notificationId);
             deleteNotificationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-
+                public void onClick(final View view) {
+                    String notificationIdStr = notificationId.getText().toString();
+                    removeAt(getAdapterPosition(), notificationIdStr);
                 }
             });
         }
@@ -53,6 +66,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         List<Notification> notifications = account.getNotifications();
         holder.notificationHeaderView.setText(notifications.get(position).getHeader());
         holder.notificationMessageView.setText(notifications.get(position).getMessage());
+        holder.notificationId.setText(notifications.get(position).getId());
     }
 
     @Override

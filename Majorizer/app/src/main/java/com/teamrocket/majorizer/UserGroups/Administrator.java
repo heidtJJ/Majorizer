@@ -35,7 +35,6 @@ public class Administrator extends Account {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot username : snapshot.getChildren()) {
                     usernameList.add(username.getKey());
-                    System.out.println("asffsdLocked1: " + username.getKey());
                 }
                 arrayAdapter.notifyDataSetChanged();
             }

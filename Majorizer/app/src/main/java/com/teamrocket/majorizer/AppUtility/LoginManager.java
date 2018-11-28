@@ -31,10 +31,17 @@ public class LoginManager implements Serializable {
     private static final String BAD_CREDENTIALS = "Your username and/or password was incorrect!";
     private static final String EMPTY_FIELD = "Your username and/or password was empty!";
     private static final String BAD_QUERY = "Could not verify your credentials!";
-    private static final int NUM_LOCKED_OUT_ATTEMPTS = 3;
+    private static final int MAX_LOGIN_ATTEMPTS = 3;
 
     private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
+    /**
+     * Checks if the current user queried in the snapshot has been locked out. If yes, notify the user via the UI.
+     *
+     * @param dataSnapshot the account query in the Firebase database.
+     * @param view
+     * @return whether the user is locked out or not
+     */
     public boolean isUserLockedOut(final DataSnapshot dataSnapshot, final View view) {
         Resources resources = view.getResources();
         // Check if this user is already locked out. Admins will not have LoginAttempts in their account fields.
@@ -45,7 +52,7 @@ public class LoginManager implements Serializable {
 
             // Increment and update the number of LoginAttempts for this user.
             int numLoginAttemptsInt = Integer.parseInt(numLoginAttemptsString);
-            if (numLoginAttemptsInt >= NUM_LOCKED_OUT_ATTEMPTS) {
+            if (numLoginAttemptsInt >= MAX_LOGIN_ATTEMPTS) {
                 // User is already locked out. Nofify them.
                 Toast.makeText(view.getContext(), resources.getText(R.string.UserLockedOut), Toast.LENGTH_SHORT).show();
                 return true;
@@ -66,6 +73,10 @@ public class LoginManager implements Serializable {
             int numLoginAttemptsInt = Integer.parseInt(numLoginAttemptsString) + 1;
             mDatabase.child("/" + resources.getText(R.string.Accounts) + "/" + enteredClarksonId + "/" +
                     resources.getString(R.string.LoginAttempts)).setValue(String.valueOf(numLoginAttemptsInt));
+            if (numLoginAttemptsInt == MAX_LOGIN_ATTEMPTS) {
+                NotificationManager.notifyAdminLockedUser(dataSnapshot.getKey());
+            }
+
         }
     }
 
@@ -86,19 +97,16 @@ public class LoginManager implements Serializable {
      * @param dataSnapshot
      * @param account
      */
-    public void populateAccount(final View view, final DataSnapshot dataSnapshot, Account account) {
+    public void populateAccount(final View view, final DataSnapshot dataSnapshot, final Account account) {
         Resources resources = view.getResources();
 
         // Set all data members for the account.
         String clarksonUserName = dataSnapshot.child(resources.getText(R.string.UsernameKey).toString()).getValue().toString();
         account.setUserName(clarksonUserName);
 
-        DataSnapshot notificationsSnapshot = dataSnapshot.child(resources.getText(R.string.title_notifications).toString());
-        for (DataSnapshot notification : notificationsSnapshot.getChildren()) {
-            String notificationHeader = notification.getKey();
-            String notificationMessage = notification.getValue().toString();
-            account.addNotification(new Notification(notificationHeader, notificationMessage));
-        }
+        // Load the user's notifications into their Account.
+        DataSnapshot notificationSnapShot = dataSnapshot.child(resources.getText(R.string.title_notifications).toString());
+        NotificationManager.getNotifications(notificationSnapShot, resources, account);
 
         String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();
         account.setId(clarksonId);

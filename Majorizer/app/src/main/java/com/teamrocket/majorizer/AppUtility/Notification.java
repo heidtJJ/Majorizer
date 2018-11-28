@@ -5,10 +5,12 @@ import java.io.Serializable;
 public class Notification implements Serializable {
     private String header = null;
     private String message = null;
+    private String id = null;
 
-    public Notification(String header, String message) {
+    public Notification(String header, String message, final String id) {
         this.header = header;
         this.message = message;
+        this.id = id;
     }
 
     public String getHeader() {
@@ -17,6 +19,10 @@ public class Notification implements Serializable {
 
     public String getMessage() {
         return this.message;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
 }

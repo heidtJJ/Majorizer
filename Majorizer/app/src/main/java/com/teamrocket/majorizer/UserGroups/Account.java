@@ -74,4 +74,8 @@ public class Account implements Serializable {
         return this.notifications;
     }
 
+    public void removeNotification(final int index) {
+        notifications.remove(index);
+    }
+
 }

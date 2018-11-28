@@ -40,6 +40,12 @@
     <string name="Id">Id</string>
     <string name="Department">Department</string>
 
+    <!-- Create Account Unlocking Strings -->
+    <string name="NotLocked">The account which you entered was not locked.</string>
+    <string name="EmptyUsername">The username field is empty. Please enter a username."</string>
+    <string name="UnlockSuccess">Successfully unlocked the user\'s account!"</string>
+
+
     <!-- Create Account Page Strings -->
     <string name="CreateAccount">Create Account</string>
     <string name="ComputerScience">Computer Science</string>

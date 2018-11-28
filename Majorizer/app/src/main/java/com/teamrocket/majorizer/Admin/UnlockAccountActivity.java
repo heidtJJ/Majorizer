@@ -36,7 +36,6 @@ public class UnlockAccountActivity extends AppCompatActivity {
         ((Administrator) account).getLockedAccounts(lockedUsernameList, arrayAdapter);
 
         // Create array adapter for the list of usernames.
-
         ListView userNameListView = findViewById(R.id.usernameListView);
         userNameListView.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
@@ -47,8 +46,8 @@ public class UnlockAccountActivity extends AppCompatActivity {
         String userNameToUnlock = editText.getText().toString();
         if (userNameToUnlock.isEmpty()) {
             // Notify the user that their input was empty.
-            Toast.makeText(this, "The username field is empty. Please enter a username.", Toast.LENGTH_LONG).show();
-        } else {
+            Toast.makeText(this, getText(R.string.EmptyUsername).toString(), Toast.LENGTH_LONG).show();
+        } else if (lockedUsernameList.contains(userNameToUnlock)) {
             // Unlock the user's account.
             ((Administrator) account).unlockAccount(userNameToUnlock.trim(), this);
 
@@ -58,6 +57,9 @@ public class UnlockAccountActivity extends AppCompatActivity {
 
             // Set the user's text (username field) to be empty.
             editText.setText("");
+            Toast.makeText(this, getText(R.string.UnlockSuccess).toString(), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, getText(R.string.NotLocked).toString(), Toast.LENGTH_LONG).show();
         }
     }
 }
