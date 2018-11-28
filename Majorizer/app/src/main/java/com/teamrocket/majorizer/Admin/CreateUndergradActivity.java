@@ -27,6 +27,7 @@ public class CreateUndergradActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_undergrad_account);
 
+        // Retrieve all use entries.
         usernameField = findViewById(R.id.accountUsername);
         passwordField = findViewById(R.id.accountPassword);
         passwordRetryField = findViewById(R.id.accountPasswordRetry);

@@ -29,6 +29,7 @@ public class Administrator extends Account {
         DatabaseReference accountsRef = FirebaseDatabase.getInstance().getReference("/Accounts/");
         Query query = accountsRef.orderByChild("LoginAttempts").equalTo("3");
 
+        // Beware: this event listener is asynchronous.
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

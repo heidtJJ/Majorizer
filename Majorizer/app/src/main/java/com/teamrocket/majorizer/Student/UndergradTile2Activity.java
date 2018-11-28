@@ -4,12 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
 
 import com.teamrocket.majorizer.AppUtility.ClassData;
-import com.teamrocket.majorizer.AppUtility.MasterCourseListManager;
+import com.teamrocket.majorizer.AppUtility.CourseListManager;
 import com.teamrocket.majorizer.UserGroups.Student;
 import com.teamrocket.majorizer.R;
 
@@ -37,6 +35,6 @@ public class UndergradTile2Activity extends AppCompatActivity {
         // The masterCourseList pulls the master course list from the database and populates the classesTakenRecyclerView based on classes taken.
         TextView classesRemainingView = findViewById(R.id.classesRemainingView);
         TextView creditsRemainingView = findViewById(R.id.creditsRemainingView);
-        MasterCourseListManager masterCourseList = new MasterCourseListManager(this, classesTakenRecyclerView, classesTakenList, classesRemainingView, creditsRemainingView);
+        CourseListManager masterCourseList = new CourseListManager(this, classesTakenRecyclerView, classesTakenList, classesRemainingView, creditsRemainingView);
     }
 }
