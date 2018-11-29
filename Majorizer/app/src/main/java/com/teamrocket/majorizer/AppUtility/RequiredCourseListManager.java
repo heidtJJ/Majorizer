@@ -28,8 +28,8 @@ public class RequiredCourseListManager {
     int courseCount = 0, creditsCount = 0;
 
     public RequiredCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView,
-                                     final Student student, final TextView coursesRemainingView, final TextView creditsRemainingView) {
-
+                                     final Student student, final TextView coursesRemainingView,
+                                     final TextView creditsRemainingView) {
         // Retrieve the list of classes already taken.
         final List<String> classesTakenList = getCoursesTaken(student);
 
