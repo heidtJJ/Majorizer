@@ -28,10 +28,10 @@ public class RequiredCourseListManager {
     int courseCount = 0, creditsCount = 0;
 
     public RequiredCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView,
-                                     final Student student, final TextView coursesRemainingView, final TextView creditsRemainingView) {
-
+                                     final Student student, final TextView coursesRemainingView,
+                                     final TextView creditsRemainingView) {
         // Retrieve the list of classes already taken.
-        final List<ClassData> classesTakenList = getCoursesTaken(student);
+        final List<String> classesTakenList = getCoursesTaken(student);
 
         // Get list of the student's major and minors
         Set<String> majors = getStudentMajors(student);
@@ -40,6 +40,7 @@ public class RequiredCourseListManager {
 
         // Iterate through list of majors finding needed classes.
         for (final String major : majors) {
+<<<<<<< HEAD
             // Make asynchronous query to Firebase database to fill classesNeededList.
             FirebaseDatabase.getInstance().getReference("/Majors/" + major).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -83,6 +84,9 @@ public class RequiredCourseListManager {
                 }
 
             });
+=======
+            populateClassesNeeded(mutexLock, "Majors", major, classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
+>>>>>>> d72c06c0cdb6f2c0b02127ebf77142accd77c4eb
         }
 
         // Get list of the student's major and minors
@@ -90,6 +94,7 @@ public class RequiredCourseListManager {
 
         // Iterate through list of majors finding needed classes.
         for (final String minor : minors) {
+<<<<<<< HEAD
             // Make asynchronous query to Firebase database to fill classesNeededList.
             FirebaseDatabase.getInstance().getReference("/Minors/" + minor).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -109,43 +114,66 @@ public class RequiredCourseListManager {
                             mutexLock.unlock();
                         }
                     }
-
-                    RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(classesNeededList);
-                    classesTakenRecyclerView.setAdapter(cAdapter);
-
-                    mutexLock.lock();
-                    String circleText = String.valueOf(courseCount) + "\ncourses";
-                    SpannableString ss = new SpannableString(circleText);
-                    ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(courseCount).length(), 0);
-                    coursesRemainingView.setText(ss);
-                    mutexLock.unlock();
-
-                    mutexLock.lock();
-                    circleText = String.valueOf(creditsCount) + "\ncredits";
-                    ss = new SpannableString(circleText);
-                    ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(creditsCount).length(), 0);
-                    creditsRemainingView.setText(ss);
-                    mutexLock.unlock();
-                }
-
-                @Override
-                public void onCancelled(final DatabaseError databaseError) {
-                    // Database query was not successful.
-                    System.err.println("Could not access database in MasterCourseList");
-                }
-
-            });
-
+=======
+            populateClassesNeeded(mutexLock, "Minors", minor, classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
         }
+    }
+>>>>>>> d72c06c0cdb6f2c0b02127ebf77142accd77c4eb
+
+    void populateClassesNeeded(final Lock mutexLock, final String level, final String curriculum,
+                               final List<String> classesTakenList, final RecyclerView classesTakenRecyclerView,
+                               final TextView coursesRemainingView, final TextView creditsRemainingView) {
+        // Make asynchronous query to Firebase database to fill classes needed in UI.
+        FirebaseDatabase.getInstance().getReference("/" + level + "/" + curriculum).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot courseList) {
+                // Iterate through courseList pulling data for each course.
+                for (DataSnapshot course : courseList.getChildren()) {
+                    String courseCode = course.getKey();
+                    String courseName = course.child("Name").getValue().toString();
+                    Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
+                    if (!classesTakenList.contains(courseCode)) {
+                        mutexLock.lock();
+                        classesNeededList.add(new Course(courseName, courseCode, numCredits));
+                        courseCount++;
+                        creditsCount += numCredits;
+                        mutexLock.unlock();
+                    }
+                }
+
+                RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(classesNeededList);
+                classesTakenRecyclerView.setAdapter(cAdapter);
+
+                mutexLock.lock();
+                String circleText = String.valueOf(courseCount) + "\ncourses";
+                SpannableString ss = new SpannableString(circleText);
+                ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(courseCount).length(), 0);
+                coursesRemainingView.setText(ss);
+
+                circleText = String.valueOf(creditsCount) + "\ncredits";
+                ss = new SpannableString(circleText);
+                ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(creditsCount).length(), 0);
+                creditsRemainingView.setText(ss);
+                mutexLock.unlock();
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                // Database query was not successful.
+                System.err.println("Could not access database in MasterCourseList");
+            }
+
+        });
+
     }
 
 
-
-    private List<ClassData> getCoursesTaken(Student student) {
-        List<ClassData> coursesTaken = new ArrayList<>();
-        ArrayList<ClassData> classesTakenList = new ArrayList<>();
-        for (int i = 0; i < student.numCoursesTaken(); ++i)
-            coursesTaken.add(student.getCourseInformation(i));
+    private List<String> getCoursesTaken(Student student) {
+        ArrayList<String> coursesTaken = new ArrayList<>();
+        for (int i = 0; i < student.numCoursesTaken(); ++i) {
+            ClassData takenClass = student.getCourseInformation(i);
+            coursesTaken.add(takenClass.getCourseCode());
+        }
         return coursesTaken;
     }
 
