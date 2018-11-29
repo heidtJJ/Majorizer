@@ -35,7 +35,7 @@ public class NotificationManager {
 
     public static void getNotifications(final DataSnapshot notificationsSnapshot, Resources resources, final Account account) {
         // Iterate through user's notifications in the database adding them to their Account data structure.
-        System.out.println(" fufsd " + resources.getText(R.string.title_notifications).toString() + " " + notificationsSnapshot.getChildrenCount());
+        System.out.println(" fufsd " + resources.getText(R.string.TitleNotifications).toString() + " " + notificationsSnapshot.getChildrenCount());
         for (DataSnapshot notification : notificationsSnapshot.getChildren()) {
             String notificationId = notification.getKey();
             String notificationHeader = notification.child(HEADER).getValue().toString();

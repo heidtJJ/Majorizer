@@ -27,7 +27,7 @@ public class UndergradTile1Activity extends AppCompatActivity {
         TextView gpaView = findViewById(R.id.gpaView);
 
         // Retrieve the Account object passed from the LoginManager.
-        Student student = (Student) getIntent().getSerializableExtra("MyClass");
+        Student student = (Student) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         ArrayList<ClassData> classesTakenList = new ArrayList<>();
 

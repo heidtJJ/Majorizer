@@ -25,7 +25,7 @@ public class UnlockAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_unlock_account);
 
         // Retreive the Account object passed from the LoginManager.
-        administrator = (Administrator) getIntent().getSerializableExtra("MyClass");
+        administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // Get list of locked accounts.
         lockedUsernameList = new ArrayList<>();

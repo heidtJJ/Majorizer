@@ -1,11 +1,12 @@
 <resources>
 
     <!-- App Strings -->
-    <string name="app_name">Majorizer</string>
-    <string name="title_home">Home</string>
-    <string name="title_account">Account</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="AppName">Majorizer</string>
+    <string name="TitleHome">Home</string>
+    <string name="TitleAccount">Account</string>
+    <string name="TitleNotifications">Notifications</string>
     <string name="RemoveNotification">Remove Notification</string>
+    <string name="AccountObject">account</string>
 
     <!-- Login Activity Strings -->
     <string name="Login">LOGIN</string>
@@ -44,7 +45,6 @@
     <string name="NotLocked">The account which you entered was not locked.</string>
     <string name="EmptyUsername">The username field is empty. Please enter a username."</string>
     <string name="UnlockSuccess">Successfully unlocked the user\'s account!"</string>
-
 
     <!-- Create Account Page Strings -->
     <string name="CreateAccount">Create Account</string>

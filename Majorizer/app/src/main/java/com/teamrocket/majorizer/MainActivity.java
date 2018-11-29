@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Retreive the Account object passed from the LoginManager.
-        account = (Account) getIntent().getSerializableExtra("MyClass");
+        account = (Account) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // Set up the ViewPager with the sections adapter.
         viewPager = findViewById(R.id.container);
@@ -65,21 +65,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Add title fragment depending on the type of account.
         if (account instanceof Advisor)
-            sectionsPageAdapter.addFragment(new AdvisorHomeFragment(), getResources().getString(R.string.title_home));
+            sectionsPageAdapter.addFragment(new AdvisorHomeFragment(), getResources().getString(R.string.TitleHome));
         else if (account instanceof UndergradStudent)
-            sectionsPageAdapter.addFragment(new UndergradHomeFragment(), getResources().getString(R.string.title_home));
+            sectionsPageAdapter.addFragment(new UndergradHomeFragment(), getResources().getString(R.string.TitleHome));
         else if (account instanceof GradStudent)
-            sectionsPageAdapter.addFragment(new GradHomeFragment(), getResources().getString(R.string.title_home));
+            sectionsPageAdapter.addFragment(new GradHomeFragment(), getResources().getString(R.string.TitleHome));
         else
-            sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.title_home));
+            sectionsPageAdapter.addFragment(new AdminHomeFragment(), getResources().getString(R.string.TitleHome));
 
         // Add notifications fragment.
         // TO-DO: Make notification fragments for each account if necessary.
-        sectionsPageAdapter.addFragment(new NotificationsFragment(), getResources().getString(R.string.title_notifications));
+        sectionsPageAdapter.addFragment(new NotificationsFragment(), getResources().getString(R.string.TitleNotifications));
 
         // Admins will not have account tab. They do not have any personal information.
         if (!(account instanceof Administrator))
-            sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.title_account));
+            sectionsPageAdapter.addFragment(new AccountFragment(), getResources().getString(R.string.TitleAccount));
 
         // Set the adapter for the viewPager.
         viewPager.setAdapter(sectionsPageAdapter);
@@ -87,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAccount(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), SelectAccountTypeActivity.class);
+        // Pass this Account object to the main activity.
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
         view.getContext().startActivity(selectAccountActivity);
     }
 
     public void unlockAccountActivity(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), UnlockAccountActivity.class);
         // Pass this Account object to the main activity.
-        selectAccountActivity.putExtra("MyClass", account);
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
         view.getContext().startActivity(selectAccountActivity);
     }
 
@@ -103,10 +105,11 @@ public class MainActivity extends AppCompatActivity {
     public void changeCurriculum(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
         // Pass this Account object to the main activity.
-        selectAccountActivity.putExtra("MyClass", account);
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
         view.getContext().startActivity(selectAccountActivity);
     }
 
     public void viewAcademicProgress(final View view) {
+
     }
 }

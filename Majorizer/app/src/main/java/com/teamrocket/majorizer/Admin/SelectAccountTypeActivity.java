@@ -11,19 +11,28 @@ import com.teamrocket.majorizer.R;
 
 public class SelectAccountTypeActivity extends AppCompatActivity {
 
+    private Administrator administrator = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_account_type);
+
+        // Retreive the Account object passed from the LoginManager.
+        administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
     }
 
     public void createStudentAccount(View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), CreateStudentAccountActivity.class);
+        // Pass this Account object to the main activity.
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);
     }
 
     public void createAdvisorAccount(View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), CreateAdvisorAccountActivity.class);
+        // Pass this Account object to the main activity.
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);
     }
 }

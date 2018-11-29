@@ -21,7 +21,7 @@
             android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
+            app:title="@string/AppName">
 
         </android.support.v7.widget.Toolbar>
 
@@ -35,20 +35,20 @@
                 android:id="@+id/homeTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/title_home" />
+                android:text="@string/TitleHome" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/profileTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/title_notifications"
+                android:text="@string/TitleNotifications"
                 app:tabMode="scrollable" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/accountTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/title_account" />
+                android:text="@string/TitleAccount" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

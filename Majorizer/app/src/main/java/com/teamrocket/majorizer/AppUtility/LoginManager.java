@@ -105,7 +105,7 @@ public class LoginManager implements Serializable {
         account.setUserName(clarksonUserName);
 
         // Load the user's notifications into their Account.
-        DataSnapshot notificationSnapShot = dataSnapshot.child(resources.getText(R.string.title_notifications).toString());
+        DataSnapshot notificationSnapShot = dataSnapshot.child(resources.getText(R.string.TitleNotifications).toString());
         NotificationManager.getNotifications(notificationSnapShot, resources, account);
 
         String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();

@@ -10,7 +10,13 @@ import android.widget.Toast;
 import com.teamrocket.majorizer.AppUtility.AccountCreationManager;
 import com.teamrocket.majorizer.R;
 
+import static com.teamrocket.majorizer.AppUtility.Utility.isValidName;
+import static com.teamrocket.majorizer.AppUtility.Utility.isValidUserName;
+
 public class CreateUndergradActivity extends AppCompatActivity {
+    private Administrator administrator = null;
+
+    // User Interface Views
     private EditText usernameField = null;
     private EditText passwordField = null;
     private EditText passwordRetryField = null;
@@ -26,6 +32,9 @@ public class CreateUndergradActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_undergrad_account);
+
+        // Retreive the Account object passed from the LoginManager.
+        administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // Retrieve all use entries.
         usernameField = findViewById(R.id.accountUsername);
@@ -45,6 +54,41 @@ public class CreateUndergradActivity extends AppCompatActivity {
      * @param view
      */
     public void createNewUndergradAccount(final View view) {
+
+        // Retrieve all strings from their respected EditText field.
+        final String username = usernameField.getText().toString();
+        final String password = passwordField.getText().toString();
+        final String passwordRetry = passwordRetryField.getText().toString();
+        final String firstName = firstNameField.getText().toString();
+        final String lastName = lastNameField.getText().toString();
+
+        // Check if any of the fields are empty.
+        if (username.isEmpty() || password.isEmpty() || passwordRetry.isEmpty()
+                || firstName.isEmpty() || lastName.isEmpty()) {
+            // A field was empty. Alert the user and leave this method.
+            Toast.makeText(this, getText(R.string.RequiredFieldEmpty), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Check if the passwords match.
+        if (!(password).equals(passwordRetry)) {
+            // The passwords do not match. Alert the user and leave this method.
+            Toast.makeText(this, getText(R.string.PasswordMismatch), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Check if the username is valid (6 lowercase letters).
+        if (!isValidUserName(username)) {
+            // The username is invalid. Alert the user and leave this method.
+            Toast.makeText(this, getText(R.string.InvalidUsername), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Check if first name and last name are valid names (contains only letters).
+        if (!isValidName(firstName) || !isValidName(lastName)) {
+            Toast.makeText(this, getText(R.string.InvalidName), Toast.LENGTH_LONG).show();
+            return;
+        }
         // Retreive the selected first student major option.
         int major1RadioGroup = this.major1RadioGroup.getCheckedRadioButtonId();
         String major1 = null;
@@ -153,8 +197,15 @@ public class CreateUndergradActivity extends AppCompatActivity {
             return;
         }
 
+        // User input was valid. Let Admin create new undergrad account.
+        administrator.createNewUndergradStudentAccount(this, username, password, firstName, lastName, major1, major2, minor1, minor2);
 
-        AccountCreationManager.createNewUndergradStudentAccount(this, usernameField, passwordField, passwordRetryField, firstNameField, lastNameField, major1, major2, minor1, minor2);
+        // Set the EditTexts to empty.
+        usernameField.setText("");
+        firstNameField.setText("");
+        lastNameField.setText("");
+        passwordField.setText("");
+        passwordRetryField.setText("");
     }
 
 }

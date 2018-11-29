@@ -9,8 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-
         android:orientation="vertical">
 
         <FrameLayout
@@ -27,15 +25,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/tile1"
+                android:id="@+id/addCourseButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:clickable="true"
-                android:onClick="viewAcademicProgress"
-                android:padding="20dp"
+                android:onClick="addCourseToCurriculum"
+                android:padding="25dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/academicprogress" />
+                app:srcCompat="@mipmap/addsign" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,6 +42,7 @@
                 android:layout_marginLeft="12dp"
                 android:clickable="false"
                 android:text="Add a\nCourse"
+                android:textSize="16dp"
                 android:textStyle="bold" />
         </FrameLayout>
 
@@ -61,14 +60,15 @@
             app:layout_constraintVertical_bias="0.0">
 
             <ImageButton
-                android:id="@+id/tile2"
+                android:id="@+id/removeCourseButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:clickable="true"
-                android:padding="10dp"
+                android:padding="30dp"
+                android:onClick="removeCourseFromCurriculum"
                 android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/gradstudenticon" />
+                app:srcCompat="@mipmap/removesign" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,8 @@
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginLeft="12dp"
                 android:clickable="false"
-                android:text="Something else"
+                android:text="Remove\na course"
+                android:textSize="16dp"
                 android:textStyle="bold" />
         </FrameLayout>
 
