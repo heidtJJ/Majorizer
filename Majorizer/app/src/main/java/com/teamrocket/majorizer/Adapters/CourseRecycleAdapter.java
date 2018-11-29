@@ -16,7 +16,7 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
     private List<Course> classList = null;
 
     static class ClassViewHolder extends RecyclerView.ViewHolder {
-        TextView nameView, classCodeView, creditView, preReqView;
+        private TextView nameView, classCodeView, creditView, preReqView, preReqLabel;
 
         ClassViewHolder(final View view) {
             super(view);
@@ -24,6 +24,7 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
             classCodeView = view.findViewById(R.id.classCodeView);
             creditView = view.findViewById(R.id.classCreditView);
             preReqView = view.findViewById(R.id.classPreReqView);
+            preReqLabel = view.findViewById(R.id.classPreReqLabel);
         }
     }
 
@@ -43,21 +44,29 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
         holder.nameView.setText(classList.get(position).getCourseName());
         holder.classCodeView.setText(classList.get(position).getCourseCode());
         holder.creditView.setText(String.valueOf(classList.get(position).getCredits()));
-        String preReqTest = "";
-        for (String preReq : classList.get(position).getPreReq()) {
-            preReqTest += preReq;
-            preReqTest += ",";
-        }
-        preReqTest = preReqTest.substring(0, preReqTest.length() - 1);
-        holder.preReqView.setText(preReqTest);
-        String preReqString = "";
-        for (String preReq : classList.get(position).getPreReq()) preReqString += preReq + ", ";
-        preReqString = preReqString.substring(0, preReqString.length() - 2);
-        holder.preReqView.setText(preReqString);
+        String preReqString = getPreRequisites(classList, position);
+        if (preReqString.isEmpty()) {
+            holder.preReqView.setVisibility(View.GONE);
+            holder.preReqLabel.setVisibility(View.GONE);
+        } else
+            holder.preReqView.setText(preReqString);
     }
 
     @Override
     public int getItemCount() {
         return classList.size();
+    }
+
+    private String getPreRequisites(final List<Course> classList, final int position) {
+        String preReqString = "";
+        boolean firstPass = true;
+        for (Course preRequsite : classList.get(position).getPreRequsites()) {
+            if (!firstPass) {
+                preReqString += ", ";
+            }
+            preReqString += preRequsite.getCourseCode();
+            firstPass = false;
+        }
+        return preReqString;
     }
 }

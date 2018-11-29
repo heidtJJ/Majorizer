@@ -23,6 +23,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class RequiredCourseListManager {
+    private static final String PRE_REQUISITES = "Prerequisites";
+
     public final List<Course> classesNeededList = new ArrayList<>();
     int courseCount = 0, creditsCount = 0;
 
@@ -60,14 +62,23 @@ public class RequiredCourseListManager {
             public void onDataChange(final DataSnapshot courseList) {
                 // Iterate through courseList pulling data for each course.
                 for (DataSnapshot course : courseList.getChildren()) {
+                    // Pull information from database.
                     String courseCode = course.getKey();
                     String courseName = course.child("Name").getValue().toString();
                     Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
-                    ArrayList<String> preReq = new ArrayList<>();
-                    preReq.add("CS000");
+
+                    // Add prerequisite information to each course.
+                    Set<Course> preReqs = new HashSet<>();
+                    DataSnapshot preReqSnapshot = course.child(PRE_REQUISITES);
+                    for (DataSnapshot preRequisite : preReqSnapshot.getChildren()) {
+                        String preReqCourseCode = preRequisite.getValue().toString();
+                        preReqs.add(new Course(null, preReqCourseCode, 4, new HashSet<Course>()));
+                    }
+
+                    // Make sure that this class was not already added to the classesNeededList.
                     if (!classesTakenList.contains(courseCode)) {
                         mutexLock.lock();
-                        classesNeededList.add(new Course(courseName, courseCode, numCredits, preReq));
+                        classesNeededList.add(new Course(courseName, courseCode, numCredits, preReqs));
                         courseCount++;
                         creditsCount += numCredits;
                         mutexLock.unlock();

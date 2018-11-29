@@ -96,7 +96,6 @@ public class AccountFragment extends Fragment {
                 userDataList.add("Minor " + String.valueOf(minorCount) + ": " + ((UndergradStudent) account).getMinor2());
             }
 
-
         }
 
         // Graduate student has only one major.

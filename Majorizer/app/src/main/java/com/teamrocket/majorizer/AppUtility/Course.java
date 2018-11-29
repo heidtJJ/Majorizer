@@ -2,14 +2,16 @@ package com.teamrocket.majorizer.AppUtility;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class Course implements Serializable {
     private String courseName = null;
     private String courseCode = null;
-    private int credits;
-    private ArrayList<String> preReq;
+    private int credits = -1;
+    private Set<Course> preReq = null;
 
-    public Course(final String courseName, final String courseCode, final int credits, final ArrayList<String> preReq) {
+    public Course(final String courseName, final String courseCode, final int credits, final Set<Course> preReq) {
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.credits = credits;
@@ -28,7 +30,8 @@ public class Course implements Serializable {
         return credits;
     }
 
-    public ArrayList<String> getPreReq() {
+    public Set<Course> getPreRequsites() {
         return preReq;
     }
+
 }
