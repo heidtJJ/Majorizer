@@ -70,8 +70,12 @@
         android:id="@+id/classPreReqLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginStart="8dp"
         android:text="Prerequisites:"
+=======
+        android:text="Prerequisite(s):"
+>>>>>>> 81a5f112244f36c48eda27011cd5e29afdb67e9c
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/classPreReqView"
         app:layout_constraintHorizontal_bias="0.5"
@@ -89,4 +93,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/classPreReqLabel" />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 81a5f112244f36c48eda27011cd5e29afdb67e9c
 </android.support.constraint.ConstraintLayout>
