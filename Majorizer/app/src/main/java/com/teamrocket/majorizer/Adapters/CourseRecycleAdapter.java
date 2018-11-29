@@ -16,13 +16,14 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
     private List<Course> classList = null;
 
     static class ClassViewHolder extends RecyclerView.ViewHolder {
-        TextView nameView, classCodeView, creditView;
+        TextView nameView, classCodeView, creditView, preReqView;
 
         ClassViewHolder(final View view) {
             super(view);
             nameView = view.findViewById(R.id.classNameView);
             classCodeView = view.findViewById(R.id.classCodeView);
             creditView = view.findViewById(R.id.classCreditView);
+            preReqView = view.findViewById(R.id.classPreReqView);
         }
     }
 
@@ -42,6 +43,10 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
         holder.nameView.setText(classList.get(position).getCourseName());
         holder.classCodeView.setText(classList.get(position).getCourseCode());
         holder.creditView.setText(String.valueOf(classList.get(position).getCredits()));
+        String preReqString = "";
+        for (String preReq : classList.get(position).getPreReq()) preReqString += preReq + ", ";
+        preReqString = preReqString.substring(0, preReqString.length() - 2);
+        holder.preReqView.setText(preReqString);
     }
 
     @Override
