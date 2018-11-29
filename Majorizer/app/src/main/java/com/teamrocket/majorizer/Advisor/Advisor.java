@@ -1,4 +1,6 @@
-package com.teamrocket.majorizer.UserGroups;
+package com.teamrocket.majorizer.Advisor;
+
+import com.teamrocket.majorizer.Account;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -9,8 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
-import com.teamrocket.majorizer.UserGroups.Administrator;
+import com.teamrocket.majorizer.Account;
 
 import java.util.ArrayList;
 import java.util.List;

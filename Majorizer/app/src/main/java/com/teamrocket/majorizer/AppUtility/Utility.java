@@ -5,13 +5,13 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.teamrocket.majorizer.UserGroups.Account;
+import com.teamrocket.majorizer.Account;
 
-import static com.teamrocket.majorizer.UserGroups.Account.AccountType.ADMIN;
-import static com.teamrocket.majorizer.UserGroups.Account.AccountType.ADVISOR;
-import static com.teamrocket.majorizer.UserGroups.Account.AccountType.ERROR;
-import static com.teamrocket.majorizer.UserGroups.Account.AccountType.GRAD;
-import static com.teamrocket.majorizer.UserGroups.Account.AccountType.UNDERGRAD;
+import static com.teamrocket.majorizer.Account.AccountType.ADMIN;
+import static com.teamrocket.majorizer.Account.AccountType.ADVISOR;
+import static com.teamrocket.majorizer.Account.AccountType.ERROR;
+import static com.teamrocket.majorizer.Account.AccountType.GRAD;
+import static com.teamrocket.majorizer.Account.AccountType.UNDERGRAD;
 
 // Final so that this class cannot be extended.
 public final class Utility {

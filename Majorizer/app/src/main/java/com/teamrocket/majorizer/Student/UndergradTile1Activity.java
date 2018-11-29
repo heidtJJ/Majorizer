@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.teamrocket.majorizer.Adapters.ClassDataRecycleAdapter;
 import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Student;
 
 import java.util.ArrayList;
 

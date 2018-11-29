@@ -6,7 +6,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
+import com.teamrocket.majorizer.Account;
 
 import java.util.HashMap;
 import java.util.Map;

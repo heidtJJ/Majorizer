@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.UserGroups;
+package com.teamrocket.majorizer;
 
 import com.teamrocket.majorizer.AppUtility.Notification;
 

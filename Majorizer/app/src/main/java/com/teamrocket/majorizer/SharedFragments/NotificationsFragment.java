@@ -11,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamrocket.majorizer.Adapters.NotificationAdapter;
-import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
-
-import java.util.ArrayList;
+import com.teamrocket.majorizer.Account;
 
 public class NotificationsFragment extends Fragment {
     @Nullable

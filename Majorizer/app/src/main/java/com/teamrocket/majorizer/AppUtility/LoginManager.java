@@ -14,12 +14,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
-import com.teamrocket.majorizer.UserGroups.Administrator;
-import com.teamrocket.majorizer.UserGroups.Advisor;
-import com.teamrocket.majorizer.UserGroups.GradStudent;
-import com.teamrocket.majorizer.UserGroups.Student;
-import com.teamrocket.majorizer.UserGroups.UndergradStudent;
+import com.teamrocket.majorizer.Account;
+import com.teamrocket.majorizer.Admin.Administrator;
+import com.teamrocket.majorizer.Advisor.Advisor;
+import com.teamrocket.majorizer.Student.GradStudent;
+import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.io.Serializable;
 import java.util.ArrayList;

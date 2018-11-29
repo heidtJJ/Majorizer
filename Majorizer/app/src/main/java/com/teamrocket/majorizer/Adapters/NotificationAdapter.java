@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.teamrocket.majorizer.AppUtility.Notification;
 import com.teamrocket.majorizer.AppUtility.NotificationManager;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
+import com.teamrocket.majorizer.Account;
 
 import java.util.List;
 

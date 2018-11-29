@@ -1,8 +1,9 @@
-package com.teamrocket.majorizer.UserGroups;
+package com.teamrocket.majorizer.Student;
 
 
 import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.AppUtility.Schedule;
+import com.teamrocket.majorizer.Account;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

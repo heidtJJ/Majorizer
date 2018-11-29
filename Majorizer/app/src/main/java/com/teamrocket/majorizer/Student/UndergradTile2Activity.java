@@ -6,12 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.AppUtility.RequiredCourseListManager;
-import com.teamrocket.majorizer.UserGroups.Student;
 import com.teamrocket.majorizer.R;
-
-import java.util.ArrayList;
 
 public class UndergradTile2Activity extends AppCompatActivity {
 

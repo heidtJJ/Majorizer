@@ -9,11 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
+import com.teamrocket.majorizer.Account;
 
 public class UndergradHomeFragment extends Fragment {
 

@@ -8,17 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.UserGroups.Account;
-import com.teamrocket.majorizer.UserGroups.Advisor;
-import com.teamrocket.majorizer.UserGroups.GradStudent;
-import com.teamrocket.majorizer.UserGroups.Student;
-import com.teamrocket.majorizer.UserGroups.UndergradStudent;
+import com.teamrocket.majorizer.Account;
+import com.teamrocket.majorizer.Advisor.Advisor;
+import com.teamrocket.majorizer.Student.GradStudent;
+import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 

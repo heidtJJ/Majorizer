@@ -13,15 +13,13 @@ import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
 import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
 import com.teamrocket.majorizer.SharedFragments.AccountFragment;
 import com.teamrocket.majorizer.Admin.AdminHomeFragment;
-import com.teamrocket.majorizer.Admin.AdminNotificationsFragment;
 import com.teamrocket.majorizer.SharedFragments.NotificationsFragment;
 import com.teamrocket.majorizer.Student.GradHomeFragment;
 import com.teamrocket.majorizer.Student.UndergradHomeFragment;
-import com.teamrocket.majorizer.UserGroups.Account;
-import com.teamrocket.majorizer.UserGroups.Administrator;
-import com.teamrocket.majorizer.UserGroups.Advisor;
-import com.teamrocket.majorizer.UserGroups.GradStudent;
-import com.teamrocket.majorizer.UserGroups.UndergradStudent;
+import com.teamrocket.majorizer.Admin.Administrator;
+import com.teamrocket.majorizer.Advisor.Advisor;
+import com.teamrocket.majorizer.Student.GradStudent;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 public class MainActivity extends AppCompatActivity {
 

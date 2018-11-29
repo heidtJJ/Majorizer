@@ -1,7 +1,6 @@
 package com.teamrocket.majorizer;
 
 import com.teamrocket.majorizer.AppUtility.LoginManager;
-import com.teamrocket.majorizer.UserGroups.Account;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

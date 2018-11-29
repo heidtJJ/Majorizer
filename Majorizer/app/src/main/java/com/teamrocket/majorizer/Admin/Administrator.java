@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.UserGroups;
+package com.teamrocket.majorizer.Admin;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,9 +10,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.teamrocket.majorizer.Account;
 import com.teamrocket.majorizer.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;

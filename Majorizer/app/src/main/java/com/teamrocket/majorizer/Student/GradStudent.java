@@ -1,4 +1,4 @@
-package com.teamrocket.majorizer.UserGroups;
+package com.teamrocket.majorizer.Student;
 
 public class GradStudent extends Student {
 

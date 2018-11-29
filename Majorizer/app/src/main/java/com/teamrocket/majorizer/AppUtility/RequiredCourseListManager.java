@@ -1,7 +1,6 @@
 package com.teamrocket.majorizer.AppUtility;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -12,9 +11,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.teamrocket.majorizer.Adapters.CourseRecycleAdapter;
-import com.teamrocket.majorizer.UserGroups.GradStudent;
-import com.teamrocket.majorizer.UserGroups.Student;
-import com.teamrocket.majorizer.UserGroups.UndergradStudent;
+import com.teamrocket.majorizer.Student.GradStudent;
+import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 import java.util.HashSet;
