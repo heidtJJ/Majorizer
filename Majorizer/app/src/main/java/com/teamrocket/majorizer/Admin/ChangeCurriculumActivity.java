@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.teamrocket.majorizer.Admin.Administrator;
 import com.teamrocket.majorizer.R;
 
 public class ChangeCurriculumActivity extends AppCompatActivity {
@@ -21,14 +20,14 @@ public class ChangeCurriculumActivity extends AppCompatActivity {
     }
 
     public void addCourseToCurriculum(final View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
+        Intent selectAccountActivity = new Intent(view.getContext(), SelectCourseTypeActivity.class);
         // Pass this Account object to the main activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);
     }
 
     public void removeCourseFromCurriculum(final View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
+        Intent selectAccountActivity = new Intent(view.getContext(), RemoveCourseActivity.class);
         // Pass this Account object to the main activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);

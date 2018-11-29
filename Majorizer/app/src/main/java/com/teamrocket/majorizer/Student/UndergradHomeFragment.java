@@ -23,26 +23,27 @@ public class UndergradHomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_undergrad_home, container, false);
-        tile1 = view.findViewById(R.id.tile1);
 
         // Get account object from the MainActivity.
         MainActivity mainActivity = (MainActivity) getActivity();
         account = mainActivity.account;
 
+        tile1 = view.findViewById(R.id.tile1);
         tile1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent courseHistoryIntent = new Intent(getActivity(), UndergradTile1Activity.class);
-                courseHistoryIntent.putExtra("MyClass", account);
+                courseHistoryIntent.putExtra(getText(R.string.AccountObject).toString(), account);
                 startActivity(courseHistoryIntent);
             }
         });
+
         tile2 = view.findViewById(R.id.tile2);
         tile2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent schedulerIntent = new Intent(getActivity(), UndergradTile2Activity.class);
-                schedulerIntent.putExtra("MyClass", account);
+                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), account);
                 startActivity(schedulerIntent);
             }
         });

@@ -32,6 +32,7 @@
     <string name="LastNameKey">LastName</string>
     <string name="Major1">Major1</string>
     <string name="Major2">Major2</string>
+    <string name="Minor">Minor</string>
     <string name="Minor1">Minor1</string>
     <string name="Minor2">Minor2</string>
     <string name="UsernameKey">Username</string>

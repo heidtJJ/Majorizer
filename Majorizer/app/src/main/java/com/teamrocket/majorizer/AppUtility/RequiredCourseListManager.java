@@ -89,10 +89,10 @@ public class RequiredCourseListManager {
                     }
                 }
 
+                mutexLock.lock();
                 RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(classesNeededList);
                 classesTakenRecyclerView.setAdapter(cAdapter);
 
-                mutexLock.lock();
                 String circleText = String.valueOf(courseCount) + "\ncourses";
                 SpannableString ss = new SpannableString(circleText);
                 ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(courseCount).length(), 0);
@@ -116,7 +116,7 @@ public class RequiredCourseListManager {
     }
 
 
-    private List<String> getCoursesTaken(Student student) {
+    private List<String> getCoursesTaken(final Student student) {
         ArrayList<String> coursesTaken = new ArrayList<>();
         for (int i = 0; i < student.numCoursesTaken(); ++i) {
             ClassData takenClass = student.getCourseInformation(i);
@@ -126,7 +126,7 @@ public class RequiredCourseListManager {
     }
 
 
-    private Set<String> getStudentMajors(Student student) {
+    private Set<String> getStudentMajors(final Student student) {
         // Get list of the student's major and minors
         Set<String> majors = new HashSet<>();
         if (student instanceof UndergradStudent) {
@@ -143,7 +143,7 @@ public class RequiredCourseListManager {
         return majors;
     }
 
-    private Set<String> getStudentMinors(Student student) {
+    private Set<String> getStudentMinors(final Student student) {
         // Get list of the student's major and minors
         Set<String> minors = new HashSet<>();
         if (student instanceof UndergradStudent) {
@@ -162,11 +162,11 @@ public class RequiredCourseListManager {
         return minors;
     }
 
-    public Course getMasterCourseListItem(int index) {
+    public Course getClassNeededListItem(final int index) {
         return classesNeededList.get(index);
     }
 
-    public void addMasterCourseListItem(Course course) {
+    public void addClassNeededListItem(final Course course) {
         classesNeededList.add(course);
     }
 

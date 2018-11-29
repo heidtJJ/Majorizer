@@ -35,7 +35,9 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Student.UndergradTile1Activity" />
         <activity android:name=".Student.UndergradTile2Activity" />
-        <activity android:name=".Admin.ChangeCurriculumActivity"></activity>
+        <activity android:name=".Admin.ChangeCurriculumActivity" />
+        <activity android:name=".Admin.SelectCourseTypeActivity" />
+        <activity android:name=".Admin.RemoveCourseActivity"></activity>
     </application>
 
 </manifest>
