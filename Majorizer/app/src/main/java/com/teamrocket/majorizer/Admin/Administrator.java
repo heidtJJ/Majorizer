@@ -31,6 +31,14 @@ public class Administrator extends Account {
         accountsReference.setValue("0");
     }
 
+    /**
+     * This method retrieves a list of locked accounts from the database and stores them in the usernameList input.
+     * The arrayAdapter is needed to update the UI with the usernameList data.
+     *
+     * @param usernameList A
+     * @param arrayAdapter
+     * @return
+     */
     public List<String> getLockedAccounts(final List<String> usernameList, final ArrayAdapter arrayAdapter) {
         DatabaseReference accountsRef = FirebaseDatabase.getInstance().getReference("/Accounts/");
         Query query = accountsRef.orderByChild("LoginAttempts").equalTo("3");
@@ -54,11 +62,49 @@ public class Administrator extends Account {
         return usernameList;
     }
     //********************************************** END OF ACCOUNT LOCKING ********************************************************
-
     //************************************************ CURRICULUM CHANGES **********************************************************
 
     public void removeCourseFromCurriculum() {
+        // Make query to Firebase database to validate user.
+        /*FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                // Check if the username already exists in the database.
+                if (dataSnapshot.hasChild(username)) {
+                    // This username already exists
+                    Toast.makeText(context, context.getText(R.string.UsernameExists), Toast.LENGTH_LONG).show();
+                    return;
+                }
 
+                // Insert the user's credentials into the a map.
+                Map<String, String> undergradFields = new HashMap<>();
+                undergradFields.put(context.getText(R.string.Major1).toString(), major1);
+                undergradFields.put(context.getText(R.string.Major2).toString(), major2);
+                undergradFields.put(context.getText(R.string.Minor1).toString(), minor1);
+                undergradFields.put(context.getText(R.string.Minor2).toString(), minor2);
+                undergradFields.put(context.getText(R.string.FirstNameKey).toString(), firstName);
+                undergradFields.put(context.getText(R.string.Id).toString(), String.valueOf("0000010"));
+                undergradFields.put(context.getText(R.string.LastNameKey).toString(), lastName);
+                undergradFields.put(context.getText(R.string.LoginAttempts).toString(), String.valueOf(0));
+                undergradFields.put(context.getText(R.string.PasswordKey).toString(), password);
+                undergradFields.put(context.getText(R.string.Type).toString(), context.getText(R.string.Undergrad).toString());
+                undergradFields.put(context.getText(R.string.UsernameKey).toString(), username);
+                undergradFields.put(context.getText(R.string.Advisor1).toString(), NULL);
+                undergradFields.put(context.getText(R.string.Advisor2).toString(), NULL);
+
+                // Insert the map into the database and notify the user.
+                DatabaseReference newAccountRef = FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts) + "/" + username);
+                newAccountRef.setValue(undergradFields);
+                Toast.makeText(context, context.getText(R.string.SuccessfulAccountCreation), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                // Database query was not successful.
+                Toast.makeText(context, context.getText(R.string.InvalidName), Toast.LENGTH_SHORT).show();
+            }
+
+        });*/
     }
 
     public void addCourseToCurriculum() {
@@ -66,13 +112,11 @@ public class Administrator extends Account {
     }
 
     //*********************************************** END OF CURRICULUM CHANGES *****************************************************
-
     //*************************************************** ACCOUNT CREATION **********************************************************
 
-    public static void createNewUndergradStudentAccount(final Context context, final String username,
-                                                        final String password, final String firstName, final String lastName,
-                                                        final String major1, final String major2, final String minor1,
-                                                        final String minor2) {
+    public static void createNewUndergradStudentAccount(final Context context, final String username, final String password,
+                                                        final String firstName, final String lastName, final String major1,
+                                                        final String major2, final String minor1, final String minor2) {
         // Make query to Firebase database to validate user.
         FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -115,7 +159,8 @@ public class Administrator extends Account {
         });
     }
 
-    public static void createNewGradStudentAccount(final Context context, final String major, final String username, final String password, final String firstName, final String lastName) {
+    public static void createNewGradStudentAccount(final Context context, final String major, final String username,
+                                                   final String password, final String firstName, final String lastName) {
         // Make query to Firebase database to validate user.
         FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -155,8 +200,8 @@ public class Administrator extends Account {
         });
     }
 
-
-    public static void createNewAdvisorAccount(final Context context, final String department, final String username, final String password, final String firstName, final String lastName) {
+    public static void createNewAdvisorAccount(final Context context, final String department, final String username,
+                                               final String password, final String firstName, final String lastName) {
         // Make query to Firebase database to validate user.
         FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -193,7 +238,7 @@ public class Administrator extends Account {
 
         });
     }
-    //************************************************ END OF ACCOUNT CREATION *******************************************************
 
+    //************************************************ END OF ACCOUNT CREATION *******************************************************
 
 }

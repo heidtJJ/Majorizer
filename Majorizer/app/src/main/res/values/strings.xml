@@ -40,6 +40,7 @@
     <string name="StudentNames">StudentNames</string>
     <string name="Id">Id</string>
     <string name="Department">Department</string>
+    <string name="UndergradMajors">UndergradMajors</string>
 
     <!-- Create Account Unlocking Strings -->
     <string name="NotLocked">The account which you entered was not locked.</string>

@@ -10,6 +10,7 @@ import com.teamrocket.majorizer.AppUtility.RequiredCourseListManager;
 import com.teamrocket.majorizer.R;
 
 public class UndergradTile2Activity extends AppCompatActivity {
+    private Student student = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class UndergradTile2Activity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Retrieve the Account object passed from the LoginManager and populate classesTaken list.
-        Student student = (Student) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
+        student = (Student) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // Set all classes taken in the recycler view.
         RecyclerView classesTakenRecyclerView = findViewById(R.id.classesRecyclerView);

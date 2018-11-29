@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.teamrocket.majorizer.Adapters.CourseRecycleAdapter;
+import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.GradStudent;
 import com.teamrocket.majorizer.Student.Student;
 import com.teamrocket.majorizer.Student.UndergradStudent;
@@ -37,11 +38,13 @@ public class RequiredCourseListManager {
         // Get list of the student's major and minors
         Set<String> majors = getStudentMajors(student);
 
+        // Create a mutex lock for adding items to the RecyclerView
         final Lock mutexLock = new ReentrantLock();
 
         // Iterate through list of majors finding needed classes.
         for (final String major : majors) {
-            populateClassesNeeded(mutexLock, "Majors", major, classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
+            populateClassesNeeded(mutexLock, context.getText(R.string.UndergradMajors).toString(), major,
+                    classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
         }
 
         // Get list of the student's major and minors
@@ -49,7 +52,8 @@ public class RequiredCourseListManager {
 
         // Iterate through list of majors finding needed classes.
         for (final String minor : minors) {
-            populateClassesNeeded(mutexLock, "Minors", minor, classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
+            populateClassesNeeded(mutexLock, "Minors", minor, classesTakenList,
+                    classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
         }
     }
 
