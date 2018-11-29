@@ -16,7 +16,7 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
     }
 
     public void createUndergradStudent(View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), CreateUndergradActivity.class);
+        Intent selectAccountActivity = new Intent(view.getContext(), CreateUndergradAccountActivity.class);
         view.getContext().startActivity(selectAccountActivity);
     }
 

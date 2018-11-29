@@ -28,7 +28,7 @@
         <activity android:name=".Admin.SelectAccountTypeActivity" />
         <activity android:name=".Admin.CreateStudentAccountActivity" />
         <activity android:name=".Admin.CreateAdvisorAccountActivity" />
-        <activity android:name=".Admin.CreateUndergradActivity" />
+        <activity android:name=".Admin.CreateUndergradAccountActivity" />
         <activity android:name=".Admin.CreateGradAccountActivity" />
         <activity
             android:name=".Admin.UnlockAccountActivity"

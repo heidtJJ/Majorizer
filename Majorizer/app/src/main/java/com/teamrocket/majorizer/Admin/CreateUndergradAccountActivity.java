@@ -13,7 +13,7 @@ import com.teamrocket.majorizer.R;
 import static com.teamrocket.majorizer.AppUtility.Utility.isValidName;
 import static com.teamrocket.majorizer.AppUtility.Utility.isValidUserName;
 
-public class CreateUndergradActivity extends AppCompatActivity {
+public class CreateUndergradAccountActivity extends AppCompatActivity {
     private Administrator administrator = null;
 
     // User Interface Views
@@ -90,9 +90,9 @@ public class CreateUndergradActivity extends AppCompatActivity {
             return;
         }
         // Retreive the selected first student major option.
-        int major1RadioGroup = this.major1RadioGroup.getCheckedRadioButtonId();
+        int major1RadioGroupChoice = this.major1RadioGroup.getCheckedRadioButtonId();
         String major1 = null;
-        switch (major1RadioGroup) {
+        switch (major1RadioGroupChoice) {
             case R.id.radioMajor1_CS:
                 major1 = getText(R.string.ComputerScience).toString();
                 break;
@@ -106,9 +106,9 @@ public class CreateUndergradActivity extends AppCompatActivity {
         }
 
         // Retreive the selected second major option.
-        int major2RadioGroup = this.major2RadioGroup.getCheckedRadioButtonId();
+        int major2RadioGroupChoice = this.major2RadioGroup.getCheckedRadioButtonId();
         String major2 = null;
-        switch (major2RadioGroup) {
+        switch (major2RadioGroupChoice) {
             case R.id.radioMajor2_CS:
                 major2 = getText(R.string.ComputerScience).toString();
                 break;
@@ -133,9 +133,9 @@ public class CreateUndergradActivity extends AppCompatActivity {
 
 
         // Retreive the selected first minor option.
-        int minor1RadioGroup = this.minor1RadioGroup.getCheckedRadioButtonId();
+        int minor1RadioGroupChoice = this.minor1RadioGroup.getCheckedRadioButtonId();
         String minor1 = null;
-        switch (minor1RadioGroup) {
+        switch (minor1RadioGroupChoice) {
             case R.id.radioMinor1_PH:
                 minor1 = getText(R.string.Physics).toString();
                 break;
@@ -152,9 +152,9 @@ public class CreateUndergradActivity extends AppCompatActivity {
         }
 
         // Retreive the selected second minor option.
-        int minor2RadioGroup = this.minor2RadioGroup.getCheckedRadioButtonId();
+        int minor2RadioGroupChoice = this.minor2RadioGroup.getCheckedRadioButtonId();
         String minor2 = null;
-        switch (minor2RadioGroup) {
+        switch (minor2RadioGroupChoice) {
             case R.id.radioMinor2_PH:
                 minor2 = getText(R.string.Physics).toString();
                 break;
@@ -200,12 +200,16 @@ public class CreateUndergradActivity extends AppCompatActivity {
         // User input was valid. Let Admin create new undergrad account.
         administrator.createNewUndergradStudentAccount(this, username, password, firstName, lastName, major1, major2, minor1, minor2);
 
-        // Set the EditTexts to empty.
+        // Set the EditTexts to empty and uncheck RadioGroups.
         usernameField.setText("");
         firstNameField.setText("");
         lastNameField.setText("");
         passwordField.setText("");
         passwordRetryField.setText("");
+        major1RadioGroup.clearCheck();
+        major2RadioGroup.clearCheck();
+        minor1RadioGroup.clearCheck();
+        minor2RadioGroup.clearCheck();
     }
 
 }

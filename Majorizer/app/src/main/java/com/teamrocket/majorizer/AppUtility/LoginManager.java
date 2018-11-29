@@ -254,7 +254,7 @@ public class LoginManager implements Serializable {
                     populateAccount(view, dataSnapshot, account);
 
                     // Pass this Account object to the main activity.
-                    mainActivity.putExtra("MyClass", account);
+                    mainActivity.putExtra(context.getText(R.string.AccountObject).toString(), account);
 
                     // Startup the main activity.
                     context.startActivity(mainActivity);

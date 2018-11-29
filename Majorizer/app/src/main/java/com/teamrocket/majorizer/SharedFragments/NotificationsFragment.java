@@ -16,13 +16,15 @@ import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Account;
 
 public class NotificationsFragment extends Fragment {
+    private Account account = null;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         MainActivity mainActivity = (MainActivity) getActivity();
-        Account account = mainActivity.account;
+        account = mainActivity.account;
 
         // Create recycler view for notifications.
         RecyclerView notificationRecyclerView = view.findViewById(R.id.NotificationsAdapter);

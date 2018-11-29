@@ -19,7 +19,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private Account account = null;
     private static NotificationManager notificationManager = null;
 
-    public NotificationAdapter(Account account) {
+    public NotificationAdapter(final Account account) {
         this.account = account;
         this.notificationManager = new NotificationManager(account);
     }
