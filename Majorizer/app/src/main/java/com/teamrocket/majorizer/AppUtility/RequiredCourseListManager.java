@@ -49,9 +49,11 @@ public class RequiredCourseListManager {
                         String courseCode = course.getKey();
                         String courseName = course.child("Name").getValue().toString();
                         Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
+                        ArrayList<String> preReq = new ArrayList<>();
+                        preReq.add("MA333");
                         if (!classesTakenList.contains(courseCode)) {
                             mutexLock.lock();
-                            classesNeededList.add(new Course(courseName, courseCode, numCredits));
+                            classesNeededList.add(new Course(courseName, courseCode, numCredits, preReq));
                             courseCount++;
                             creditsCount += numCredits;
                             mutexLock.unlock();
@@ -97,9 +99,11 @@ public class RequiredCourseListManager {
                         String courseCode = course.getKey();
                         String courseName = course.child("Name").getValue().toString();
                         Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
+                        ArrayList<String> preReq = new ArrayList<>();
+                        preReq.add("MA333");
                         if (!classesTakenList.contains(courseCode)) {
                             mutexLock.lock();
-                            classesNeededList.add(new Course(courseName, courseCode, numCredits));
+                            classesNeededList.add(new Course(courseName, courseCode, numCredits, preReq));
                             courseCount++;
                             creditsCount += numCredits;
                             mutexLock.unlock();
