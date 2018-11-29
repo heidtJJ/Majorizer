@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.teamrocket.majorizer.Adapters.SectionsPageAdapter;
+import com.teamrocket.majorizer.Admin.ChangeCurriculumActivity;
 import com.teamrocket.majorizer.Admin.SelectAccountTypeActivity;
 import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
 import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public Account account = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Adds fragments to SectionsPageAdapter and give titles.
-    public void setupViewPager(ViewPager viewPager) {
+    public void setupViewPager(final ViewPager viewPager) {
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Add title fragment depending on the type of account.
@@ -84,24 +85,28 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPageAdapter);
     }
 
-    public void createAccount(View view) {
+    public void createAccount(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), SelectAccountTypeActivity.class);
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void unlockAccountActivity(View view) {
+    public void unlockAccountActivity(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), UnlockAccountActivity.class);
         // Pass this Account object to the main activity.
         selectAccountActivity.putExtra("MyClass", account);
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void searchAccount(View view) {
+    public void searchAccount(final View view) {
     }
 
-    public void changeCourses(View view) {
+    public void changeCurriculum(final View view) {
+        Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
+        // Pass this Account object to the main activity.
+        selectAccountActivity.putExtra("MyClass", account);
+        view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void viewAcademicProgress(View view) {
+    public void viewAcademicProgress(final View view) {
     }
 }

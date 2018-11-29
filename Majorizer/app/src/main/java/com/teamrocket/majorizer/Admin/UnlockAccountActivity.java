@@ -9,13 +9,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.Account;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UnlockAccountActivity extends AppCompatActivity {
-    private Account account = null;
+    private Administrator administrator = null;
 
     private List<String> lockedUsernameList = null;
     private ArrayAdapter<String> arrayAdapter = null;
@@ -26,13 +25,13 @@ public class UnlockAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_unlock_account);
 
         // Retreive the Account object passed from the LoginManager.
-        account = (Account) getIntent().getSerializableExtra("MyClass");
+        administrator = (Administrator) getIntent().getSerializableExtra("MyClass");
 
         // Get list of locked accounts.
         lockedUsernameList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lockedUsernameList);
 
-        ((Administrator) account).getLockedAccounts(lockedUsernameList, arrayAdapter);
+        administrator.getLockedAccounts(lockedUsernameList, arrayAdapter);
 
         // Create array adapter for the list of usernames.
         ListView userNameListView = findViewById(R.id.usernameListView);
@@ -40,7 +39,8 @@ public class UnlockAccountActivity extends AppCompatActivity {
         arrayAdapter.notifyDataSetChanged();
     }
 
-    public void unlockAccount(View view) {
+    public void unlockAccount(final View view) {
+        // Retrieve the username entered in the accountNameField.
         EditText editText = findViewById(R.id.accountNameField);
         String userNameToUnlock = editText.getText().toString();
         if (userNameToUnlock.isEmpty()) {
@@ -48,7 +48,7 @@ public class UnlockAccountActivity extends AppCompatActivity {
             Toast.makeText(this, getText(R.string.EmptyUsername).toString(), Toast.LENGTH_LONG).show();
         } else if (lockedUsernameList.contains(userNameToUnlock)) {
             // Unlock the user's account.
-            ((Administrator) account).unlockAccount(userNameToUnlock.trim(), this);
+            administrator.unlockAccount(userNameToUnlock.trim(), this);
 
             // Update the UI's listview.
             lockedUsernameList.remove(userNameToUnlock);

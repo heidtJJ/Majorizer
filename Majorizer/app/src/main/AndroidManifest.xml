@@ -34,7 +34,8 @@
             android:name=".Admin.UnlockAccountActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Student.UndergradTile1Activity" />
-        <activity android:name=".Student.UndergradTile2Activity"></activity>
+        <activity android:name=".Student.UndergradTile2Activity" />
+        <activity android:name=".Admin.ChangeCurriculumActivity"></activity>
     </application>
 
 </manifest>
