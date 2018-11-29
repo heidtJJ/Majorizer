@@ -40,53 +40,7 @@ public class RequiredCourseListManager {
 
         // Iterate through list of majors finding needed classes.
         for (final String major : majors) {
-<<<<<<< HEAD
-            // Make asynchronous query to Firebase database to fill classesNeededList.
-            FirebaseDatabase.getInstance().getReference("/Majors/" + major).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(final DataSnapshot courseList) {
-                    // Iterate through courseList pulling data for each course.
-                    for (DataSnapshot course : courseList.getChildren()) {
-                        String courseCode = course.getKey();
-                        String courseName = course.child("Name").getValue().toString();
-                        Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
-                        ArrayList<String> preReq = new ArrayList<>();
-                        preReq.add("MA333");
-                        if (!classesTakenList.contains(courseCode)) {
-                            mutexLock.lock();
-                            classesNeededList.add(new Course(courseName, courseCode, numCredits, preReq));
-                            courseCount++;
-                            creditsCount += numCredits;
-                            mutexLock.unlock();
-                        }
-                    }
-
-                    RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(classesNeededList);
-                    classesTakenRecyclerView.setAdapter(cAdapter);
-
-                    mutexLock.lock();
-                    String circleText = String.valueOf(courseCount) + "\ncourses";
-                    SpannableString ss = new SpannableString(circleText);
-                    ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(courseCount).length(), 0);
-                    coursesRemainingView.setText(ss);
-
-                    circleText = String.valueOf(creditsCount) + "\ncredits";
-                    ss = new SpannableString(circleText);
-                    ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(creditsCount).length(), 0);
-                    creditsRemainingView.setText(ss);
-                    mutexLock.unlock();
-                }
-
-                @Override
-                public void onCancelled(final DatabaseError databaseError) {
-                    // Database query was not successful.
-                    System.err.println("Could not access database in MasterCourseList");
-                }
-
-            });
-=======
             populateClassesNeeded(mutexLock, "Majors", major, classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
->>>>>>> d72c06c0cdb6f2c0b02127ebf77142accd77c4eb
         }
 
         // Get list of the student's major and minors
@@ -94,31 +48,9 @@ public class RequiredCourseListManager {
 
         // Iterate through list of majors finding needed classes.
         for (final String minor : minors) {
-<<<<<<< HEAD
-            // Make asynchronous query to Firebase database to fill classesNeededList.
-            FirebaseDatabase.getInstance().getReference("/Minors/" + minor).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(final DataSnapshot courseList) {
-                    // Iterate through courseList pulling data for each course.
-                    for (DataSnapshot course : courseList.getChildren()) {
-                        String courseCode = course.getKey();
-                        String courseName = course.child("Name").getValue().toString();
-                        Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
-                        ArrayList<String> preReq = new ArrayList<>();
-                        preReq.add("MA333");
-                        if (!classesTakenList.contains(courseCode)) {
-                            mutexLock.lock();
-                            classesNeededList.add(new Course(courseName, courseCode, numCredits, preReq));
-                            courseCount++;
-                            creditsCount += numCredits;
-                            mutexLock.unlock();
-                        }
-                    }
-=======
             populateClassesNeeded(mutexLock, "Minors", minor, classesTakenList, classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
         }
     }
->>>>>>> d72c06c0cdb6f2c0b02127ebf77142accd77c4eb
 
     void populateClassesNeeded(final Lock mutexLock, final String level, final String curriculum,
                                final List<String> classesTakenList, final RecyclerView classesTakenRecyclerView,
