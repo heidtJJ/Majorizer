@@ -48,7 +48,7 @@ public class ClassDataRecycleAdapter extends RecyclerView.Adapter<ClassDataRecyc
             public void onClick(View v) {
                 ClassDataDialogFragment cddf = new ClassDataDialogFragment();
                 Bundle args = new Bundle();
-                args.putString("credits", classList.get(position).getCourseCode());
+                args.putString("credits", String.valueOf(classList.get(position).getCredits()));
                 args.putString("grade", classList.get(position).getGrade());
                 cddf.setArguments(args);
                 cddf.show(fm, "");
