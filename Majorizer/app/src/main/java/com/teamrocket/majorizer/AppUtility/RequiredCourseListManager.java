@@ -1,6 +1,8 @@
 package com.teamrocket.majorizer.AppUtility;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -28,10 +30,11 @@ public class RequiredCourseListManager {
 
     public final List<Course> classesNeededList = new ArrayList<>();
     int courseCount = 0, creditsCount = 0;
-
+    Activity activity;
+    FragmentManager fm;
     public RequiredCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView,
                                      final Student student, final TextView coursesRemainingView,
-                                     final TextView creditsRemainingView) {
+                                     final TextView creditsRemainingView, final FragmentManager fm) {
         // Retrieve the list of classes already taken.
         final List<String> classesTakenList = getCoursesTaken(student);
 
@@ -55,6 +58,9 @@ public class RequiredCourseListManager {
             populateClassesNeeded(mutexLock, "Minors", minor, classesTakenList,
                     classesTakenRecyclerView, coursesRemainingView, creditsRemainingView);
         }
+
+        this.activity = (Activity) context;
+        this.fm = fm;
     }
 
     void populateClassesNeeded(final Lock mutexLock, final String level, final String curriculum,
@@ -90,7 +96,7 @@ public class RequiredCourseListManager {
                 }
 
                 mutexLock.lock();
-                RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(classesNeededList);
+                RecyclerView.Adapter cAdapter = new CourseRecycleAdapter(classesNeededList, activity, fm);
                 classesTakenRecyclerView.setAdapter(cAdapter);
 
                 String circleText = String.valueOf(courseCount) + "\ncourses";

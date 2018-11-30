@@ -1,12 +1,16 @@
 package com.teamrocket.majorizer.Adapters;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.teamrocket.majorizer.AppUtility.CourseDataDialogFragment;
 import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
 
@@ -14,22 +18,21 @@ import java.util.List;
 
 public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdapter.ClassViewHolder> {
     private List<Course> classList = null;
+    Activity activity;
+    FragmentManager fm;
 
     static class ClassViewHolder extends RecyclerView.ViewHolder {
-        private TextView nameView, classCodeView, creditView, preReqView, preReqLabel;
-
+        private TextView nameView;
         ClassViewHolder(final View view) {
             super(view);
             nameView = view.findViewById(R.id.classNameView);
-            classCodeView = view.findViewById(R.id.classCodeView);
-            creditView = view.findViewById(R.id.classCreditView);
-            preReqView = view.findViewById(R.id.classPreReqView);
-            preReqLabel = view.findViewById(R.id.classPreReqLabel);
         }
     }
 
-    public CourseRecycleAdapter(List<Course> classList) {
+    public CourseRecycleAdapter(List<Course> classList, Activity activity, FragmentManager fm) {
         this.classList = classList;
+        this.activity = activity;
+        this.fm = fm;
     }
 
     @NonNull
@@ -40,16 +43,20 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ClassViewHolder holder, final int position) {
+        holder.nameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CourseDataDialogFragment cddf = new CourseDataDialogFragment();
+                Bundle args = new Bundle();
+                args.putString("code", classList.get(position).getCourseCode());
+                args.putString("credits", String.valueOf(classList.get(position).getCredits()));
+                args.putString("preReq", getPreRequisites(classList, position));
+                cddf.setArguments(args);
+                cddf.show(fm, "");
+            }
+        });
         holder.nameView.setText(classList.get(position).getCourseName());
-        holder.classCodeView.setText(classList.get(position).getCourseCode());
-        holder.creditView.setText(String.valueOf(classList.get(position).getCredits()));
-        String preReqString = getPreRequisites(classList, position);
-        if (preReqString.isEmpty()) {
-            holder.preReqView.setVisibility(View.GONE);
-            holder.preReqLabel.setVisibility(View.GONE);
-        } else
-            holder.preReqView.setText(preReqString);
     }
 
     @Override
@@ -58,15 +65,13 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
     }
 
     private String getPreRequisites(final List<Course> classList, final int position) {
-        String preReqString = "";
+        StringBuilder preReqString = new StringBuilder();
         boolean firstPass = true;
         for (Course preRequsite : classList.get(position).getPreRequsites()) {
-            if (!firstPass) {
-                preReqString += ", ";
-            }
-            preReqString += preRequsite.getCourseCode();
+            if (!firstPass) preReqString.append("\n");
+            preReqString.append(preRequsite.getCourseCode());
             firstPass = false;
         }
-        return preReqString;
+        return preReqString.toString();
     }
 }

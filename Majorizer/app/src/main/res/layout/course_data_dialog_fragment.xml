@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/classCreditsLabelDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Credits:"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/classCodeLabelDialog"
+        app:layout_constraintEnd_toStartOf="@+id/classCreditsViewDialog"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/classCreditsViewDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text=""
+        android:textSize="25sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/classCreditsLabelDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/classCreditsLabelDialog" />
+
+    <TextView
+        android:id="@+id/classCodeLabelDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Code:"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/classPreReqLabelDialog"
+        app:layout_constraintEnd_toStartOf="@+id/classCodeViewDialog"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classCreditsLabelDialog" />
+
+    <TextView
+        android:id="@+id/classCodeViewDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text=""
+        android:textSize="25sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/classCodeLabelDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/classCodeLabelDialog" />
+
+    <TextView
+        android:id="@+id/classPreReqLabelDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prerequisite(s):"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/classPreReqViewDialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classCodeLabelDialog" />
+
+    <TextView
+        android:id="@+id/classPreReqViewDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text=""
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classPreReqLabelDialog" />
+</android.support.constraint.ConstraintLayout>

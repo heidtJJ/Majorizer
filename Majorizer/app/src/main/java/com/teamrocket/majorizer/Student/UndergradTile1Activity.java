@@ -56,7 +56,7 @@ public class UndergradTile1Activity extends AppCompatActivity {
         gpaView.setText(ss);
 
         // Create RecyclerView with data.
-        RecyclerView.Adapter classAdapter = new ClassDataRecycleAdapter(classesTakenList);
+        RecyclerView.Adapter classAdapter = new ClassDataRecycleAdapter(classesTakenList, getSupportFragmentManager());
         cRecyclerView.setAdapter(classAdapter);
     }
 }
