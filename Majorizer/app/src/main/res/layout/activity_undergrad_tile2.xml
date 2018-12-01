@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_view"
-        android:backgroundTint="@color/circleBlue"
+        android:backgroundTint="@color/circleYellow"
         android:gravity="center"
         android:text="44"
         android:textColor="@color/white"

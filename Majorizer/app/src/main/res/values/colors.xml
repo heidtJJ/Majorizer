@@ -6,10 +6,12 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="circleRed">#ff5c5c</color>
+    <color name="circleRed">#F44336</color>
     <color name="circleBlue">#5c72ff</color>
-    <color name="circleGreen">#41b67e</color>
+    <color name="circleGreen">#4CAF50</color>
     <color name="test">#0000ff</color>
     <color name="Grey">#f2f2f2</color>
-
+    <color name="offWhite">#e7e7e7</color>
+    <color name="trans">#000000ff</color>
+    <color name="circleYellow">#FFC107</color>
 </resources>
