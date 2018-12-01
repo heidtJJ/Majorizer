@@ -37,7 +37,11 @@
         <activity android:name=".Student.UndergradRemainingTileActivity" />
         <activity android:name=".Admin.ChangeCurriculumActivity" />
         <activity android:name=".Admin.SelectCourseTypeActivity" />
-        <activity android:name=".Admin.RemoveCourseActivity"></activity>
+        <activity android:name=".Admin.RemoveCourseActivity" />
+        <activity android:name=".Advisor.AdvisorMyAdviseesTileActivity" />
+        <activity android:name=".Advisor.AdvisorSearchStudentsTileActivity" />
+        <activity android:name=".Advisor.AdvisorDropAdviseeTileActivity" />
+        <activity android:name=".Student.UndergradCurrentTileActivity"></activity>
     </application>
 
 </manifest>

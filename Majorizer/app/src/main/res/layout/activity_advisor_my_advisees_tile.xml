@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Student.UndergradHistoryTileActivity">
+    tools:context=".Advisor.AdvisorMyAdviseesTileActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:background="?attr/colorPrimary"
+        android:gravity="center"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History"
-            android:textSize="23sp"
-            android:textColor="@color/white"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_title" />
+            android:text="My Advisees"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
 
     </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:id="@+id/classesTakenView"
+        android:id="@+id/numberAdviseesView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -37,44 +37,29 @@
         android:text="0"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/creditsTakenView"
+        app:layout_constraintEnd_toStartOf="@+id/averageAdviseeGpaView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/creditsTakenView"
+        android:id="@+id/averageAdviseeGpaView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_view"
         android:backgroundTint="@color/circleYellow"
         android:gravity="center"
         android:text="0"
-        android:textSize="15sp"
         android:textColor="@color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/classesTakenView"
-        app:layout_constraintEnd_toStartOf="@+id/gpaView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/classesTakenView" />
-
-    <TextView
-        android:id="@+id/gpaView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_view"
-        android:backgroundTint="@color/circleGreen"
-        android:gravity="center"
-        android:text="0.00"
         android:textSize="15sp"
-        android:textColor="@color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/creditsTakenView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/numberAdviseesView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/creditsTakenView" />
+        app:layout_constraintStart_toEndOf="@+id/numberAdviseesView" />
 
     <View
         android:id="@+id/divider"
-        android:layout_width="0dp"
+        android:layout_width="395dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -82,10 +67,10 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditsTakenView" />
+        app:layout_constraintTop_toBottomOf="@+id/numberAdviseesView" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/classesRecyclerView"
+        android:id="@+id/adviseesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

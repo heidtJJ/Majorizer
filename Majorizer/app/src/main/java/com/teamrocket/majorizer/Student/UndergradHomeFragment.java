@@ -15,8 +15,6 @@ import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Account;
 
 public class UndergradHomeFragment extends Fragment {
-
-    CardView tile1, tile2;
     Account account = null;
 
     @Nullable
@@ -28,8 +26,7 @@ public class UndergradHomeFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         account = mainActivity.account;
 
-        tile1 = view.findViewById(R.id.card1);
-        tile1.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.card1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent courseHistoryIntent = new Intent(getActivity(), UndergradHistoryTileActivity.class);
@@ -38,11 +35,19 @@ public class UndergradHomeFragment extends Fragment {
             }
         });
 
-        tile2 = view.findViewById(R.id.card2);
-        tile2.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.card2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent schedulerIntent = new Intent(getActivity(), UndergradRemainingTileActivity.class);
+                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), account);
+                startActivity(schedulerIntent);
+            }
+        });
+
+        view.findViewById(R.id.card3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent schedulerIntent = new Intent(getActivity(), UndergradCurrentTileActivity.class);
                 schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), account);
                 startActivity(schedulerIntent);
             }
