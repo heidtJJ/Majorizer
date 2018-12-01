@@ -14,11 +14,11 @@ import com.teamrocket.majorizer.R;
 
 import java.util.ArrayList;
 
-public class UndergradTile1Activity extends AppCompatActivity {
+public class UndergradHistoryTileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_undergrad_tile1);
+        setContentView(R.layout.activity_undergrad_history_tile);
         getSupportActionBar().hide();
 
         // Retrieve needed Textviews to show user information.
