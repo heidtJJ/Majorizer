@@ -58,7 +58,7 @@ public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAd
         holder.nameView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                
+
                 return false;
             }
         });
