@@ -1,8 +1,12 @@
 package com.teamrocket.majorizer.Admin;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -35,30 +39,39 @@ public class UnlockAccountActivity extends AppCompatActivity {
 
         // Create array adapter for the list of usernames.
         ListView userNameListView = findViewById(R.id.usernameListView);
+
         userNameListView.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
-    }
 
-    public void unlockAccount(final View view) {
-        // Retrieve the username entered in the accountNameField.
-        EditText editText = findViewById(R.id.accountNameField);
-        String userNameToUnlock = editText.getText().toString();
-        if (userNameToUnlock.isEmpty()) {
-            // Notify the user that their input was empty.
-            Toast.makeText(this, getText(R.string.EmptyUsername).toString(), Toast.LENGTH_LONG).show();
-        } else if (lockedUsernameList.contains(userNameToUnlock)) {
-            // Unlock the user's account.
-            administrator.unlockAccount(userNameToUnlock.trim(), this);
-
-            // Update the UI's listview.
-            lockedUsernameList.remove(userNameToUnlock);
-            arrayAdapter.notifyDataSetChanged();
-
-            // Set the user's text (username field) to be empty.
-            editText.setText("");
-            Toast.makeText(this, getText(R.string.UnlockSuccess).toString(), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, getText(R.string.NotLocked).toString(), Toast.LENGTH_LONG).show();
-        }
+        final Context context = this;
+        userNameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3)
+            {
+                final String userNameToUnlock = (String) adapter.getItemAtPosition(position);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setTitle("Account Unlock Confirmation");
+                alertDialogBuilder
+                        .setMessage("Unlock %s account?".format(userNameToUnlock))
+                        .setPositiveButton("Unlock", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                administrator.unlockAccount(userNameToUnlock.trim(), context);
+                                // Update the UI's listview.
+                                lockedUsernameList.remove(userNameToUnlock);
+                                arrayAdapter.notifyDataSetChanged();
+                                Toast.makeText(context, getText(R.string.UnlockSuccess).toString(), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
     }
 }
