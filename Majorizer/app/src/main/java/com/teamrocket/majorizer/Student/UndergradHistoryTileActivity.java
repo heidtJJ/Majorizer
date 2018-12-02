@@ -22,8 +22,8 @@ public class UndergradHistoryTileActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Retrieve needed Textviews to show user information.
-        TextView classesTakenView = findViewById(R.id.classesTakenView);
-        TextView creditsTakenView = findViewById(R.id.creditsTakenView);
+        TextView classesTakenView = findViewById(R.id.classesTakingView);
+        TextView creditsTakenView = findViewById(R.id.creditsTakingView);
         TextView gpaView = findViewById(R.id.gpaView);
 
         // Retrieve the Account object passed from the LoginManager.

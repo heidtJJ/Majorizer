@@ -27,7 +27,7 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:id="@+id/classesTakenView"
+        android:id="@+id/classesTakingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -37,13 +37,13 @@
         android:text="0"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/creditsTakenView"
+        app:layout_constraintEnd_toStartOf="@+id/creditsTakingView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/creditsTakenView"
+        android:id="@+id/creditsTakingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_view"
@@ -52,10 +52,10 @@
         android:text="0"
         android:textSize="15sp"
         android:textColor="@color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/classesTakenView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/classesTakingView"
         app:layout_constraintEnd_toStartOf="@+id/gpaView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/classesTakenView" />
+        app:layout_constraintStart_toEndOf="@+id/classesTakingView" />
 
     <TextView
         android:id="@+id/gpaView"
@@ -67,10 +67,10 @@
         android:text="0.00"
         android:textSize="15sp"
         android:textColor="@color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/creditsTakenView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/creditsTakingView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/creditsTakenView" />
+        app:layout_constraintStart_toEndOf="@+id/creditsTakingView" />
 
     <View
         android:id="@+id/divider"
@@ -82,7 +82,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditsTakenView" />
+        app:layout_constraintTop_toBottomOf="@+id/creditsTakingView" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/classesRecyclerView"
