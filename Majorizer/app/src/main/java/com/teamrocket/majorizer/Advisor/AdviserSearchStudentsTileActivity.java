@@ -32,7 +32,7 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         Advisor advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         students = new ArrayList<>();
-        Map<String, String> studentsMap = advisor.getStudents();
+        Map<String, String> studentsMap = advisor.getStudents(); // will need to get all students
         if (studentsMap.isEmpty()) { // when getStudents() works will not need to populate
             studentsMap.put("heidtjj", "Jared Heidt");
             studentsMap.put("dewejm", "Jeremy Dewey");
