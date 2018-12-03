@@ -20,14 +20,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Create an Advisor Account"
+                android:text="Create an Undergraduate Course"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="23sp"
                 android:textStyle="bold" />
 
             <include
-                layout="@layout/starter_create_account"
+                layout="@layout/starter_create_course"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 

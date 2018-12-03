@@ -15,5 +15,6 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
     }
 
     public void createNewGraduateCourse(final View view) {
+
     }
 }

@@ -27,6 +27,7 @@
     <string name="LoginAttempts">LoginAttempts</string>
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>
     <string name="CourseName">CourseName</string>
+    <string name="Course_Name">Course Name:</string>
     <string name="Credits">Credits</string>
     <string name="Type">Type</string>
     <string name="Advisor">advisor</string>
@@ -66,6 +67,7 @@
     <string name="ComputerEngineering">Computer Engineering</string>
     <string name="PasswordRules">Passwords must have at least length 6, one lowercase letter, one uppercase letter, and one special character.</string>
     <string name="UsernameRules">Passwords must have six lowercase letters.</string>
+    <string name="CourseNumberRules">Course numbers must be 1-999.</string>
     <string name="SuccessfulAccountCreation">Account successfully created!</string>
     <string name="Major">Major</string>
 
