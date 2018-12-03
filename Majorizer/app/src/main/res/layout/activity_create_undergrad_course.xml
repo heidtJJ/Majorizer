@@ -58,13 +58,13 @@
                     android:orientation="vertical">
 
                     <RadioButton
-                        android:id="@+id/radioMajor1_CS"
+                        android:id="@+id/radioDepartment_CS"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ComputerScience" />
 
                     <RadioButton
-                        android:id="@+id/radioMajor1_math"
+                        android:id="@+id/radioDepartment_math"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Mathematics" />
@@ -73,13 +73,13 @@
             </GridLayout>
 
             <Button
-                android:id="@+id/CreateAccountButton"
+                android:id="@+id/CreateCourseButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="bottom"
                 android:onClick="createNewGraduateCourse"
-                android:text="@string/CreateAccount"
+                android:text="@string/CreateCourse"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
-        
+
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
