@@ -15,7 +15,8 @@ import com.teamrocket.majorizer.Student.UndergradClassHistoryActivity;
 import com.teamrocket.majorizer.Student.UndergradClassesNeededActivity;
 import com.teamrocket.majorizer.Student.UndergradStudent;
 
-public class StudentInfoActivity extends AppCompatActivity {
+public class
+StudentInfoActivity extends AppCompatActivity {
     private Advisor advisor = null;
     private Student student = null;
     private TextView adviseeActivityHeader = null;

@@ -24,7 +24,7 @@ public class UndergradHomeFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         student = (Student) mainActivity.account;
 
-        view.findViewById(R.id.undergradCard).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.courseHistoryCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent courseHistoryIntent = new Intent(getActivity(), UndergradClassHistoryActivity.class);
@@ -33,7 +33,7 @@ public class UndergradHomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.card2).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.coursesNeededCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent schedulerIntent = new Intent(getActivity(), UndergradClassesNeededActivity.class);
@@ -42,7 +42,7 @@ public class UndergradHomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.card3).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.currentCoursesCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent schedulerIntent = new Intent(getActivity(), UndergradCurrentClassesActivity.class);

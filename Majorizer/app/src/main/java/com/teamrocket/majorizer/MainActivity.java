@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.teamrocket.majorizer.Adapters.SectionsPageAdapter;
 import com.teamrocket.majorizer.Admin.ChangeCurriculumActivity;
-import com.teamrocket.majorizer.Admin.AdminSearchAccountActivity;
 import com.teamrocket.majorizer.Admin.SelectAccountTypeActivity;
 import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
 import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
@@ -98,12 +97,6 @@ public class MainActivity extends AppCompatActivity {
         // Pass this Account object to the main activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
         view.getContext().startActivity(selectAccountActivity);
-    }
-
-    public void searchAccount(final View view) {
-        Intent selectAccoutActivity = new Intent(view.getContext(), AdminSearchAccountActivity.class);
-        selectAccoutActivity.putExtra("account", account);
-        view.getContext().startActivity(selectAccoutActivity);
     }
 
     public void changeCurriculum(final View view) {

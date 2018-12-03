@@ -27,7 +27,7 @@ public class AdvisorHomeFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         account = mainActivity.account;
 
-        view.findViewById(R.id.undergradCard).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.myAdviseeCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent adviseesTileIntent = new Intent(getActivity(), AdvisorMyAdviseesTileActivity.class);
@@ -36,7 +36,7 @@ public class AdvisorHomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.card2).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.addAdviseeCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent searchTileIntent = new Intent(getActivity(), AdviserSearchStudentsTileActivity.class);
@@ -45,7 +45,7 @@ public class AdvisorHomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.card3).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.dropAdviseeCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent dropAdviseeIntent = new Intent(getActivity(), AdvisorDropAdviseeTileActivity.class);

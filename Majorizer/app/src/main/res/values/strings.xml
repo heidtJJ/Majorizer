@@ -21,6 +21,8 @@
     <!-- Database Keys -->
     <string name="AccountType">Account Type</string>
     <string name="Course_History">Course History</string>
+    <string name="Courses_Needed">Courses Needed</string>
+    <string name="Current_Courses">Current Courses</string>
     <string name="CurrentCourses">CurrentCourses</string>
     <string name="LoginAttempts">LoginAttempts</string>
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>

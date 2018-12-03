@@ -19,12 +19,6 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
     }
 
-    public void createGradCourse(final View view) {
-        final Intent selectAccountActivity = new Intent(view.getContext(), CreateGradCourseActivity.class);
-        // Pass this Account object to the next activity.
-        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
-        view.getContext().startActivity(selectAccountActivity);
-    }
 
     public void createUndergradCourse(final View view) {
         final Intent selectAccountActivity = new Intent(view.getContext(), CreateUndergradCourseActivity.class);
@@ -32,4 +26,12 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);
     }
+
+    public void createGradCourse(final View view) {
+        final Intent selectAccountActivity = new Intent(view.getContext(), CreateGradCourseActivity.class);
+        // Pass this Account object to the next activity.
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
+        view.getContext().startActivity(selectAccountActivity);
+    }
+
 }
