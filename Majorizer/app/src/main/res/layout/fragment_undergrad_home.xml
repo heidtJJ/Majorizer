@@ -84,7 +84,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
-                    android:text="@string/Current_Courses"
+                    android:text="@string/Remaining_Courses"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
@@ -124,7 +124,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
-                    android:text="@string/Courses_Needed"
+                    android:text="@string/Current_Courses"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
