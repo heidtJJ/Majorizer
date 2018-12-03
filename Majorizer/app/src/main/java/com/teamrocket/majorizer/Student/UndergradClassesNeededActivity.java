@@ -28,6 +28,6 @@ public class UndergradClassesNeededActivity extends AppCompatActivity {
 
         TextView classesRemainingView = findViewById(R.id.classesRemainingView);
         TextView creditsRemainingView = findViewById(R.id.creditsRemainingView);
-        RequiredCourseListManager masterCourseList = new RequiredCourseListManager(this, classesTakenRecyclerView, student, classesRemainingView, creditsRemainingView, getSupportFragmentManager());
+        RequiredCourseListManager requiredCourseListManager = new RequiredCourseListManager(this, classesTakenRecyclerView, student, classesRemainingView, creditsRemainingView, getSupportFragmentManager());
     }
 }
