@@ -97,4 +97,9 @@ public final class Utility {
         }
         return null;
     }
+
+    boolean isValidPassword(final String password){
+
+        return false;
+    }
 }
