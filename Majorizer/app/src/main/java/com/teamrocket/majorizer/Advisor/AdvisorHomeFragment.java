@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.teamrocket.majorizer.Account;
 import com.teamrocket.majorizer.MainActivity;
@@ -28,7 +27,7 @@ public class AdvisorHomeFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         account = mainActivity.account;
 
-        view.findViewById(R.id.card1).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.undergradCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent adviseesTileIntent = new Intent(getActivity(), AdvisorMyAdviseesTileActivity.class);

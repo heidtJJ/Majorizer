@@ -24,7 +24,7 @@ public class UndergradHomeFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         student = (Student) mainActivity.account;
 
-        view.findViewById(R.id.card1).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.undergradCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent courseHistoryIntent = new Intent(getActivity(), UndergradClassHistoryActivity.class);
