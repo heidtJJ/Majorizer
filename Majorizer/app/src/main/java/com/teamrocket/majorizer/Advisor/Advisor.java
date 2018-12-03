@@ -1,6 +1,7 @@
 package com.teamrocket.majorizer.Advisor;
 
 import com.teamrocket.majorizer.Account;
+import com.teamrocket.majorizer.Student.Student;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ public class Advisor extends Account {
 
     // This is a map of the Advisor's advisees.
     // The key is the student's username, the value is the student's full name.
-    private Map<String, String> studentsMap = new HashMap<>();
+    private Map<String, Student> studentsMap = new HashMap<>();
 
     // This string is the Advisors department. Example: CS, PH, CE
     private String department;
@@ -22,16 +23,20 @@ public class Advisor extends Account {
             return false;
     }
 
-    public void addStudent(String studentUserName, String name) {
-        studentsMap.put(studentUserName, name);
+    public void addStudent(String studentUserName, Student student) {
+        studentsMap.put(studentUserName, student);
     }
 
-    public Map<String, String> getStudents() {
+    public Map<String, Student> getStudents() {
         return studentsMap;
     }
 
     public void removeStudent(String studentUserName) {
         studentsMap.remove(studentUserName);
+    }
+
+    public int getNumAdvisees() {
+        return studentsMap.size();
     }
 
     // Department methods.

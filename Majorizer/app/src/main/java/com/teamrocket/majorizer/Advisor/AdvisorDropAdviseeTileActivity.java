@@ -4,9 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.teamrocket.majorizer.Adapters.DropAdviseeRecycleAdapter;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,22 +23,13 @@ public class AdvisorDropAdviseeTileActivity extends AppCompatActivity {
 
         Advisor advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
-        Map<String, String> studentsMap = advisor.getStudents();
-        if (studentsMap.isEmpty()) { // when getStudents() works will not need to populate
-            studentsMap.put("heidtjj", "Jared Heidt");
-            studentsMap.put("dewejm", "Jeremy Dewey");
-            studentsMap.put("shawah", "Andrew Shaw");
-        }
+        Map<String, Student> studentsMap = advisor.getStudents();
 
         ArrayList<Student> students = new ArrayList<>();
 
-        for (Map.Entry<String,String> student : studentsMap.entrySet()) {
-            Student s = new Student();
-            s.setUserName(student.getKey());
-            String name = student.getValue();
-            s.setFirstName(name.substring(0, name.indexOf(" ")));
-            s.setLastName(name.substring(name.indexOf(" ") + 1, name.length()));
-            students.add(s);
+        for (Map.Entry<String, Student> student : studentsMap.entrySet()) {
+            Student advisee = student.getValue();
+            students.add(advisee);
         }
 
         // Set all classes taken in the recycler view.

@@ -8,14 +8,14 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
 
-import com.teamrocket.majorizer.Adapters.ClassDataRecycleAdapter;
 import com.teamrocket.majorizer.Adapters.CurrentClassDataRecycleAdapter;
-import com.teamrocket.majorizer.AppUtility.ClassData;
+import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UndergradCurrentTileActivity extends AppCompatActivity {
+public class UndergradCurrentClassesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,35 +23,35 @@ public class UndergradCurrentTileActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Retrieve needed Textviews to show user information.
-        TextView classesTakenView = findViewById(R.id.classesTakingView);
-        TextView creditsTakenView = findViewById(R.id.creditsTakingView);
+        TextView classesTakingView = findViewById(R.id.classesTakingView);
+        TextView creditsTakingView = findViewById(R.id.creditsTakingView);
 
         // Retrieve the Account object passed from the LoginManager.
         Student student = (Student) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
-        ArrayList<ClassData> classesTakenList = new ArrayList<>();
+        List<Course> classesTakingList = new ArrayList<>();
 
-        // Set all classes taken in the recycler view.
+        // Set all current classes taking in the recycler view.
         RecyclerView cRecyclerView = findViewById(R.id.classesRecyclerView);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
         cRecyclerView.setLayoutManager(cLayoutManager);
 
-        for (int i = 0; i < student.numCoursesTaken(); ++i)
-            classesTakenList.add(student.getCourseInformation(i));
+        for (int i = 0; i < student.numCurCoursesTaking(); ++i)
+            classesTakingList.add(student.getCurCourseInformation(i));
 
-        // Set the text for the user's number of courses/classes taken and GPA.
-        String circleText = String.valueOf(classesTakenList.size()) + "\ncourses";
+        // Set the text for the user's number of courses/classes taking and GPA.
+        String circleText = String.valueOf(classesTakingList.size()) + "\ncourses";
         SpannableString ss = new SpannableString(circleText);
-        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(classesTakenList.size()).length(), 0);
-        classesTakenView.setText(ss);
+        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(classesTakingList.size()).length(), 0);
+        classesTakingView.setText(ss);
 
-        circleText = student.getCreditsTaken() + "\ncredits";
+        circleText = student.getCreditsTaking() + "\ncredits";
         ss = new SpannableString(circleText);
-        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(student.getCreditsTaken()).length(), 0);
-        creditsTakenView.setText(ss);
+        ss.setSpan(new RelativeSizeSpan(1.7f), 0, String.valueOf(student.getCreditsTaking()).length(), 0);
+        creditsTakingView.setText(ss);
 
         // Create RecyclerView with data.
-        RecyclerView.Adapter classAdapter = new CurrentClassDataRecycleAdapter(classesTakenList, getSupportFragmentManager());
+        RecyclerView.Adapter classAdapter = new CurrentClassDataRecycleAdapter(classesTakingList, getSupportFragmentManager());
         cRecyclerView.setAdapter(classAdapter);
     }
 }

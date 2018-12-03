@@ -3,6 +3,7 @@ package com.teamrocket.majorizer.AppUtility;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,12 +24,15 @@ import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
+import static com.teamrocket.majorizer.Account.AccountType.UNDERGRAD;
 import static com.teamrocket.majorizer.AppUtility.Utility.getAccountType;
 
 public class LoginManager implements Serializable {
 
     private static final String BAD_CREDENTIALS = "Your username and/or password was incorrect!";
+    private static final String COULD_NOT_GET_ACCOUNT = "We could not retrieve this user's information!";
     private static final String EMPTY_FIELD = "Your username and/or password was empty!";
     private static final String BAD_QUERY = "Could not verify your credentials!";
     private static final int MAX_LOGIN_ATTEMPTS = 3;
@@ -97,9 +101,7 @@ public class LoginManager implements Serializable {
      * @param dataSnapshot
      * @param account
      */
-    public void populateAccount(final View view, final DataSnapshot dataSnapshot, final Account account) {
-        Resources resources = view.getResources();
-
+    public static void populateAccount(final Resources resources, final DataSnapshot dataSnapshot, final Account account) {
         // Set all data members for the account.
         String clarksonUserName = dataSnapshot.child(resources.getText(R.string.UsernameKey).toString()).getValue().toString();
         account.setUserName(clarksonUserName);
@@ -128,7 +130,18 @@ public class LoginManager implements Serializable {
                 String courseName = course.child("CourseName").getValue().toString();
                 String grade = course.child("Grade").getValue().toString();
                 Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
-                ((Student) account).addCourseTaken(courseName, courseCode, grade, numCredits);
+                ((Student) account).addCoursePrevTaken(courseName, courseCode, grade, numCredits);
+            }
+
+            System.out.println("FUCK");
+            // Load the student's current courses taking.
+            DataSnapshot coursesTaking = dataSnapshot.child(resources.getText(R.string.CurrentCourses).toString());
+            for (DataSnapshot course : coursesTaking.getChildren()) {
+                String courseCode = course.getKey();
+                System.out.println("FUCK " + courseCode);
+                String courseName = course.child(resources.getText(R.string.CourseName).toString()).getValue().toString();
+                Integer numCredits = Integer.valueOf(course.child(resources.getText(R.string.Credits).toString()).getValue().toString());
+                ((Student) account).addCourseCurTaking(courseName, courseCode, numCredits);
             }
         }
 
@@ -166,29 +179,58 @@ public class LoginManager implements Serializable {
         // Populate hashmap for the advisors students. Key is student id, value is students full name.
         if (account instanceof Advisor) {
             // Get list of student usernames.
-            DataSnapshot studentUserNames = dataSnapshot.child(resources.getText(R.string.StudentUserNames).toString());
-            ArrayList<String> userNameList = new ArrayList();
+            DataSnapshot studentUserNames = dataSnapshot.child(resources.getText(R.string.Advisees).toString());
+            List<String> userNameList = new ArrayList();
             for (DataSnapshot studentUserName : studentUserNames.getChildren()) {
-                String userName = studentUserName.getValue().toString();
-                userNameList.add(userName);
-            }
-            // Iterate through student names and populate map.
-            DataSnapshot studentNames = dataSnapshot.child(resources.getText(R.string.StudentNames).toString());
-            int index = 0;
-            for (DataSnapshot studentName : studentNames.getChildren()) {
-                String name = studentName.getValue().toString();
-                ((Advisor) account).addStudent(userNameList.get(index++), name);
+                // Pull student information from database.
+                String firstName = studentUserName.child(resources.getText(R.string.FirstNameKey).toString()).getValue().toString();
+                String lastName = studentUserName.child(resources.getText(R.string.LastNameKey).toString()).getValue().toString();
+                String username = studentUserName.getKey();
+                String stringAccountType = studentUserName.child(resources.getText(R.string.Type).toString()).getValue().toString();
+                Account.AccountType accountType = getAccountType(stringAccountType);
+
+                // Create new student object for this advisee.
+                Student advisee = null;
+                if (accountType.equals(UNDERGRAD)) {
+                    advisee = new UndergradStudent(firstName, lastName, username);
+                } else {
+                    advisee = new GradStudent(firstName, lastName, username);
+                }
+
+                account.setAccountType(accountType);
+
+                ((Advisor) account).addStudent(username, advisee);
             }
 
             String department = dataSnapshot.child(resources.getText(R.string.Department).toString()).getValue().toString();
             ((Advisor) account).setDepartment(department);
-
         }
 
     }
 
 
-    // Launch main activity if credentials are correct.
+    public static void getStudentData(final Student student, final Context context) {
+        FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts) + "/" + student.getUserName()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Check if this clarkson ID exists in the database under /Accounts.
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    // Entered clarkson ID was incorrect. Notify user.
+                    Toast.makeText(context, COULD_NOT_GET_ACCOUNT, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // Uses the dataSnapshot to populate the data members of the Account.
+                populateAccount(context.getResources(), dataSnapshot, student);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Database query was not successful.
+                Toast.makeText(context, BAD_QUERY, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     /**
      * If credentials are correct, create an account object of the correct type and pass this object to the main activity.
@@ -244,14 +286,14 @@ public class LoginManager implements Serializable {
                     // Determine which type of user this account is. Instantiate that Account type.
                     if (accountType.equals(Account.AccountType.ADMIN))
                         account = new Administrator();
-                    else if (accountType.equals(Account.AccountType.UNDERGRAD))
+                    else if (accountType.equals(UNDERGRAD))
                         account = new UndergradStudent();
                     else if (accountType.equals(Account.AccountType.GRAD))
                         account = new GradStudent();
                     else account = new Advisor();
 
                     // Uses the dataSnapshot to populate the data members of the Account.
-                    populateAccount(view, dataSnapshot, account);
+                    populateAccount(view.getResources(), dataSnapshot, account);
 
                     // Pass this Account object to the main activity.
                     mainActivity.putExtra(context.getText(R.string.AccountObject).toString(), account);

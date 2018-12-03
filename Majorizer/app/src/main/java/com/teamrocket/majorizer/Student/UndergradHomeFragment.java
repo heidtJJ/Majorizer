@@ -5,17 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.Account;
 
 public class UndergradHomeFragment extends Fragment {
-    Account account = null;
+    Student student = null;
 
     @Nullable
     @Override
@@ -24,13 +22,13 @@ public class UndergradHomeFragment extends Fragment {
 
         // Get account object from the MainActivity.
         MainActivity mainActivity = (MainActivity) getActivity();
-        account = mainActivity.account;
+        student = (Student) mainActivity.account;
 
         view.findViewById(R.id.card1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent courseHistoryIntent = new Intent(getActivity(), UndergradHistoryTileActivity.class);
-                courseHistoryIntent.putExtra(getText(R.string.AccountObject).toString(), account);
+                Intent courseHistoryIntent = new Intent(getActivity(), UndergradClassHistoryActivity.class);
+                courseHistoryIntent.putExtra(getText(R.string.AccountObject).toString(), student);
                 startActivity(courseHistoryIntent);
             }
         });
@@ -38,8 +36,8 @@ public class UndergradHomeFragment extends Fragment {
         view.findViewById(R.id.card2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent schedulerIntent = new Intent(getActivity(), UndergradRemainingTileActivity.class);
-                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), account);
+                Intent schedulerIntent = new Intent(getActivity(), UndergradClassesNeededActivity.class);
+                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), student);
                 startActivity(schedulerIntent);
             }
         });
@@ -47,8 +45,8 @@ public class UndergradHomeFragment extends Fragment {
         view.findViewById(R.id.card3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent schedulerIntent = new Intent(getActivity(), UndergradCurrentTileActivity.class);
-                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), account);
+                Intent schedulerIntent = new Intent(getActivity(), UndergradCurrentClassesActivity.class);
+                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), student);
                 startActivity(schedulerIntent);
             }
         });

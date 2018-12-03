@@ -7,6 +7,7 @@
     <string name="TitleNotifications">Notifications</string>
     <string name="RemoveNotification">Remove Notification</string>
     <string name="AccountObject">account</string>
+    <string name="StudentObject">student</string>
 
     <!-- Login Activity Strings -->
     <string name="Login">LOGIN</string>
@@ -18,9 +19,11 @@
     <!-- Database Keys -->
     <string name="AccountType">Account Type</string>
     <string name="Course_History">Course History</string>
-    <string name="CurrentCourses">Current Courses</string>
+    <string name="CurrentCourses">CurrentCourses</string>
     <string name="LoginAttempts">LoginAttempts</string>
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>
+    <string name="CourseName">CourseName</string>
+    <string name="Credits">Credits</string>
     <string name="Type">Type</string>
     <string name="Advisor">advisor</string>
     <string name="Grad">grad</string>
@@ -37,8 +40,8 @@
     <string name="Minor2">Minor2</string>
     <string name="UsernameKey">Username</string>
     <string name="NullString">NULL</string>
-    <string name="StudentUserNames">StudentUsernames</string>
-    <string name="StudentNames">StudentNames</string>
+    <string name="Advisees">Advisees</string>
+    <string name="Name">Name</string>
     <string name="Id">Id</string>
     <string name="Department">Department</string>
     <string name="UndergradMajors">UndergradMajors</string>
@@ -61,6 +64,11 @@
     <string name="UsernameRules">Passwords must have six lowercase letters.</string>
     <string name="SuccessfulAccountCreation">Account successfully created!</string>
     <string name="Major">Major</string>
+
+    <!-- Instruction Strings -->
+    <string name="AdviseesInstructions">Click Advisee to see their information.</string>
+    <string name="StudentInformationFor">Student information for</string>
+
 
     <!-- Create Account Page Error Messages -->
     <string name="DepartmentNotSelected">A department was not selected. Please select a department.</string>

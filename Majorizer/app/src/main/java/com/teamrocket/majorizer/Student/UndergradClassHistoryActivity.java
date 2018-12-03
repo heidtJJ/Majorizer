@@ -13,8 +13,9 @@ import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UndergradHistoryTileActivity extends AppCompatActivity {
+public class UndergradClassHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public class UndergradHistoryTileActivity extends AppCompatActivity {
         // Retrieve the Account object passed from the LoginManager.
         Student student = (Student) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
-        ArrayList<ClassData> classesTakenList = new ArrayList<>();
+        List<ClassData> classesTakenList = new ArrayList<>();
 
         // Set all classes taken in the recycler view.
         RecyclerView cRecyclerView = findViewById(R.id.classesRecyclerView);
@@ -37,7 +38,7 @@ public class UndergradHistoryTileActivity extends AppCompatActivity {
         cRecyclerView.setLayoutManager(cLayoutManager);
 
         for (int i = 0; i < student.numCoursesTaken(); ++i)
-            classesTakenList.add(student.getCourseInformation(i));
+            classesTakenList.add(student.getPrevCourseInformation(i));
 
         // Set the text for the user's number of courses/classes taken and GPA.
         String circleText = String.valueOf(classesTakenList.size()) + "\ncourses";

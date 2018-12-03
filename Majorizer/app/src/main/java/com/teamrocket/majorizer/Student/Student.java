@@ -2,14 +2,16 @@ package com.teamrocket.majorizer.Student;
 
 
 import com.teamrocket.majorizer.AppUtility.ClassData;
+import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.AppUtility.Schedule;
 import com.teamrocket.majorizer.Account;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
-public class Student extends Account {
+public abstract class Student extends Account {
 
     // DATA MEMBERS
     private String advisor1 = null;
@@ -19,7 +21,9 @@ public class Student extends Account {
     // COURSE HISTORY (DATA MEMBERS)
     // These three arrays will correspond to a student's taken course
     // in each index. These arrays will always be the same length.
-    private final List<ClassData> coursesTakenList = new ArrayList<>();
+    private final List<ClassData> coursesPrevTakenList = new ArrayList<>();
+
+    private final List<Course> coursesCurTakingList = new ArrayList<>();
 
     // GET METHODS
     public String getAdvisor1() {
@@ -35,26 +39,44 @@ public class Student extends Account {
     }
 
     public int numCoursesTaken() {
-        return coursesTakenList.size();
+        return coursesPrevTakenList.size();
     }
 
-    public ClassData getCourseInformation(int courseIndex) {
+    public int numCurCoursesTaking() {
+        return coursesCurTakingList.size();
+    }
+
+    public ClassData getPrevCourseInformation(int courseIndex) {
         // Check for error case.
-        if (courseIndex < 0 || courseIndex >= coursesTakenList.size())
+        if (courseIndex < 0 || courseIndex >= coursesPrevTakenList.size())
             return null;
-        return coursesTakenList.get(courseIndex);
+        return coursesPrevTakenList.get(courseIndex);
+    }
+
+    public Course getCurCourseInformation(int courseIndex) {
+        // Check for error case.
+        if (courseIndex < 0 || courseIndex >= coursesCurTakingList.size())
+            return null;
+        return coursesCurTakingList.get(courseIndex);
     }
 
     public int getCreditsTaken() {
         int totalCredits = 0;
-        for (ClassData course : coursesTakenList)
+        for (Course course : coursesPrevTakenList)
+            totalCredits += course.getCredits();
+        return totalCredits;
+    }
+
+    public int getCreditsTaking() {
+        int totalCredits = 0;
+        for (Course course : coursesCurTakingList)
             totalCredits += course.getCredits();
         return totalCredits;
     }
 
     public String getGPA() {
         double scores = 0;
-        for (ClassData course : coursesTakenList) {
+        for (ClassData course : coursesPrevTakenList) {
             double score;
             if (course.getGrade().equals("A+") || course.getGrade().equals("A")) score = 4;
             else if (course.getGrade().equals("A-")) score = 3.6667;
@@ -88,7 +110,11 @@ public class Student extends Account {
         this.schedule = schedule;
     }
 
-    public void addCourseTaken(final String courseName, final String courseCode, final String courseGrade, final Integer numCredits) {
-        coursesTakenList.add(new ClassData(courseName, courseCode, courseGrade, numCredits));
+    public void addCoursePrevTaken(final String courseName, final String courseCode, final String courseGrade, final Integer numCredits) {
+        coursesPrevTakenList.add(new ClassData(courseName, courseCode, courseGrade, numCredits));
+    }
+
+    public void addCourseCurTaking(final String courseName, final String courseCode, final Integer numCredits) {
+        coursesCurTakingList.add(new Course(courseName, courseCode, numCredits, new HashSet<Course>()));
     }
 }

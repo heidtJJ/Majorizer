@@ -11,6 +11,7 @@ import android.widget.SearchView;
 import com.teamrocket.majorizer.Adapters.AdviseeSearchAdapter;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,30 +33,11 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         Advisor advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         students = new ArrayList<>();
-        Map<String, String> studentsMap = advisor.getStudents(); // will need to get all students
-        if (studentsMap.isEmpty()) { // when getStudents() works will not need to populate
-            studentsMap.put("heidtjj", "Jared Heidt");
-            studentsMap.put("dewejm", "Jeremy Dewey");
-            studentsMap.put("shawah", "Andrew Shaw");
-            studentsMap.put("gilletj", "Josh Gillette");
-            studentsMap.put("fawlsT", "Tim Fawls");
-            studentsMap.put("pyszcC", "Colton Pyszczysnki");
-            studentsMap.put("kubiS", "Stanley Kubis");
-            studentsMap.put("smitJ", "John Smith");
-            studentsMap.put("cruzB", "Bill Cruz");
-            studentsMap.put("marseS", "Sean Mars");
-            studentsMap.put("charleR", "Ray Charles");
-            studentsMap.put("obamahB", "Barrack Obama");
-            studentsMap.put("wayneL", "Lil Wayne");
-        }
+        Map<String, Student> studentsMap = advisor.getStudents(); // will need to get all students
 
-        for (Map.Entry<String,String> student : studentsMap.entrySet()) {
-            Student s = new Student();
-            s.setUserName(student.getKey());
-            String name = student.getValue();
-            s.setFirstName(name.substring(0, name.indexOf(" ")));
-            s.setLastName(name.substring(name.indexOf(" ") + 1, name.length()));
-            students.add(s);
+        for (Map.Entry<String, Student> student : studentsMap.entrySet()) {
+            Student advisee = student.getValue();
+            students.add(advisee);
         }
 
         adviseeSearchView = findViewById(R.id.adviseeSearchView);

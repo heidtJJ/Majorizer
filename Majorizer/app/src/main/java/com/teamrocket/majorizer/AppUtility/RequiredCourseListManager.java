@@ -125,7 +125,7 @@ public class RequiredCourseListManager {
     private List<String> getCoursesTaken(final Student student) {
         ArrayList<String> coursesTaken = new ArrayList<>();
         for (int i = 0; i < student.numCoursesTaken(); ++i) {
-            ClassData takenClass = student.getCourseInformation(i);
+            ClassData takenClass = student.getPrevCourseInformation(i);
             coursesTaken.add(takenClass.getCourseCode());
         }
         return coursesTaken;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.teamrocket.majorizer.AppUtility.RequiredCourseListManager;
 import com.teamrocket.majorizer.R;
 
-public class UndergradRemainingTileActivity extends AppCompatActivity {
+public class UndergradClassesNeededActivity extends AppCompatActivity {
     private Student student = null;
 
     @Override

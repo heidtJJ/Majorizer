@@ -33,16 +33,17 @@
         <activity
             android:name=".Admin.UnlockAccountActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".Student.UndergradHistoryTileActivity" />
-        <activity android:name=".Student.UndergradRemainingTileActivity" />
+        <activity android:name=".Student.UndergradClassHistoryActivity" />
+        <activity android:name=".Student.UndergradClassesNeededActivity" />
         <activity android:name=".Admin.ChangeCurriculumActivity" />
         <activity android:name=".Admin.SelectCourseTypeActivity" />
         <activity android:name=".Admin.RemoveCourseActivity" />
         <activity android:name=".Advisor.AdvisorMyAdviseesTileActivity" />
         <activity android:name=".Advisor.AdviserSearchStudentsTileActivity" />
         <activity android:name=".Advisor.AdvisorDropAdviseeTileActivity" />
-        <activity android:name=".Student.UndergradCurrentTileActivity" />
-        <activity android:name=".Admin.SearchAccountActivity"></activity>
+        <activity android:name=".Student.UndergradCurrentClassesActivity" />
+        <activity android:name=".Admin.SearchAccountActivity" />
+        <activity android:name=".Advisor.StudentInfoActivity"></activity>
     </application>
 
 </manifest>

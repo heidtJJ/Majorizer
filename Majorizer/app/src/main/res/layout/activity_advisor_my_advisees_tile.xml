@@ -6,77 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".Advisor.AdvisorMyAdviseesTileActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:gravity="center"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="My Advisees"
+                android:textColor="@color/white"
+                android:textSize="23sp" />
+
+        </android.support.v7.widget.Toolbar>
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/numberAdviseesView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="My Advisees"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_view"
+            android:backgroundTint="@color/circleRed"
+            android:gravity="center"
+            android:text="0"
             android:textColor="@color/white"
-            android:textSize="23sp" />
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/numberAdviseesView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_view"
-        android:backgroundTint="@color/circleRed"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/averageAdviseeGpaView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/AdviseesInstructions"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/averageAdviseeGpaView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_view"
-        android:backgroundTint="@color/circleYellow"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/numberAdviseesView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/numberAdviseesView" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="395dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numberAdviseesView" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="395dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberAdviseesView" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/adviseesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/adviseesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

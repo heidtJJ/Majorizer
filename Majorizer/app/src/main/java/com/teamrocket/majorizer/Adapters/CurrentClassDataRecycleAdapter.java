@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.teamrocket.majorizer.AppUtility.ClassData;
+import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
 
 import java.util.List;
 
 public class CurrentClassDataRecycleAdapter extends RecyclerView.Adapter<CurrentClassDataRecycleAdapter.CurrentClassViewHolder> {
-    private List<ClassData> classList = null;
+    private List<Course> classList = null;
     private FragmentManager fm;
 
     static class CurrentClassViewHolder extends RecyclerView.ViewHolder {
@@ -27,7 +28,7 @@ public class CurrentClassDataRecycleAdapter extends RecyclerView.Adapter<Current
         }
     }
 
-    public CurrentClassDataRecycleAdapter(List<ClassData> data, FragmentManager fm) {
+    public CurrentClassDataRecycleAdapter(List<Course> data, FragmentManager fm) {
         this.classList = data;
         this.fm = fm;
     }

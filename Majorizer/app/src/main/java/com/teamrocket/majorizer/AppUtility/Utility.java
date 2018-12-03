@@ -2,6 +2,7 @@ package com.teamrocket.majorizer.AppUtility;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -86,4 +87,14 @@ public final class Utility {
         return true;
     }
 
+    public static Activity getActivity(final View view) {
+        Context context = view.getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity) context;
+            }
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.teamrocket.majorizer.Adapters;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,17 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.teamrocket.majorizer.AppUtility.AdviseeDataDialogFragment;
+import com.teamrocket.majorizer.Advisor.Advisor;
+import com.teamrocket.majorizer.Advisor.StudentInfoActivity;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
 
 import java.util.List;
 
-public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAdapter.AdviseeViewHolder>{
+import static com.teamrocket.majorizer.AppUtility.Utility.getActivity;
+
+public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAdapter.AdviseeViewHolder> {
     private List<Student> students = null;
     private FragmentManager fm;
+    private Advisor advisor = null;
 
     static class AdviseeViewHolder extends RecyclerView.ViewHolder {
         TextView nameView;
@@ -29,9 +33,10 @@ public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAd
         }
     }
 
-    public AdviseeRecycleAdapter(List<Student> students, FragmentManager fm) {
+    public AdviseeRecycleAdapter(final List<Student> students, final FragmentManager fm, final Advisor advisor) {
         this.students = students;
         this.fm = fm;
+        this.advisor = advisor;
     }
 
     @NonNull
@@ -42,15 +47,15 @@ public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdviseeViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final AdviseeViewHolder holder, final int position) {
         holder.nameView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                AdviseeDataDialogFragment cddf = new AdviseeDataDialogFragment();
-                Bundle args = new Bundle();
-                args.putString("userName", String.valueOf((students.get(position).getUserName())));
-                cddf.setArguments(args);
-                cddf.show(fm, "");
+            public void onClick(final View view) {
+                Context context = view.getContext();
+                Intent studentInfoIntent = new Intent(getActivity(view), StudentInfoActivity.class);
+                studentInfoIntent.putExtra(context.getText(R.string.AccountObject).toString(), advisor);
+                studentInfoIntent.putExtra(context.getText(R.string.StudentObject).toString(), students.get(position));
+                context.startActivity(studentInfoIntent);
             }
         });
         holder.nameView.setText(students.get(position).getFirstName() + " " + students.get(position).getLastName());

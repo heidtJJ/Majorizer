@@ -12,6 +12,7 @@ import com.teamrocket.majorizer.Adapters.AdviseeSearchAdapter;
 import com.teamrocket.majorizer.Advisor.Advisor;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,8 +50,8 @@ public class SearchAccountActivity extends AppCompatActivity implements SearchVi
         studentsMap.put("obamahB", "Barrack Obama");
         studentsMap.put("wayneL", "Lil Wayne");
 
-        for (Map.Entry<String,String> student : studentsMap.entrySet()) {
-            Student s = new Student();
+        for (Map.Entry<String, String> student : studentsMap.entrySet()) {
+            Student s = new UndergradStudent();
             s.setUserName(student.getKey());
             String name = student.getValue();
             s.setFirstName(name.substring(0, name.indexOf(" ")));

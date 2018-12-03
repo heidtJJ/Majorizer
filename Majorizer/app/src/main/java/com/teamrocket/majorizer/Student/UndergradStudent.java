@@ -1,5 +1,7 @@
 package com.teamrocket.majorizer.Student;
 
+import static com.teamrocket.majorizer.Account.AccountType.UNDERGRAD;
+
 public class UndergradStudent extends Student {
 
     // DATA MEMBERS
@@ -7,6 +9,20 @@ public class UndergradStudent extends Student {
     private String major2 = null;
     private String minor1 = null;
     private String minor2 = null;
+
+    public UndergradStudent(final String firstName, final String lastName, final String username) {
+        super();
+        setFirstName(firstName);
+        setLastName(lastName);
+        setUserName(username);
+        setAccountType(UNDERGRAD);
+    }
+
+    public UndergradStudent() {
+        super();
+        setAccountType(UNDERGRAD);
+
+    }
 
 
     // SET METHODS
