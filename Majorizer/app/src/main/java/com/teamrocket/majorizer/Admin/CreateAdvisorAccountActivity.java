@@ -80,6 +80,10 @@ public class CreateAdvisorAccountActivity extends AppCompatActivity {
             return;
         }
 
+
+        // TO-DO: Validate the password
+
+
         // Check if the username is valid (6 lowercase letters).
         if (!isValidUserName(username)) {
             // The username is invalid. Alert the user and leave this method.
