@@ -17,10 +17,15 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
     private RadioGroup departmentRadioGroup = null;
     private RadioGroup majorMinorRadioGroup = null;
 
+    private Administrator administrator = null;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_undergrad_course);
+
+        // Retreive the Account object passed from the LoginManager.
+        administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         courseNumberEditText = findViewById(R.id.courseNumberEditText);
         courseNameEditText = findViewById(R.id.courseNameEditText);
@@ -30,12 +35,12 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
     }
 
     public void createNewGraduateCourse(final View view) {
-        String courseNumberString = courseNumberEditText.getText().toString();
+        String courseNumber = courseNumberEditText.getText().toString();
         String courseName = courseNameEditText.getText().toString();
-        String numCreditsString = numCreditsEditText.getText().toString();
+        String numCredits = numCreditsEditText.getText().toString();
 
         // Check if any of the text-inputs are empty.
-        if (courseNumberString.isEmpty() || courseName.isEmpty() || numCreditsString.isEmpty()) {
+        if (courseNumber.isEmpty() || courseName.isEmpty() || numCredits.isEmpty()) {
             Toast.makeText(this, getText(R.string.MissingInput).toString(), Toast.LENGTH_LONG).show();
             return;
         }
@@ -47,10 +52,59 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
         }
 
         // Check that courseNumberString is a number between 0 and 999.
-        if(Utility.isValidCourseNumber(courseNumberString)){
+        if (!Utility.isValidCourseNumber(courseNumber)) {
+            Toast.makeText(this, getText(R.string.InvalidCourseNumber).toString(), Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        // Check that numCreditsString is a number between 3 and 4 (no decimal).
+        if (!Utility.isValidNumberCredits(numCredits)) {
+            Toast.makeText(this, getText(R.string.InvalidNumberCredits).toString(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Retreive the selected second minor option.
+        int department = departmentRadioGroup.getCheckedRadioButtonId();
+        String classCodePrefix = null;
+        String departmentString = null;
+        switch (department) {
+            case R.id.radioDepartment_PH:
+                classCodePrefix = getText(R.string.PhysicsCode).toString();
+                departmentString = getText(R.string.Physics).toString();
+                break;
+            case R.id.radioDepartment_MA:
+                classCodePrefix = getText(R.string.MathematicsCode).toString();
+                departmentString = getText(R.string.Mathematics).toString();
+                break;
+            case R.id.radioDepartment_CS:
+                classCodePrefix = getText(R.string.ComputerScienceCode).toString();
+                departmentString = getText(R.string.ComputerScience).toString();
+                break;
+            default:
+                // Department was not selected. Alert the user and leave this method.
+                Toast.makeText(this, getText(R.string.MissingCheckBox), Toast.LENGTH_LONG).show();
+                return;
+        }
+
+        // Determine whether course is a major or a minor.
+
+        int courseType = majorMinorRadioGroup.getCheckedRadioButtonId();
+        String courseTypeString = null;
+        switch (courseType) {
+            case R.id.major:
+                courseTypeString = getText(R.string.UndergradMajors).toString();
+                break;
+            case R.id.minor:
+                courseTypeString = getText(R.string.Minors).toString();
+                break;
+            default:
+                // Department was not selected. Alert the user and leave this method.
+                Toast.makeText(this, getText(R.string.MissingCheckBox), Toast.LENGTH_LONG).show();
+                return;
         }
 
 
+        // Input is valid. Proceed to add class to database.
+        administrator.addUndergradCourseToCurriculum(courseName, classCodePrefix + courseNumber, departmentString, numCredits, courseTypeString, this);
     }
 }

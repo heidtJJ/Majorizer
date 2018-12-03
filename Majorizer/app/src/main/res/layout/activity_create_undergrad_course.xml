@@ -64,13 +64,13 @@
                         android:text="@string/ComputerScience" />
 
                     <RadioButton
-                        android:id="@+id/radioDepartment_math"
+                        android:id="@+id/radioDepartment_MA"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Mathematics" />
 
                     <RadioButton
-                        android:id="@+id/radioDepartment_physics"
+                        android:id="@+id/radioDepartment_PH"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Physics" />

@@ -20,6 +20,7 @@
 
     <!-- Database Keys -->
     <string name="AccountType">Account Type</string>
+    <string name="MasterCourseList">MasterCourseList</string>
     <string name="Course_History">Course History</string>
     <string name="Courses_Needed">Courses Needed</string>
     <string name="Current_Courses">Current Courses</string>
@@ -51,6 +52,7 @@
     <string name="Id">Id</string>
     <string name="Department">Department</string>
     <string name="UndergradMajors">UndergradMajors</string>
+    <string name="Minors">Minors</string>
 
     <!-- Create Account Unlocking Strings -->
     <string name="NotLocked">The account which you entered was not locked.</string>
@@ -80,8 +82,8 @@
     <string name="SuccessfulAdviseeDrop">"Successfully removed student from your advisees."</string>
     <string name="SuccessfulAdviseeAdd">"Successfully added student to your advisees."</string>
 
-
-    <!-- Create Account Page Error Messages -->
+    <!-- Error Messages -->
+    <string name="TryAgainLater">Could not make this request. Please try again later.</string>
     <string name="DepartmentNotSelected">A department was not selected. Please select a department.</string>
     <string name="InvalidUsername">The entered username must contain 6 lowercase letters!</string>
     <string name="InvalidName">The entered first name and last name must contain letters only!</string>
@@ -100,6 +102,9 @@
     <string name="Minor1NotSelected">You may not choose a second minor without choosing a first minor. Please revise your selections.</string>
     <string name="MissingInput">You are missing a required input. Please revise your selections.</string>
     <string name="MissingCheckBox">You are missing a required check box. Please revise your selections.</string>
+    <string name="InvalidCourseNumber">The entered course number is invalid! Please revise your selections.</string>
+    <string name="InvalidNumberCredits">The entered number of course credits is invalid! Please revise your selections.</string>
+    <string name="SuccessfulCourseAddition">Successfully added the course to our records!</string>
 
 
 </resources>

@@ -13,6 +13,7 @@ import static com.teamrocket.majorizer.Account.AccountType.ADVISOR;
 import static com.teamrocket.majorizer.Account.AccountType.ERROR;
 import static com.teamrocket.majorizer.Account.AccountType.GRAD;
 import static com.teamrocket.majorizer.Account.AccountType.UNDERGRAD;
+import static java.lang.String.valueOf;
 
 // Final so that this class cannot be extended.
 public final class Utility {
@@ -103,8 +104,23 @@ public final class Utility {
         return false;
     }
 
-    public static boolean isValidCourseNumber(final String courseNumber) {
-
-        return false;
+    public static boolean isNumber(final String str) {
+        return str.replaceAll("[0-9]", "").length() == 0;
     }
+
+
+    public static boolean isValidCourseNumber(final String courseNumber) {
+        if (!isNumber(courseNumber))
+            return false;
+        Integer courseNumInt = Integer.valueOf(courseNumber);
+        return courseNumInt > 0 && courseNumInt < 1000;
+    }
+
+    public static boolean isValidNumberCredits(final String numberOfCredits) {
+        if (!isNumber(numberOfCredits))
+            return false;
+        Integer numberOfCreditsInt = Integer.valueOf(numberOfCredits);
+        return numberOfCreditsInt >= 3 && numberOfCreditsInt <= 4;
+    }
+
 }
