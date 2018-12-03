@@ -171,7 +171,6 @@ public class Administrator extends Account {
                     Toast.makeText(context, context.getText(R.string.UsernameExists), Toast.LENGTH_LONG).show();
                     return;
                 }
-
                 // Insert the user's credentials into the a map.
                 Map<String, String> undergradFields = new HashMap<>();
                 undergradFields.put(context.getText(R.string.Major1).toString(), major);

@@ -3,28 +3,27 @@ package com.teamrocket.majorizer.Admin;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.teamrocket.majorizer.Adapters.AdviseeSearchAdapter;
-import com.teamrocket.majorizer.Advisor.Advisor;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
 import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SearchAccountActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    SearchView adviseeSearchView;
-    ListView adviseeListView;
-    ArrayList<Student> students;
-    AdviseeSearchAdapter adviseeSearchViewAdapter;
-    Filter filter;
+    private SearchView adviseeSearchView = null;
+    private ListView adviseeSearchListView = null;
+    private List<Student> studentsToSearch = null;
+    private AdviseeSearchAdapter adviseeSearchViewAdapter = null;
+    private Filter filter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class SearchAccountActivity extends AppCompatActivity implements SearchVi
 
         Administrator administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
-        students = new ArrayList<>();
+        studentsToSearch = new ArrayList<>();
         Map<String, String> studentsMap = new HashMap<>();
         studentsMap.put("heidtjj", "Jared Heidt");
         studentsMap.put("dewejm", "Jeremy Dewey");
@@ -56,16 +55,16 @@ public class SearchAccountActivity extends AppCompatActivity implements SearchVi
             String name = student.getValue();
             s.setFirstName(name.substring(0, name.indexOf(" ")));
             s.setLastName(name.substring(name.indexOf(" ") + 1, name.length()));
-            students.add(s);
+            studentsToSearch.add(s);
         }
 
         adviseeSearchView = findViewById(R.id.adviseeSearchView);
-        adviseeListView = findViewById(R.id.adviseesRecyclerView);
+        adviseeSearchListView = findViewById(R.id.adviseesRecyclerView);
 
-        adviseeSearchViewAdapter = new AdviseeSearchAdapter(this, students);
-        adviseeListView.setAdapter(adviseeSearchViewAdapter);
-        adviseeListView.setTextFilterEnabled(false);
-        adviseeListView.setDivider(null);
+        adviseeSearchViewAdapter = new AdviseeSearchAdapter(this, studentsToSearch);
+        adviseeSearchListView.setAdapter(adviseeSearchViewAdapter);
+        adviseeSearchListView.setTextFilterEnabled(false);
+        adviseeSearchListView.setDivider(null);
         filter = adviseeSearchViewAdapter.getFilter();
         filter.filter(null);
         setupSearchView();

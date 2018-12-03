@@ -14,46 +14,49 @@ import android.widget.Toast;
 
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdviseeSearchAdapter extends BaseAdapter implements Filterable {
     private Context context;
-    private ArrayList<Student> students;
-    private ArrayList<Student> orig;
+    private List<Student> studentsToSearch;
+    private List<Student> orig;
 
-    public AdviseeSearchAdapter(Context context, ArrayList<Student> students) {
+    public AdviseeSearchAdapter(final Context context, final List<Student> studentsToSearch) {
         super();
         this.context = context;
-        this.students = students;
+        this.studentsToSearch = studentsToSearch;
     }
 
     public class AdviseeHolder {
-        TextView nameView;
+        TextView nameView = null;
     }
 
     public Filter getFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                final FilterResults oReturn = new FilterResults();
-                final ArrayList<Student> results = new ArrayList<>();
-                if (orig == null) orig = students;
+                final FilterResults filterResults = new FilterResults();
+                final List<Student> results = new ArrayList<>();
+                if (orig == null) orig = studentsToSearch;
                 if (constraint != null) {
                     if (orig != null && orig.size() > 0) {
                         for (final Student s : orig) {
-                            String name = s.getFirstName().toLowerCase() + " " + s.getLastName().toLowerCase();
-                            if (name.toLowerCase().contains(constraint.toString().toLowerCase())) results.add(s);
+                            String name = s.getFirstName() + " " + s.getLastName();
+                            if (name.toLowerCase().contains(constraint.toString().toLowerCase()))
+                                results.add(s);
                         }
                     }
-                    oReturn.values = results;
+                    filterResults.values = results;
                 }
-                return oReturn;
+                return filterResults;
             }
 
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                students = (ArrayList<Student>) results.values;
+                studentsToSearch = (List<Student>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -67,7 +70,7 @@ public class AdviseeSearchAdapter extends BaseAdapter implements Filterable {
     public int getCount() {
         int size;
         try {
-            size = students.size();
+            size = studentsToSearch.size();
         } catch (NullPointerException npe) {
             size = 0;
         }
@@ -88,19 +91,19 @@ public class AdviseeSearchAdapter extends BaseAdapter implements Filterable {
     public View getView(final int position, View convertView, ViewGroup parent) {
         AdviseeHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.advisee_search_item, parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.advisee_search_item, parent, false);
             holder = new AdviseeHolder();
             holder.nameView = convertView.findViewById(R.id.adviseeNameView);
             convertView.setTag(holder);
         } else holder = (AdviseeHolder) convertView.getTag();
-        holder.nameView.setText(students.get(position).getLastName() + ", " + students.get(position).getFirstName());
+        holder.nameView.setText(studentsToSearch.get(position).getLastName() + ", " + studentsToSearch.get(position).getFirstName());
         holder.nameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setTitle("Add Student");
                 alertDialogBuilder
-                        .setMessage(String.format("Are you sure you want to be %s adviser?", students.get(position).getFirstName() + " " + students.get(position).getLastName() + "'s"))
+                        .setMessage(String.format("Are you sure you want to be %s adviser?", studentsToSearch.get(position).getFirstName() + " " + studentsToSearch.get(position).getLastName() + "'s"))
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

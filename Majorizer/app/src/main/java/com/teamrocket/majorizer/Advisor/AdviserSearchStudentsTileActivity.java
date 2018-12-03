@@ -14,15 +14,16 @@ import com.teamrocket.majorizer.Student.Student;
 import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class AdviserSearchStudentsTileActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    SearchView adviseeSearchView;
-    ListView adviseeListView;
-    ArrayList<Student> students;
-    AdviseeSearchAdapter adviseeSearchViewAdapter;
-    Filter filter;
+    private SearchView adviseeSearchView;
+    private ListView adviseeListView;
+    private List<Student> studentsToSearch = new ArrayList<>();
+    private AdviseeSearchAdapter adviseeSearchViewAdapter;
+    private Filter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,26 +31,22 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         setContentView(R.layout.activity_advisor_search_students_tile);
         getSupportActionBar().hide();
 
+        // Retrieve Advisor from previous activity.
         Advisor advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
-        students = new ArrayList<>();
-        Map<String, Student> studentsMap = advisor.getStudents(); // will need to get all students
-
-        for (Map.Entry<String, Student> student : studentsMap.entrySet()) {
-            Student advisee = student.getValue();
-            students.add(advisee);
-        }
-
+        // Retrieve views from UI.
         adviseeSearchView = findViewById(R.id.adviseeSearchView);
         adviseeListView = findViewById(R.id.adviseesRecyclerView);
 
-        adviseeSearchViewAdapter = new AdviseeSearchAdapter(this, students);
+        adviseeSearchViewAdapter = new AdviseeSearchAdapter(this, studentsToSearch);
         adviseeListView.setAdapter(adviseeSearchViewAdapter);
         adviseeListView.setTextFilterEnabled(false);
         adviseeListView.setDivider(null);
         filter = adviseeSearchViewAdapter.getFilter();
         filter.filter(null);
         setupSearchView();
+
+        advisor.getSearchableAccounts(studentsToSearch, adviseeSearchViewAdapter, this);
     }
 
     private void setupSearchView() {
