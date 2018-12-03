@@ -2,8 +2,8 @@ package com.teamrocket.majorizer.Advisor;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +25,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static android.support.constraint.Constraints.TAG;
-import static com.teamrocket.majorizer.AppUtility.Utility.getAccountType;
 
 public class Advisor extends Account {
 
@@ -34,7 +33,7 @@ public class Advisor extends Account {
     private Map<String, Student> studentsMap = new HashMap<>();
 
     // This string is the Advisors department. Example: CS, PH, CE
-    private String department;
+    private String department = null;
 
     // Student map methods.
     public boolean hasStudent(String studentUserName) {
@@ -44,7 +43,7 @@ public class Advisor extends Account {
             return false;
     }
 
-    public void addStudent(String studentUserName, Student student) {
+    public void addAdviseeToMap(String studentUserName, Student student) {
         studentsMap.put(studentUserName, student);
     }
 
@@ -133,7 +132,6 @@ public class Advisor extends Account {
     public void dropStudentFromAdvisees(final Student student, final Context context) {
         // Remove student from advisees in memory.
         studentsMap.remove(student.getUserName());
-        System.out.println("FUCK " + studentsMap);
 
         // Remove student from advisees in database.
         // First, remove student from advisee's in Advisor account.
@@ -144,6 +142,41 @@ public class Advisor extends Account {
         // Second, remove adviser from student's Advisors in Student's account.
         FirebaseDatabase.getInstance().getReference().getRoot().child(context
                 .getText(R.string.Accounts) + "/" + student.getUserName() + "/Advisors/" + this.userName).removeValue();
+    }
+
+    public void addStudentToAdvisees(final Student student, final Context context) {
+        // Add student from advisees in memory.
+        studentsMap.put(student.getUserName(), student);
+
+        // Add student from advisees in database.
+        String advisorURL = "/" + context.getText(R.string.Accounts) + "/" +
+                userName + "/" + context.getText(R.string.Advisees) + "/" + student.getUserName();
+
+        // Add advisor from student's advisors in database.
+        FirebaseDatabase.getInstance().getReference(advisorURL).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot newAdvisee) {
+                newAdvisee.child(context.getText(R.string.FirstNameKey).toString()).getRef().setValue(student.getFirstName());
+                newAdvisee.child(context.getText(R.string.LastNameKey).toString()).getRef().setValue(student.getLastName());
+                if (student instanceof UndergradStudent)
+                    newAdvisee.child(context.getText(R.string.Type).toString()).getRef().setValue(context.getText(R.string.Undergrad).toString());
+                else
+                    newAdvisee.child(context.getText(R.string.Type).toString()).getRef().setValue(context.getText(R.string.Grad).toString());
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                // Database query was not successful.
+                Toast.makeText(context, context.getText(R.string.InvalidName), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        // Add student from advisees in database.
+        String studentURL = "/" + context.getText(R.string.Accounts) + "/" +
+                student.getUserName() + "/" + context.getText(R.string.Advisors) + "/" + userName + "/";
+        FirebaseDatabase.getInstance().getReference().getRoot().child(studentURL).setValue(firstName + " " + lastName);
+
     }
 
 }

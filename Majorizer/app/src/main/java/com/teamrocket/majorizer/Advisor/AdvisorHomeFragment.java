@@ -42,7 +42,7 @@ public class AdvisorHomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent searchTileIntent = new Intent(getActivity(), AdviserSearchStudentsTileActivity.class);
                 searchTileIntent.putExtra(getText(R.string.AccountObject).toString(), account);
-                startActivity(searchTileIntent);
+                startActivityForResult(searchTileIntent, 0);
             }
         });
 
@@ -65,8 +65,6 @@ public class AdvisorHomeFragment extends Fragment {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 account = (Account) data.getSerializableExtra(getText(R.string.AccountObject).toString());
-                System.out.println("ENOLA");
-                Toast.makeText(getContext(), "FUCK UA", Toast.LENGTH_LONG).show();
             }
         }
     }

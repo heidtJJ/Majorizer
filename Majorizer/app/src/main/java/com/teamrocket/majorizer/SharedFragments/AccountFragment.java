@@ -20,6 +20,7 @@ import com.teamrocket.majorizer.Student.Student;
 import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AccountFragment extends Fragment {
 
@@ -64,15 +65,17 @@ public class AccountFragment extends Fragment {
 
         // Show information for student if the user is a student.
         if (account instanceof Student) {
-            if (((Student) account).getAdvisor1() == null && ((Student) account).getAdvisor2() == null) {
-                userDataList.add("Advisor: No Current Advisor");
-            } else if (((Student) account).getAdvisor2() == null) {
-                // Student has one advisor.
-                userDataList.add("Advisor: " + ((Student) account).getAdvisor1());
+            Set<String> advisors = ((Student) account).getAdvisors();
+            if (advisors.isEmpty()) {
+                userDataList.add("No current advisor");
+            } else if (advisors.size() == 1) {
+                String advisorName = advisors.iterator().next();
+                userDataList.add("Advisor: " + advisorName);
             } else {
-                // Student has two advisors.
-                userDataList.add("Advisor 1: " + ((Student) account).getAdvisor1());
-                userDataList.add("Advisor 2: " + ((Student) account).getAdvisor2());
+                int counter = 1;
+                for (String advisorName : ((Student) account).getAdvisors()) {
+                    userDataList.add("Advisor " + counter++ + ": " + advisorName);
+                }
             }
         }
         // Show information for undergrad student if the user is a student.

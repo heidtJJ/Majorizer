@@ -23,8 +23,6 @@ import com.teamrocket.majorizer.Student.Student;
 import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.teamrocket.majorizer.Account.AccountType.UNDERGRAD;
 import static com.teamrocket.majorizer.AppUtility.Utility.getAccountType;
@@ -115,14 +113,13 @@ public class LoginManager implements Serializable {
 
         if (account instanceof Student) {
             // Load the student's advisors.
-            String advisor1 = dataSnapshot.child(resources.getText(R.string.Advisor1).toString()).getValue().toString();
-            if (!advisor1.equals(resources.getText(R.string.NullString)))
-                ((Student) account).setAdvisor1(advisor1);
-
-            String advisor2 = dataSnapshot.child(resources.getText(R.string.Advisor2).toString()).getValue().toString();
-            if (!advisor2.equals(resources.getText(R.string.NullString)))
-                ((Student) account).setAdvisor2(advisor2);
-
+            DataSnapshot advisors = dataSnapshot.child(resources.getText(R.string.Advisors).toString());
+            for (DataSnapshot advisor : advisors.getChildren()) {
+                String advisorUsername = advisor.getKey();
+                String fullName = advisor.getValue().toString();
+                ((Student) account).addAdvisor(advisorUsername, fullName);
+            }
+            
             // Load the student's course history.
             DataSnapshot courseHistory = dataSnapshot.child(resources.getText(R.string.CourseHistory).toString());
             for (DataSnapshot course : courseHistory.getChildren()) {
@@ -197,7 +194,7 @@ public class LoginManager implements Serializable {
 
                 account.setAccountType(accountType);
 
-                ((Advisor) account).addStudent(username, advisee);
+                ((Advisor) account).addAdviseeToMap(username, advisee);
             }
 
             String department = dataSnapshot.child(resources.getText(R.string.Department).toString()).getValue().toString();

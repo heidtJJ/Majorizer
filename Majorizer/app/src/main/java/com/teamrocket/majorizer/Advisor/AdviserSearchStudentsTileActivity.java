@@ -1,29 +1,28 @@
 package com.teamrocket.majorizer.Advisor;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.teamrocket.majorizer.Adapters.AdviseeSearchAdapter;
+import com.teamrocket.majorizer.Adapters.StudentSearchAdapter;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
-import com.teamrocket.majorizer.Student.UndergradStudent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AdviserSearchStudentsTileActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    private SearchView adviseeSearchView;
-    private ListView adviseeListView;
+    private SearchView adviseeSearchView = null;
+    private ListView adviseeListView = null;
     private List<Student> studentsToSearch = new ArrayList<>();
-    private AdviseeSearchAdapter adviseeSearchViewAdapter;
-    private Filter filter;
+    private StudentSearchAdapter adviseeSearchViewAdapter = null;
+    private Filter filter = null;
+    private Advisor advisor = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +31,13 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         getSupportActionBar().hide();
 
         // Retrieve Advisor from previous activity.
-        Advisor advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
+        advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // Retrieve views from UI.
         adviseeSearchView = findViewById(R.id.adviseeSearchView);
         adviseeListView = findViewById(R.id.adviseesRecyclerView);
 
-        adviseeSearchViewAdapter = new AdviseeSearchAdapter(this, studentsToSearch);
+        adviseeSearchViewAdapter = new StudentSearchAdapter(this, advisor, studentsToSearch);
         adviseeListView.setAdapter(adviseeSearchViewAdapter);
         adviseeListView.setTextFilterEnabled(false);
         adviseeListView.setDivider(null);
@@ -68,5 +67,22 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(getText(R.string.AccountObject).toString(), advisor);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent intent = new Intent();
+        intent.putExtra(getText(R.string.AccountObject).toString(), advisor);
+        setResult(RESULT_OK, intent);
+        finish();
+        super.onDestroy();
     }
 }

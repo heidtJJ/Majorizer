@@ -12,21 +12,24 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamrocket.majorizer.Advisor.Advisor;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdviseeSearchAdapter extends BaseAdapter implements Filterable {
-    private Context context;
-    private List<Student> studentsToSearch;
-    private List<Student> orig;
+public class StudentSearchAdapter extends BaseAdapter implements Filterable {
+    private Context context = null;
+    private List<Student> studentsToSearch = null;
+    private List<Student> orig = null;
+    private Advisor advisor = null;
 
-    public AdviseeSearchAdapter(final Context context, final List<Student> studentsToSearch) {
+    public StudentSearchAdapter(final Context context, final Advisor advisor, final List<Student> studentsToSearch) {
         super();
         this.context = context;
         this.studentsToSearch = studentsToSearch;
+        this.advisor = advisor;
     }
 
     public class AdviseeHolder {
@@ -107,7 +110,15 @@ public class AdviseeSearchAdapter extends BaseAdapter implements Filterable {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // ToDo: Edit students adviser
+                                // Create the advisor-advisee link between the two accounts.
+                                advisor.addStudentToAdvisees(studentsToSearch.get(position), context);
+
+                                // Remove the searchable account from memory.
+                                studentsToSearch.remove(position);
+                                notifyDataSetChanged();
+
+                                // Notify the user of successful completion.
+                                Toast.makeText(context, context.getText(R.string.SuccessfulAdviseeAdd), Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

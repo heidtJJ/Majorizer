@@ -7,7 +7,8 @@ import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.teamrocket.majorizer.Adapters.AdviseeSearchAdapter;
+import com.teamrocket.majorizer.Adapters.StudentSearchAdapter;
+import com.teamrocket.majorizer.Advisor.Advisor;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
 import com.teamrocket.majorizer.Student.UndergradStudent;
@@ -17,12 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchAccountActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class AdminSearchAccountActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private SearchView adviseeSearchView = null;
     private ListView adviseeSearchListView = null;
     private List<Student> studentsToSearch = null;
-    private AdviseeSearchAdapter adviseeSearchViewAdapter = null;
+    private StudentSearchAdapter adviseeSearchViewAdapter = null;
     private Filter filter = null;
 
     @Override
@@ -31,7 +32,7 @@ public class SearchAccountActivity extends AppCompatActivity implements SearchVi
         setContentView(R.layout.activity_advisor_search_students_tile);
         getSupportActionBar().hide();
 
-        Administrator administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
+        Advisor advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         studentsToSearch = new ArrayList<>();
         Map<String, String> studentsMap = new HashMap<>();
@@ -61,7 +62,7 @@ public class SearchAccountActivity extends AppCompatActivity implements SearchVi
         adviseeSearchView = findViewById(R.id.adviseeSearchView);
         adviseeSearchListView = findViewById(R.id.adviseesRecyclerView);
 
-        adviseeSearchViewAdapter = new AdviseeSearchAdapter(this, studentsToSearch);
+        adviseeSearchViewAdapter = new StudentSearchAdapter(this, advisor, studentsToSearch);
         adviseeSearchListView.setAdapter(adviseeSearchViewAdapter);
         adviseeSearchListView.setTextFilterEnabled(false);
         adviseeSearchListView.setDivider(null);

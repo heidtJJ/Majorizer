@@ -1,6 +1,7 @@
 package com.teamrocket.majorizer.Student;
 
 
+import com.teamrocket.majorizer.Advisor.Advisor;
 import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.AppUtility.Schedule;
@@ -8,30 +9,31 @@ import com.teamrocket.majorizer.Account;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class Student extends Account {
 
     // DATA MEMBERS
-    private String advisor1 = null;
-    private String advisor2 = null;
     private Schedule schedule = null;
 
-    // COURSE HISTORY (DATA MEMBERS)
-    // These three arrays will correspond to a student's taken course
-    // in each index. These arrays will always be the same length.
-    private final List<ClassData> coursesPrevTakenList = new ArrayList<>();
+    // First string is Advisor username, second string is full name.
+    private Map<String, String> advisors = new HashMap<>();
 
+    // COURSE HISTORY (DATA MEMBERS)
+    private final List<ClassData> coursesPrevTakenList = new ArrayList<>();
     private final List<Course> coursesCurTakingList = new ArrayList<>();
 
     // GET METHODS
-    public String getAdvisor1() {
-        return this.advisor1;
+    public String getAdvisorName(String username) {
+        return advisors.get(username);
     }
 
-    public String getAdvisor2() {
-        return this.advisor2;
+    public Set<String> getAdvisors() {
+        return new HashSet<>(advisors.values());
     }
 
     public Schedule getSchedule() {
@@ -98,13 +100,10 @@ public abstract class Student extends Account {
     }
 
     // SET METHODS
-    public void setAdvisor1(final String advisor1) {
-        this.advisor1 = advisor1;
+    public void addAdvisor(final String username, final String fullName) {
+        advisors.put(username, fullName);
     }
 
-    public void setAdvisor2(final String advisor2) {
-        this.advisor2 = advisor2;
-    }
 
     public void setSchedule(final Schedule schedule) {
         this.schedule = schedule;

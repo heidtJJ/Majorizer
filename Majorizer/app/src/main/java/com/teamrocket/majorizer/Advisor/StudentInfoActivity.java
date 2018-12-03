@@ -31,7 +31,7 @@ public class StudentInfoActivity extends AppCompatActivity {
         advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         adviseeActivityHeader = findViewById(R.id.adviseeActivityHeader);
-        adviseeActivityHeader.setText(adviseeActivityHeader.getText() + student.getFirstName() + " " + student.getLastName());
+        adviseeActivityHeader.setText(adviseeActivityHeader.getText() + " " + student.getFirstName() + " " + student.getLastName());
 
     }
 

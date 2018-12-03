@@ -89,8 +89,6 @@ public class Administrator extends Account {
                 undergradFields.put(context.getText(R.string.PasswordKey).toString(), password);
                 undergradFields.put(context.getText(R.string.Type).toString(), context.getText(R.string.Undergrad).toString());
                 undergradFields.put(context.getText(R.string.UsernameKey).toString(), username);
-                undergradFields.put(context.getText(R.string.Advisor1).toString(), NULL);
-                undergradFields.put(context.getText(R.string.Advisor2).toString(), NULL);
 
                 // Insert the map into the database and notify the user.
                 DatabaseReference newAccountRef = FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts) + "/" + username);
@@ -141,8 +139,6 @@ public class Administrator extends Account {
                 undergradFields.put(context.getText(R.string.PasswordKey).toString(), password);
                 undergradFields.put(context.getText(R.string.Type).toString(), context.getText(R.string.Undergrad).toString());
                 undergradFields.put(context.getText(R.string.UsernameKey).toString(), username);
-                undergradFields.put(context.getText(R.string.Advisor1).toString(), NULL);
-                undergradFields.put(context.getText(R.string.Advisor2).toString(), NULL);
 
                 // Insert the map into the database and notify the user.
                 DatabaseReference newAccountRef = FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts) + "/" + username);
@@ -181,8 +177,6 @@ public class Administrator extends Account {
                 undergradFields.put(context.getText(R.string.PasswordKey).toString(), password);
                 undergradFields.put(context.getText(R.string.Type).toString(), context.getText(R.string.Grad).toString());
                 undergradFields.put(context.getText(R.string.UsernameKey).toString(), username);
-                undergradFields.put(context.getText(R.string.Advisor1).toString(), NULL);
-                undergradFields.put(context.getText(R.string.Advisor2).toString(), NULL);
 
                 // Insert the map into the database and notify the user.
                 DatabaseReference newAccountRef = FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts) + "/" + username);
