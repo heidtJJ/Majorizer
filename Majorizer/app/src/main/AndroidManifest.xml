@@ -43,7 +43,9 @@
         <activity android:name=".Advisor.AdvisorDropAdviseeTileActivity" />
         <activity android:name=".Student.UndergradCurrentClassesActivity" />
         <activity android:name=".Admin.AdminSearchAccountActivity" />
-        <activity android:name=".Advisor.StudentInfoActivity"></activity>
+        <activity android:name=".Advisor.StudentInfoActivity" />
+        <activity android:name=".Admin.CreateGradCourseActivity" />
+        <activity android:name=".Admin.CreateUndergradCourseActivity"></activity>
     </application>
 
 </manifest>

@@ -15,12 +15,12 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_student_account);
     }
 
-    public void createUndergradStudent(View view) {
+    public void createUndergradStudent(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), CreateUndergradAccountActivity.class);
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void createGradStudent(View view) {
+    public void createGradStudent(final View view) {
         Intent selectAccountActivity = new Intent(view.getContext(), CreateGradAccountActivity.class);
         view.getContext().startActivity(selectAccountActivity);
     }

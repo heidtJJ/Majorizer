@@ -22,16 +22,16 @@ public class SelectAccountTypeActivity extends AppCompatActivity {
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
     }
 
-    public void createStudentAccount(View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), CreateStudentAccountActivity.class);
-        // Pass this Account object to the main activity.
+    public void createStudentAccount(final View view) {
+        final Intent selectAccountActivity = new Intent(view.getContext(), CreateStudentAccountActivity.class);
+        // Pass this Account object to the next activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void createAdvisorAccount(View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), CreateAdvisorAccountActivity.class);
-        // Pass this Account object to the main activity.
+    public void createAdvisorAccount(final View view) {
+        final Intent selectAccountActivity = new Intent(view.getContext(), CreateAdvisorAccountActivity.class);
+        // Pass this Account object to the next activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
         view.getContext().startActivity(selectAccountActivity);
     }
