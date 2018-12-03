@@ -7,122 +7,101 @@
     android:background="@color/offWhite"
     tools:context=".Admin.SelectAccountTypeActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select account type to create."
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/undergradCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/undergradCard"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="createAdvisorAccount"
-        app:cardCornerRadius="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/card2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <android.support.constraint.ConstraintLayout
+        <TextView
+            android:id="@+id/activityHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Select account type to create."
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/advisorCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:onClick="createAdvisorAccount"
+            app:cardCornerRadius="7dp">
 
-            <ImageView
-                android:id="@+id/addCourseImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/ic_shortcut_people_outline"
-                app:layout_constraintBottom_toTopOf="@+id/addCourseTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/addCourseTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Adviser"
-                android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addCourseImageView" />
+                <ImageView
+                    android:id="@+id/advisorImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/ic_shortcut_people_outline" />
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/advisorTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="3"
+                    android:text="Advisor"
+                    android:textAlignment="center"
+                    android:textSize="25sp" />
 
+            </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card2"
-        android:layout_width="match_parent"
-        android:layout_height="305dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="createStudentAccount"
-        app:cardCornerRadius="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/undergradCard">
-
-        <android.support.constraint.ConstraintLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/undergradCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:onClick="createStudentAccount"
+            app:cardCornerRadius="7dp">
 
-            <ImageView
-                android:id="@+id/removeCourseImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/ic_shortcut_person_outline"
-                app:layout_constraintBottom_toTopOf="@+id/removeCourseTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/removeCourseTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Student"
-                android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/removeCourseImageView" />
+                <ImageView
+                    android:id="@+id/studentImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/ic_shortcut_person_outline" />
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/studentTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="3"
+                    android:text="Student"
+                    android:textAlignment="center"
+                    android:textSize="25sp" />
 
-    </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
