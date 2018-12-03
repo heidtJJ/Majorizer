@@ -36,18 +36,27 @@ public class UndergradHomeFragment extends Fragment {
         view.findViewById(R.id.coursesNeededCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent schedulerIntent = new Intent(getActivity(), UndergradClassesNeededActivity.class);
-                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), student);
-                startActivity(schedulerIntent);
+                Intent coursesNeededIntent = new Intent(getActivity(), UndergradClassesNeededActivity.class);
+                coursesNeededIntent.putExtra(getText(R.string.AccountObject).toString(), student);
+                startActivity(coursesNeededIntent);
             }
         });
 
         view.findViewById(R.id.currentCoursesCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent schedulerIntent = new Intent(getActivity(), UndergradCurrentClassesActivity.class);
-                schedulerIntent.putExtra(getText(R.string.AccountObject).toString(), student);
-                startActivity(schedulerIntent);
+                Intent currentCoursesIntent = new Intent(getActivity(), UndergradCurrentClassesActivity.class);
+                currentCoursesIntent.putExtra(getText(R.string.AccountObject).toString(), student);
+                startActivity(currentCoursesIntent);
+            }
+        });
+
+        view.findViewById(R.id.switchMajorCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switchMajorIntent = new Intent(getActivity(), UndergradSwitchMajorActivity.class);
+                switchMajorIntent.putExtra(getText(R.string.AccountObject).toString(), student);
+                startActivity(switchMajorIntent);
             }
         });
         return view;

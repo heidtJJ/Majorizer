@@ -45,7 +45,8 @@
         <activity android:name=".Admin.AdminSearchAccountActivity" />
         <activity android:name=".Advisor.StudentInfoActivity" />
         <activity android:name=".Admin.CreateGradCourseActivity" />
-        <activity android:name=".Admin.CreateUndergradCourseActivity"></activity>
+        <activity android:name=".Admin.CreateUndergradCourseActivity" />
+        <activity android:name=".Student.UndergradSwitchMajorActivity"></activity>
     </application>
 
 </manifest>

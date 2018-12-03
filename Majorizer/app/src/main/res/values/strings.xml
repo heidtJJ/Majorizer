@@ -24,6 +24,7 @@
     <string name="Courses_Needed">Courses Needed</string>
     <string name="Current_Courses">Current Courses</string>
     <string name="Remaining_Courses">Remaining Courses</string>
+    <string name="Switch_Major">Switch Major</string>
     <string name="CurrentCourses">CurrentCourses</string>
     <string name="LoginAttempts">LoginAttempts</string>
     <string name="UserLockedOut">Your account is locked! You have exceeded the number of login attempts.</string>

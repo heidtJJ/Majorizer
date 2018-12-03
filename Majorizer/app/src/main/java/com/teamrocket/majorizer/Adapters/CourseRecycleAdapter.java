@@ -16,7 +16,8 @@ import com.teamrocket.majorizer.R;
 
 import java.util.List;
 
-public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdapter.ClassViewHolder> {
+public class
+CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdapter.ClassViewHolder> {
     private List<Course> classList = null;
     Activity activity;
     FragmentManager fm;
