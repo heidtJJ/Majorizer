@@ -92,7 +92,7 @@ public class Administrator extends Account {
 
         String curriculumURL = "/" + classType + "/" + department + "/" + courseCode;
         // Make query to database to add new course to MasterCourseList.
-        FirebaseDatabase.getInstance().getReference(curriculumURL).addLitenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference(curriculumURL).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 dataSnapshot.child(CREDITS).getRef().setValue(numCourseCredits);
