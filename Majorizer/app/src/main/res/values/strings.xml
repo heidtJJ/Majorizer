@@ -99,6 +99,8 @@
     <string name="SameMinorError">A student may not have the same first and second minor. Please revise your selections.</string>
     <string name="SameMajorMinorError">A student may not have the same major and minor. Please revise your selections.</string>
     <string name="Minor1NotSelected">You may not choose a second minor without choosing a first minor. Please revise your selections.</string>
+    <string name="MissingInput">You are missing a required input. Please revise your selections.</string>
+    <string name="MissingCheckBox">You are missing a required check box. Please revise your selections.</string>
 
 
 </resources>

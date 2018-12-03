@@ -65,44 +65,7 @@ public class Administrator extends Account {
     //************************************************ CURRICULUM CHANGES **********************************************************
 
     public void removeCourseFromCurriculum() {
-        // Make query to Firebase database to validate user.
-        /*FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                // Check if the username already exists in the database.
-                if (dataSnapshot.hasChild(username)) {
-                    // This username already exists
-                    Toast.makeText(context, context.getText(R.string.UsernameExists), Toast.LENGTH_LONG).show();
-                    return;
-                }
 
-                // Insert the user's credentials into the a map.
-                Map<String, String> undergradFields = new HashMap<>();
-                undergradFields.put(context.getText(R.string.Major1).toString(), major1);
-                undergradFields.put(context.getText(R.string.Major2).toString(), major2);
-                undergradFields.put(context.getText(R.string.Minor1).toString(), minor1);
-                undergradFields.put(context.getText(R.string.Minor2).toString(), minor2);
-                undergradFields.put(context.getText(R.string.FirstNameKey).toString(), firstName);
-                undergradFields.put(context.getText(R.string.Id).toString(), String.valueOf("0000010"));
-                undergradFields.put(context.getText(R.string.LastNameKey).toString(), lastName);
-                undergradFields.put(context.getText(R.string.LoginAttempts).toString(), String.valueOf(0));
-                undergradFields.put(context.getText(R.string.PasswordKey).toString(), password);
-                undergradFields.put(context.getText(R.string.Type).toString(), context.getText(R.string.Undergrad).toString());
-                undergradFields.put(context.getText(R.string.UsernameKey).toString(), username);
-
-                // Insert the map into the database and notify the user.
-                DatabaseReference newAccountRef = FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts) + "/" + username);
-                newAccountRef.setValue(undergradFields);
-                Toast.makeText(context, context.getText(R.string.SuccessfulAccountCreation), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(final DatabaseError databaseError) {
-                // Database query was not successful.
-                Toast.makeText(context, context.getText(R.string.InvalidName), Toast.LENGTH_SHORT).show();
-            }
-
-        });*/
     }
 
     public void addCourseToCurriculum() {
