@@ -98,7 +98,12 @@ public final class Utility {
         return null;
     }
 
-    boolean isValidPassword(final String password){
+    public static boolean isValidPassword(final String password) {
+
+        return false;
+    }
+
+    public static boolean isValidCourseNumber(final String courseNumber) {
 
         return false;
     }

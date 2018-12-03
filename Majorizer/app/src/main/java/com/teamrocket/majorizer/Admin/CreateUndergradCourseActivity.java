@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.teamrocket.majorizer.AppUtility.Utility;
 import com.teamrocket.majorizer.R;
 
 public class CreateUndergradCourseActivity extends AppCompatActivity {
@@ -44,9 +45,11 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
             Toast.makeText(this, getText(R.string.MissingCheckBox).toString(), Toast.LENGTH_LONG).show();
             return;
         }
-        
-        //
 
+        // Check that courseNumberString is a number between 0 and 999.
+        if(Utility.isValidCourseNumber(courseNumberString)){
+
+        }
 
 
     }
