@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.teamrocket.majorizer.AppUtility.AccountCreationManager;
 import com.teamrocket.majorizer.R;
 
 import static com.teamrocket.majorizer.AppUtility.Utility.isValidName;

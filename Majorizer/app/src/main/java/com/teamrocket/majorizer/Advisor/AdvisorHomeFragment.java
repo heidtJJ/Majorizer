@@ -8,10 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.teamrocket.majorizer.Account;
 import com.teamrocket.majorizer.MainActivity;
 import com.teamrocket.majorizer.R;
+
+import static android.app.Activity.RESULT_OK;
 
 public class AdvisorHomeFragment extends Fragment {
 
@@ -48,11 +51,24 @@ public class AdvisorHomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent dropAdviseeIntent = new Intent(getActivity(), AdvisorDropAdviseeTileActivity.class);
                 dropAdviseeIntent.putExtra(getText(R.string.AccountObject).toString(), account);
-                startActivity(dropAdviseeIntent);
+                startActivityForResult(dropAdviseeIntent, 0);
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                account = (Account) data.getSerializableExtra(getText(R.string.AccountObject).toString());
+                System.out.println("ENOLA");
+                Toast.makeText(getContext(), "FUCK UA", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 

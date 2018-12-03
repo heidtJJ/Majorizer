@@ -133,7 +133,6 @@ public class LoginManager implements Serializable {
                 ((Student) account).addCoursePrevTaken(courseName, courseCode, grade, numCredits);
             }
 
-            System.out.println("FUCK");
             // Load the student's current courses taking.
             DataSnapshot coursesTaking = dataSnapshot.child(resources.getText(R.string.CurrentCourses).toString());
             for (DataSnapshot course : coursesTaking.getChildren()) {
@@ -180,7 +179,6 @@ public class LoginManager implements Serializable {
         if (account instanceof Advisor) {
             // Get list of student usernames.
             DataSnapshot studentUserNames = dataSnapshot.child(resources.getText(R.string.Advisees).toString());
-            List<String> userNameList = new ArrayList();
             for (DataSnapshot studentUserName : studentUserNames.getChildren()) {
                 // Pull student information from database.
                 String firstName = studentUserName.child(resources.getText(R.string.FirstNameKey).toString()).getValue().toString();

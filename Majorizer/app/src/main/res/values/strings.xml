@@ -68,6 +68,7 @@
     <!-- Instruction Strings -->
     <string name="AdviseesInstructions">Click Advisee to see their information.</string>
     <string name="StudentInformationFor">Student information for</string>
+    <string name="SuccessfulAdviseeDrop">"Successfully removed student from your advisees."</string>
 
 
     <!-- Create Account Page Error Messages -->

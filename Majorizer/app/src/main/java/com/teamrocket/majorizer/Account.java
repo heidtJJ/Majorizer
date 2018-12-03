@@ -14,12 +14,12 @@ public abstract class Account implements Serializable {
     }
 
     // DATA MEMBERS
-    private String id = null;
-    private String firstName = null;
-    private String lastName = null;
-    private String userName = null;
-    private AccountType accountType = null;
-    private List<Notification> notifications = new ArrayList<>();
+    protected String id = null;
+    protected String firstName = null;
+    protected String lastName = null;
+    protected String userName = null;
+    protected AccountType accountType = null;
+    protected List<Notification> notifications = new ArrayList<>();
 
     // SET METHODS
     public void setId(final String id) {
