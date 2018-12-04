@@ -1,5 +1,6 @@
 package com.teamrocket.majorizer.Admin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -12,11 +13,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.teamrocket.majorizer.Account;
+import com.teamrocket.majorizer.Adapters.CourseSearchAdapter;
+import com.teamrocket.majorizer.AppUtility.Course;
+import com.teamrocket.majorizer.AppUtility.Utility;
 import com.teamrocket.majorizer.R;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -95,6 +101,109 @@ public class Administrator extends Account {
             }
 
         });
+    }
+
+    public void addCourseToCurriculum(final Course course, final String courseType, final String adminAction, final String department, final String courseLevel, final Context context) {
+        final String CREDITS = context.getText(R.string.Credits).toString();
+        final String COURSE_NAME = context.getText(R.string.CourseName).toString();
+        final String PREREQUISITES = context.getText(R.string.Prerequisites).toString();
+
+        String masterCourseListURL = "/" + courseLevel + "/" + department + "/" + course.getCourseCode();
+        // Make query to database to add new course to Curriculum.
+        FirebaseDatabase.getInstance().getReference(masterCourseListURL).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    Toast.makeText(context, context.getText(R.string.CourseExists).toString(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                dataSnapshot.child(CREDITS).getRef().setValue(course.getCredits());
+                dataSnapshot.child(COURSE_NAME).getRef().setValue(course.getCourseName());
+                DataSnapshot preReqsSnapshot = dataSnapshot.child(PREREQUISITES);
+                int i = 0;
+                for (Course preReqCourseCode : course.getPreRequsites()) {
+                    preReqsSnapshot.child(String.valueOf(i++)).getRef().setValue(preReqCourseCode.getCourseCode());
+                }
+                Toast.makeText(context, Utility.getSuccessMessage(courseType, adminAction, department, courseLevel, context), Toast.LENGTH_LONG).show();
+                //((Activity) context).finish();
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                // Database query was not successful.
+                Toast.makeText(context, context.getText(R.string.TryAgainLater), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+
+    public void removeCourseFromCurriculum(final Course course, final String courseType, final String adminAction, final String department, final String courseLevel, final Context context) {
+        final String CREDITS = context.getText(R.string.Credits).toString();
+        final String COURSE_NAME = context.getText(R.string.CourseName).toString();
+        final String PREREQUISITES = context.getText(R.string.Prerequisites).toString();
+
+        String masterCourseListURL = "/" + courseLevel + "/" + department + "/" + course.getCourseCode();
+        // Make query to database to add new course to Curriculum.
+        FirebaseDatabase.getInstance().getReference(masterCourseListURL).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.hasChildren()) {
+                    Toast.makeText(context, context.getText(R.string.CourseDNE).toString(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                dataSnapshot.getRef().removeValue();
+                Toast.makeText(context, Utility.getSuccessMessage(courseType, adminAction, department, courseLevel, context), Toast.LENGTH_LONG).show();
+                //((Activity) context).finish();
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                // Database query was not successful.
+                Toast.makeText(context, context.getText(R.string.TryAgainLater), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+
+
+    public void populateCoursesForSearch(final Context context, final List<Course> courseToSearch,
+                                         final CourseSearchAdapter courseSearchAdapter, final String urlInDatabase) {
+        final String COURSE_NAME = context.getText(R.string.CourseName).toString();
+        final String CREDITS = context.getText(R.string.Credits).toString();
+        final String PRE_REQUISITES = context.getText(R.string.Prerequisites).toString();
+        // Make asynchronous query to Firebase database to fill classes needed in UI.
+        FirebaseDatabase.getInstance().getReference(urlInDatabase).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot courseList) {
+                // Iterate through courseList pulling data for each course.
+                for (DataSnapshot course : courseList.getChildren()) {
+                    // Pull information from database.
+                    String courseCode = course.getKey();
+                    String courseName = course.child(COURSE_NAME).getValue().toString();
+                    Integer numCredits = Integer.valueOf(course.child(CREDITS).getValue().toString());
+
+                    // Add prerequisite information to each course.
+                    Set<Course> preReqs = new HashSet<>();
+                    DataSnapshot preReqSnapshot = course.child(PRE_REQUISITES);
+                    for (DataSnapshot preRequisite : preReqSnapshot.getChildren()) {
+                        String preReqCourseCode = preRequisite.getValue().toString();
+                        preReqs.add(new Course(null, preReqCourseCode, 4, new HashSet<Course>()));
+                    }
+
+                    courseToSearch.add(new Course(courseName, courseCode, numCredits, preReqs));
+                    courseSearchAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                // Database query was not successful.
+                System.err.println("Could not access database in MasterCourseList");
+            }
+        });
+
     }
 
     //*********************************************** END OF CURRICULUM CHANGES *****************************************************

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.teamrocket.majorizer.Account;
+import com.teamrocket.majorizer.R;
 
 import static com.teamrocket.majorizer.Account.AccountType.ADMIN;
 import static com.teamrocket.majorizer.Account.AccountType.ADVISOR;
@@ -128,6 +129,30 @@ public final class Utility {
             return false;
         Integer numberOfCreditsInt = Integer.valueOf(numberOfCredits);
         return numberOfCreditsInt >= 3 && numberOfCreditsInt <= 4;
+    }
+
+
+    public static String getSuccessMessage(final String courseType, final String adminAction,
+                                           final String departmentName, final String courseMajorOrMinor,
+                                           final Context context) {
+        String pageTitle = "Successfully ";
+        if (adminAction.equals(context.getText(R.string.AddCourse))) {
+            pageTitle += "added this course to ";
+        } else {
+            pageTitle += "removed this course from ";
+        }
+        if (courseType.equals(context.getText(R.string.Undergrad))) {
+            pageTitle += "the Undergraduate ";
+            if (courseMajorOrMinor.equals(context.getText(R.string.UndergradMajors)))
+                pageTitle += context.getText(R.string.Major).toString();
+            else
+                pageTitle += context.getText(R.string.Minor).toString();
+
+            pageTitle += " of ";
+        } else {
+            pageTitle += "the Graduate department of ";
+        }
+        return pageTitle + departmentName;
     }
 
 }

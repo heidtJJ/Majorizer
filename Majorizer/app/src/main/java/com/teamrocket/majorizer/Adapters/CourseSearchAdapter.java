@@ -1,7 +1,8 @@
 package com.teamrocket.majorizer.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.teamrocket.majorizer.Admin.Administrator;
-import com.teamrocket.majorizer.Admin.DepartmentSelectionActivity;
 import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
 
@@ -24,18 +24,30 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
     private List<Course> orig = null;
     private Administrator administrator = null;
 
-    private String courseLevel = null;
+    // Either Grad or Undergrad
+    private String courseType = null;
+
+    // Either AddCourse or RemoveCourse
     private String adminAction = null;
 
+    // Course level is where in the database to insert/remove this data.
+    private String courseLevel = null;
+
+    // Department name is name of department.
+    private String departmentName = null;
+
     public CourseSearchAdapter(final Context context, final Administrator administrator,
-                               final List<Course> coursesToSearch, final String adminActionType,
-                               final String adminAction) {
+                               final List<Course> coursesToSearch, final String courseType,
+                               final String adminAction, final String courseLevel,
+                               final String departmentName) {
         super();
         this.context = context;
         this.coursesToSearch = coursesToSearch;
         this.administrator = administrator;
-        this.courseLevel = adminActionType;
+        this.courseType = courseType;
         this.adminAction = adminAction;
+        this.departmentName = departmentName;
+        this.courseLevel = courseLevel;
     }
 
     public class CourseHolder {
@@ -94,30 +106,56 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        CourseHolder holder;
+        final Course courseSelected = coursesToSearch.get(position);
+        CourseSearchAdapter.CourseHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.object_search_item, parent, false);
-            holder = new CourseHolder();
+            holder = new CourseSearchAdapter.CourseHolder();
             holder.nameView = convertView.findViewById(R.id.objectNameView);
             convertView.setTag(holder);
-        } else holder = (CourseHolder) convertView.getTag();
-        holder.nameView.setText(coursesToSearch.get(position).getCourseCode() + ": " + coursesToSearch.get(position).getCourseName());
+        } else holder = (CourseSearchAdapter.CourseHolder) convertView.getTag();
+        holder.nameView.setText(courseSelected.getCourseName() + ", " + courseSelected.getCourseCode());
         holder.nameView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Course currentCourse = coursesToSearch.get(position);
+            public void onClick(View v) {
+                String addOrRemove = null;
+                if (adminAction.equals(context.getText(R.string.AddCourse)))
+                    addOrRemove = "add";
+                else
+                    addOrRemove = "remove";
 
-                // Change curriculum for undergraduate program.
-                final Intent selectAccountActivity = new Intent(context, DepartmentSelectionActivity.class);
+                String areYouSure = null;
+                if (courseType.equals(context.getText(R.string.Undergrad))) {
+                    areYouSure = String.format("Are you sure that you want to %s this class to the %s ", addOrRemove, courseType);
+                    if (courseLevel.equals(context.getText(R.string.Major)))
+                        areYouSure += "Major of " + departmentName;
+                    else
+                        areYouSure += "Minor of " + departmentName;
+                } else
+                    areYouSure = String.format("Are you sure that you want to %s this class to the Graduate department of %s?", addOrRemove, departmentName);
 
-                // Send administrator to the next activity.
-                selectAccountActivity.putExtra(context.getText(R.string.AccountObject).toString(), administrator);
-                selectAccountActivity.putExtra(context.getText(R.string.AdminAction).toString(), adminAction);
-                selectAccountActivity.putExtra(context.getText(R.string.CourseType).toString(), courseLevel);
-                selectAccountActivity.putExtra(context.getText(R.string.Course).toString(), currentCourse);
-                view.getContext().startActivity(selectAccountActivity);
 
-
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setTitle("Add Course");
+                alertDialogBuilder
+                        .setMessage(areYouSure)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (adminAction.equals(context.getText(R.string.AddCourse)))
+                                    administrator.addCourseToCurriculum(courseSelected, courseType, adminAction, departmentName, courseLevel, context);
+                                else
+                                    administrator.removeCourseFromCurriculum(courseSelected, courseType, adminAction, departmentName, courseLevel, context);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
         return convertView;

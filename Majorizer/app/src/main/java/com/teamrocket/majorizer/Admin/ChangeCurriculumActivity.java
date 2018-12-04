@@ -25,6 +25,8 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
     private Administrator administrator = null;
     private String adminAction = null;
     private String courseType = null;
+    private String courseLevel = null;
+    private String departmentName = null;
 
     // Views in UI
     private SearchView courseSearchView = null;
@@ -32,6 +34,7 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
     private List<Course> coursesToSearch = new ArrayList<>();
     private CourseSearchAdapter courseSearchViewAdapter = null;
     private Filter filter = null;
+    private String searchHint = "Search for ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +49,27 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
 
         // adminActionType is either grad or undergrad.
         courseType = (String) getIntent().getSerializableExtra(getText(R.string.CourseType).toString());
+        if (courseType.equals(getText(R.string.Undergrad).toString()))
+            searchHint += "an Undergraduate course";
+        else
+            searchHint += "a Graduate course";
+
+        // Course level is where in the database to insert/remove this data.
+        courseLevel = (String) getIntent().getSerializableExtra(getText(R.string.CourseLevel).toString());
+
+        // Department name is name of department.
+        departmentName = (String) getIntent().getSerializableExtra(getText(R.string.Department).toString());
 
         // Create a search-view adapter object for searching through master course list.
-        courseSearchViewAdapter = new CourseSearchAdapter(this, administrator, coursesToSearch, courseType, adminAction);
+        courseSearchViewAdapter = new CourseSearchAdapter(this, administrator, coursesToSearch, courseType, adminAction, courseLevel, departmentName);
 
-        // Populate the coursesToSearch list with the master course list.
-        populateCoursesToSearch(courseSearchViewAdapter);
+        // Populate the coursesToSearch list with the correct courses. Construct the proper URL first.
+        String URLinDatabase = null;
+        if (adminAction.equals(getText(R.string.AddCourse)) && courseLevel.equals(getText(R.string.Undergrad)))
+            URLinDatabase = "/" + getText(R.string.MasterCourseList).toString();
+        else
+            URLinDatabase = "/" + courseLevel + "/" + departmentName + "";
+        administrator.populateCoursesForSearch(this, coursesToSearch, courseSearchViewAdapter, URLinDatabase);
 
         // Retrieve views from UI.
         courseSearchView = findViewById(R.id.coursesSearchView);
@@ -65,48 +83,10 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
         setupSearchView();
     }
 
-    private void populateCoursesToSearch(final CourseSearchAdapter courseSearchAdapter) {
-        final String COURSE_NAME = getText(R.string.CourseName).toString();
-        final String CREDITS = getText(R.string.Credits).toString();
-        final String PRE_REQUISITES = getText(R.string.Prerequisites).toString();
-        // Make asynchronous query to Firebase database to fill classes needed in UI.
-        FirebaseDatabase.getInstance().getReference("/" + getText(R.string.MasterCourseList).toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot courseList) {
-                // Iterate through courseList pulling data for each course.
-                for (DataSnapshot course : courseList.getChildren()) {
-                    // Pull information from database.
-                    String courseCode = course.getKey();
-                    String courseName = course.child(COURSE_NAME).getValue().toString();
-                    Integer numCredits = Integer.valueOf(course.child(CREDITS).getValue().toString());
-
-                    // Add prerequisite information to each course.
-                    Set<Course> preReqs = new HashSet<>();
-                    DataSnapshot preReqSnapshot = course.child(PRE_REQUISITES);
-                    for (DataSnapshot preRequisite : preReqSnapshot.getChildren()) {
-                        String preReqCourseCode = preRequisite.getValue().toString();
-                        preReqs.add(new Course(null, preReqCourseCode, 4, new HashSet<Course>()));
-                    }
-
-                    coursesToSearch.add(new Course(courseName, courseCode, numCredits, preReqs));
-                    courseSearchAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(final DatabaseError databaseError) {
-                // Database query was not successful.
-                System.err.println("Could not access database in MasterCourseList");
-            }
-
-        });
-
-    }
-
     private void setupSearchView() {
         courseSearchView.setIconifiedByDefault(false);
         courseSearchView.setOnQueryTextListener(this);
-        courseSearchView.setQueryHint("Search students");
+        courseSearchView.setQueryHint(searchHint);
     }
 
     @Override

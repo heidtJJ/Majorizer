@@ -13,24 +13,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/courseTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/departmentSelectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingRight="10dp"
-            android:text=""
+            android:text="Title of Page"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold|italic" />
 
         <GridLayout
@@ -78,14 +68,56 @@
 
         </GridLayout>
 
+        <GridLayout
+            android:id="@+id/majorOrMinorGridlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="1"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:paddingRight="10dp"
+                android:text="Major or Minor?"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/majorOrMinor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Major" />
+
+                <RadioButton
+                    android:id="@+id/minor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Minor" />
+
+            </RadioGroup>
+
+        </GridLayout>
+
         <Button
-            android:id="@+id/CreateCourseButton"
+            android:id="@+id/SearchForClassButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="bottom"
             android:onClick="changeCurriculum"
-            android:text="@string/CreateCourse"
+            android:text="Search for Class"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

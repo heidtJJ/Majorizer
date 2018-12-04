@@ -1,8 +1,10 @@
 package com.teamrocket.majorizer.Admin;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +17,9 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
     private String adminAction = null;
     private String courseType = null;
     private TextView departmentSelectionTitle = null;
-    private TextView courseTitle = null;
-    private Course course = null;
-    private RadioGroup courseDepartment = null;
+    private RadioGroup courseDepartmentRadioGroup = null;
+    private RadioGroup majorOrMinorRadioGroup = null;
+    private GridLayout majorOrMinorGridLayout = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,9 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
 
         // Get TextViews from the UI.
         departmentSelectionTitle = findViewById(R.id.departmentSelectionTitle);
-        courseTitle = findViewById(R.id.courseTitle);
-        courseDepartment = findViewById(R.id.courseDepartment);
+        courseDepartmentRadioGroup = findViewById(R.id.courseDepartment);
+        majorOrMinorRadioGroup = findViewById(R.id.majorOrMinor);
+        majorOrMinorGridLayout = findViewById(R.id.majorOrMinorGridlayout);
 
         // Retrieve the Account object passed from the LoginManager.
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
@@ -38,39 +41,32 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
         // adminActionType is either grad or undergrad.
         courseType = (String) getIntent().getSerializableExtra(getText(R.string.CourseType).toString());
 
-        // Retrieve course object from previous activity (Search activity).
-        course = (Course) getIntent().getSerializableExtra(getText(R.string.Course).toString());
+        // Allow the user to select whether this course is for a major or minor.
+        if (courseType.equals(getText(R.string.Undergrad))) {
+            majorOrMinorGridLayout.setVisibility(View.VISIBLE);
+        }
 
         // Construct title dynamically.
-        courseTitle.setText(course.getCourseCode() + ": " + course.getCourseName());
-
-
         departmentSelectionTitle.setText(getPageTitle(courseType, adminAction));
     }
 
     public void changeCurriculum(final View view) {
-        String sucessMessage = "";
-
-        if (courseDepartment.getCheckedRadioButtonId() == -1) {
+        if (courseDepartmentRadioGroup.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, getText(R.string.MissingCheckBox), Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Retreive the selected second minor option.
-        int department = courseDepartment.getCheckedRadioButtonId();
-        String classCodePrefix = null;
+        // Retrieve the selected second minor option.
+        int department = courseDepartmentRadioGroup.getCheckedRadioButtonId();
         String departmentName = null;
         switch (department) {
             case R.id.radioDepartment_PH:
-                classCodePrefix = getText(R.string.PhysicsCode).toString();
                 departmentName = getText(R.string.Physics).toString();
                 break;
             case R.id.radioDepartment_MA:
-                classCodePrefix = getText(R.string.MathematicsCode).toString();
                 departmentName = getText(R.string.Mathematics).toString();
                 break;
             case R.id.radioDepartment_CS:
-                classCodePrefix = getText(R.string.ComputerScienceCode).toString();
                 departmentName = getText(R.string.ComputerScience).toString();
                 break;
             default:
@@ -79,24 +75,36 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
                 return;
         }
 
-        Toast.makeText(this, getSuccessMessage(courseType, adminAction, departmentName), Toast.LENGTH_LONG).show();
-        finish();
+
+        int majorOrMinor = majorOrMinorRadioGroup.getCheckedRadioButtonId();
+        String courseLevel = null;
+        if (majorOrMinorGridLayout.getVisibility() == View.VISIBLE) {
+            switch (majorOrMinor) {
+                case R.id.major:
+                    courseLevel = getText(R.string.UndergradMajors).toString();
+                    break;
+                case R.id.minor:
+                    courseLevel = getText(R.string.Minors).toString();
+                    break;
+                default:
+                    // Department was not selected. Alert the user and leave this method.
+                    Toast.makeText(this, getText(R.string.MissingCheckBox), Toast.LENGTH_LONG).show();
+                    return;
+            }
+        } else {
+            courseLevel = getText(R.string.GradMajors).toString();
+        }
+        // Send administrator to the next activity.
+        final Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
+
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
+        selectAccountActivity.putExtra(getText(R.string.AdminAction).toString(), adminAction);
+        selectAccountActivity.putExtra(getText(R.string.CourseType).toString(), courseType);
+        selectAccountActivity.putExtra(getText(R.string.CourseLevel).toString(), courseLevel);
+        selectAccountActivity.putExtra(getText(R.string.Department).toString(), departmentName);
+        view.getContext().startActivity(selectAccountActivity);
     }
 
-    private String getSuccessMessage(final String courseType, final String adminAction, final String departmentName) {
-        String pageTitle = "Successfully ";
-        if (adminAction.equals(getText(R.string.AddCourse))) {
-            pageTitle += "added this course to ";
-        } else {
-            pageTitle += "removed this course from ";
-        }
-        if (courseType.equals(getText(R.string.Undergrad))) {
-            pageTitle += "the Undergraduate department of ";
-        } else {
-            pageTitle += "the Graduate department of ";
-        }
-        return pageTitle + departmentName;
-    }
 
     private String getPageTitle(final String courseType, final String adminAction) {
         String pageTitle = "Enter ";
@@ -107,9 +115,9 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
         }
 
         if (adminAction.equals(getText(R.string.AddCourse))) {
-            pageTitle += "add this course to.";
+            pageTitle += "add courses to.";
         } else {
-            pageTitle += "remove this course from.";
+            pageTitle += "remove courses from.";
         }
         return pageTitle;
     }

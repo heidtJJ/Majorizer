@@ -16,6 +16,7 @@
     <string name="AddCourse">AddCourse</string>
     <string name="StudentType">StudentType</string>
     <string name="CourseType">CourseType</string>
+    <string name="CourseLevel">CourseLevel</string>
     <string name="RemoveCourse">RemoveCourse</string>
     <string name="Prerequisites">Prerequisites</string>
 
@@ -121,6 +122,7 @@
     <string name="InvalidNumberCredits">The entered number of course credits is invalid! Please revise your selections.</string>
     <string name="SuccessfulCourseAddition">Successfully added the course to our records!</string>
     <string name="CourseExists">This course already exists in our records!</string>
+    <string name="CourseDNE">We were not able to remove this course from the curriculum because it does not exist!</string>
 
 
 </resources>

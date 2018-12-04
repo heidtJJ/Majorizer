@@ -29,6 +29,7 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
     }
 
 
+    // User clicked the "Undergrad" button
     public void undergradSelection(final View view) {
         // Check if making change to master course list or a curriculum.
         if (adminActionType.equals(getText(R.string.ChangeMasterCourseList)) && adminAction.equals(getText(R.string.AddCourse).toString())) {
@@ -40,9 +41,9 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
             selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
             view.getContext().startActivity(selectAccountActivity);
 
-        } else if (adminActionType.equals(getText(R.string.ChangeCurriculum))) {
+        } else {
             // Change curriculum for undergraduate program.
-            final Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
+            final Intent selectAccountActivity = new Intent(view.getContext(), DepartmentSelectionActivity.class);
 
             // Send administrator to the next activity.
             selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
@@ -50,12 +51,10 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
             selectAccountActivity.putExtra(getText(R.string.CourseType).toString(), getText(R.string.Undergrad));
             view.getContext().startActivity(selectAccountActivity);
 
-        } else {
-
         }
-
     }
 
+    // User clicked the "Graduate" button
     public void graduateSelection(final View view) {
         // Check if making change to master course list or a curriculum.
         if (adminActionType.equals(getText(R.string.ChangeMasterCourseList))) {
@@ -66,6 +65,13 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
             view.getContext().startActivity(selectAccountActivity);
         } else {
             // Change curriculum for graduate program.
+            final Intent selectAccountActivity = new Intent(view.getContext(), DepartmentSelectionActivity.class);
+
+            // Send administrator to the next activity.
+            selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
+            selectAccountActivity.putExtra(getText(R.string.AdminAction).toString(), adminAction);
+            selectAccountActivity.putExtra(getText(R.string.CourseType).toString(), getText(R.string.Grad));
+            view.getContext().startActivity(selectAccountActivity);
         }
     }
 
