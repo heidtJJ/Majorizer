@@ -34,8 +34,8 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // Retrieve views from UI.
-        adviseeSearchView = findViewById(R.id.adviseeSearchView);
-        adviseeListView = findViewById(R.id.adviseesRecyclerView);
+        adviseeSearchView = findViewById(R.id.studentsSearchView);
+        adviseeListView = findViewById(R.id.studentsRecyclerView);
 
         adviseeSearchViewAdapter = new StudentSearchAdapter(this, advisor, studentsToSearch);
         adviseeListView.setAdapter(adviseeSearchViewAdapter);

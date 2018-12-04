@@ -29,7 +29,7 @@ public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAd
 
         AdviseeViewHolder(final View view) {
             super(view);
-            nameView = view.findViewById(R.id.adviseeNameView);
+            nameView = view.findViewById(R.id.objectNameView);
         }
     }
 
@@ -42,7 +42,7 @@ public class AdviseeRecycleAdapter extends RecyclerView.Adapter<AdviseeRecycleAd
     @NonNull
     @Override
     public AdviseeRecycleAdapter.AdviseeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.advisee_text_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.object_text_view, parent, false);
         return new AdviseeViewHolder(v);
     }
 

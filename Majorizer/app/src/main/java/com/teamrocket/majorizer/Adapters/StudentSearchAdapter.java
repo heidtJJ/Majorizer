@@ -94,9 +94,9 @@ public class StudentSearchAdapter extends BaseAdapter implements Filterable {
     public View getView(final int position, View convertView, ViewGroup parent) {
         AdviseeHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.advisee_search_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.object_search_item, parent, false);
             holder = new AdviseeHolder();
-            holder.nameView = convertView.findViewById(R.id.adviseeNameView);
+            holder.nameView = convertView.findViewById(R.id.objectNameView);
             convertView.setTag(holder);
         } else holder = (AdviseeHolder) convertView.getTag();
         holder.nameView.setText(studentsToSearch.get(position).getLastName() + ", " + studentsToSearch.get(position).getFirstName());

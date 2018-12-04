@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Select account type to create."
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/undergradCard"
+        app:layout_constraintBottom_toTopOf="@+id/coursesCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,14 +21,14 @@
         app:layout_constraintVertical_chainStyle="spread" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/undergradCard"
+        android:id="@+id/coursesCardView"
         android:layout_width="match_parent"
         android:layout_height="305dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="createUndergradStudent"
         app:cardCornerRadius="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/card2"
+        app:layout_constraintBottom_toTopOf="@+id/removeCourseCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card2"
+        android:id="@+id/removeCourseCard"
         android:layout_width="match_parent"
         android:layout_height="305dp"
         android:layout_marginStart="8dp"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/undergradCard">
+        app:layout_constraintTop_toBottomOf="@+id/coursesCardView">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

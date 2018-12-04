@@ -32,6 +32,7 @@ public class RequiredCourseListManager {
     int courseCount = 0, creditsCount = 0;
     Activity activity;
     FragmentManager fm;
+
     public RequiredCourseListManager(final Context context, final RecyclerView classesTakenRecyclerView,
                                      final Student student, final TextView coursesRemainingView,
                                      final TextView creditsRemainingView, final FragmentManager fm) {
@@ -66,6 +67,9 @@ public class RequiredCourseListManager {
     void populateClassesNeeded(final Lock mutexLock, final String level, final String curriculum,
                                final List<String> classesTakenList, final RecyclerView classesTakenRecyclerView,
                                final TextView coursesRemainingView, final TextView creditsRemainingView) {
+        final Context context = coursesRemainingView.getContext();
+        final String COURSE_NAME = context.getText(R.string.CourseName).toString();
+        final String CREDITS = context.getText(R.string.Credits).toString();
         // Make asynchronous query to Firebase database to fill classes needed in UI.
         FirebaseDatabase.getInstance().getReference("/" + level + "/" + curriculum).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -74,8 +78,8 @@ public class RequiredCourseListManager {
                 for (DataSnapshot course : courseList.getChildren()) {
                     // Pull information from database.
                     String courseCode = course.getKey();
-                    String courseName = course.child("Name").getValue().toString();
-                    Integer numCredits = Integer.valueOf(course.child("Credits").getValue().toString());
+                    String courseName = course.child(COURSE_NAME).getValue().toString();
+                    Integer numCredits = Integer.valueOf(course.child(CREDITS).getValue().toString());
 
                     // Add prerequisite information to each course.
                     Set<Course> preReqs = new HashSet<>();

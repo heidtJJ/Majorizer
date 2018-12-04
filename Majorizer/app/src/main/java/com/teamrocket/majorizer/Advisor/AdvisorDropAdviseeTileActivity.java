@@ -8,11 +8,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.teamrocket.majorizer.Adapters.DropAdviseeRecycleAdapter;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.Student.Student;
-import com.teamrocket.majorizer.Student.UndergradStudent;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class AdvisorDropAdviseeTileActivity extends AppCompatActivity {
     private Advisor advisor = null;
@@ -28,7 +23,7 @@ public class AdvisorDropAdviseeTileActivity extends AppCompatActivity {
 
 
         // Set all classes taken in the recycler view.
-        RecyclerView cRecyclerView = findViewById(R.id.adviseesRecyclerView);
+        RecyclerView cRecyclerView = findViewById(R.id.coursesRecyclerView);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(this);
         cRecyclerView.setLayoutManager(cLayoutManager);
 
