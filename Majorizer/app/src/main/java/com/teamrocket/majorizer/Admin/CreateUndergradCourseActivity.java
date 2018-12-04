@@ -24,7 +24,7 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_undergrad_course);
 
-        // Retreive the Account object passed from the LoginManager.
+        // Retreive the Account object passed from the previous activity.
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         courseNumberEditText = findViewById(R.id.courseNumberEditText);
@@ -34,7 +34,7 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
         majorMinorRadioGroup = findViewById(R.id.majorMinorRadioGroup);
     }
 
-    public void createNewGraduateCourse(final View view) {
+    public void createNewUndergradCourse(final View view) {
         String courseNumber = courseNumberEditText.getText().toString();
         String courseName = courseNameEditText.getText().toString();
         String numCredits = numCreditsEditText.getText().toString();
@@ -51,8 +51,8 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
             return;
         }
 
-        // Check that courseNumberString is a number between 0 and 999.
-        if (!Utility.isValidCourseNumber(courseNumber)) {
+        // Check that courseNumberString is a number between 1 and 499.
+        if (!Utility.isValidUndergradCourseNumber(courseNumber)) {
             Toast.makeText(this, getText(R.string.InvalidCourseNumber).toString(), Toast.LENGTH_LONG).show();
             return;
         }
@@ -105,6 +105,6 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
 
 
         // Input is valid. Proceed to add class to database.
-        administrator.addUndergradCourseToCurriculum(courseName, classCodePrefix + courseNumber, departmentString, numCredits, courseTypeString, this);
+        administrator.addCourseToCurriculum(courseName, classCodePrefix + courseNumber, departmentString, numCredits, courseTypeString, this);
     }
 }

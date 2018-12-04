@@ -109,11 +109,18 @@ public final class Utility {
     }
 
 
-    public static boolean isValidCourseNumber(final String courseNumber) {
+    public static boolean isValidUndergradCourseNumber(final String courseNumber) {
         if (!isNumber(courseNumber))
             return false;
         Integer courseNumInt = Integer.valueOf(courseNumber);
-        return courseNumInt > 0 && courseNumInt < 1000;
+        return courseNumInt > 0 && courseNumInt < 500;
+    }
+
+    public static boolean isValidGradCourseNumber(final String courseNumber) {
+        if (!isNumber(courseNumber))
+            return false;
+        Integer courseNumInt = Integer.valueOf(courseNumber);
+        return courseNumInt >= 500 && courseNumInt < 1000;
     }
 
     public static boolean isValidNumberCredits(final String numberOfCredits) {

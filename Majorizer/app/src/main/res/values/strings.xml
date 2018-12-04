@@ -54,6 +54,7 @@
     <string name="Department">Department</string>
     <string name="UndergradMajors">UndergradMajors</string>
     <string name="Minors">Minors</string>
+    <string name="GradMajors">GradMajors</string>
 
     <!-- Create Account Unlocking Strings -->
     <string name="NotLocked">The account which you entered was not locked.</string>
@@ -71,7 +72,8 @@
     <string name="PhysicsCode">PH</string>
     <string name="ComputerEngineering">Computer Engineering</string>
     <string name="PasswordRules">Passwords must have at least length 6, one lowercase letter, one uppercase letter, and one special character.</string>
-    <string name="CourseNumberRules">Course numbers must be 1-999.</string>
+    <string name="CourseNumberRulesUndergrad">Course numbers must be 1-499.</string>
+    <string name="CourseNumberRulesGrad">Course numbers must be 500-999.</string>
     <string name="CourseCreditsRules">Course credits must be 3-4.</string>
     <string name="UsernameRules">Usernames must have six lowercase letters.</string>
     <string name="SuccessfulAccountCreation">Account successfully created!</string>

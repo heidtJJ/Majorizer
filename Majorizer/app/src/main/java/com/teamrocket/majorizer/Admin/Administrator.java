@@ -68,7 +68,7 @@ public class Administrator extends Account {
 
     }
 
-    public void addUndergradCourseToCurriculum(final String courseName, final String courseCode, final String department, final String numCourseCredits, final String classType, final Context context) {
+    public void addCourseToCurriculum(final String courseName, final String courseCode, final String department, final String numCourseCredits, final String classType, final Context context) {
         final String MASTER_COURSE_LIST = context.getText(R.string.MasterCourseList).toString();
         final String CREDITS = context.getText(R.string.Credits).toString();
         final String COURSE_NAME = context.getText(R.string.CourseName).toString();

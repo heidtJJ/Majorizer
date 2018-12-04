@@ -26,6 +26,55 @@
                 android:textSize="23sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/CourseNumberRulesUndergrad"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:rowCount="1">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:paddingRight="10dp"
+                    android:text="Course Number: "
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/courseNumberEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/white"
+                    android:hint="1 - 499"
+                    android:inputType="number|textFilter"
+                    android:maxLength="3"
+                    android:padding="5dp"
+                    android:textSize="20sp" />
+
+            </GridLayout>
+
             <include
                 layout="@layout/starter_create_course"
                 android:layout_width="fill_parent"
@@ -46,54 +95,7 @@
                     android:layout_row="0"
                     android:layout_column="0"
                     android:paddingRight="10dp"
-                    android:text="@string/Department"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/courseDepartment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/radioDepartment_CS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ComputerScience" />
-
-                    <RadioButton
-                        android:id="@+id/radioDepartment_MA"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Mathematics" />
-
-                    <RadioButton
-                        android:id="@+id/radioDepartment_PH"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Physics" />
-                </RadioGroup>
-
-            </GridLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="12dp"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:rowCount="1">
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    android:paddingRight="10dp"
-                    android:text="@string/Department"
+                    android:text="Major or Minor:"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -127,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="bottom"
-                android:onClick="createNewGraduateCourse"
+                android:onClick="createNewUndergradCourse"
                 android:text="@string/CreateCourse"
                 android:textAlignment="center"
                 android:textSize="20sp"
