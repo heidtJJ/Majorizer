@@ -1,6 +1,8 @@
 package com.teamrocket.majorizer.Advisor;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,12 +10,20 @@ import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.teamrocket.majorizer.Adapters.StudentSearchAdapter;
 import com.teamrocket.majorizer.R;
 import com.teamrocket.majorizer.Student.Student;
+import com.teamrocket.majorizer.Student.UndergradStudent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdviserSearchStudentsTileActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -36,16 +46,54 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         // Retrieve views from UI.
         adviseeSearchView = findViewById(R.id.studentsSearchView);
         adviseeListView = findViewById(R.id.studentsRecyclerView);
-
-        adviseeSearchViewAdapter = new StudentSearchAdapter(this, advisor, studentsToSearch);
-        adviseeListView.setAdapter(adviseeSearchViewAdapter);
-        adviseeListView.setTextFilterEnabled(false);
-        adviseeListView.setDivider(null);
-        filter = adviseeSearchViewAdapter.getFilter();
-        filter.filter(null);
         setupSearchView();
 
-        advisor.getSearchableAccounts(studentsToSearch, adviseeSearchViewAdapter, this);
+        final Context context = this;
+        FirebaseDatabase.getInstance().getReference("/Accounts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap<String, String> accounts = new HashMap<>();
+                for (DataSnapshot acccount : dataSnapshot.getChildren()) {
+                    String name = "";
+                    for (DataSnapshot accountInfo : acccount.getChildren()) {
+                        if (accountInfo.getKey().equals("FirstName")) {
+                            name = (String) accountInfo.getValue();
+                        }
+                        else if (accountInfo.getKey().equals("LastName")) {
+                            name += " " + accountInfo.getValue();
+                        }
+                        else if (accountInfo.getKey().equals("Type")) {
+                            if (accountInfo.getValue().equals("undergrad")) {
+                                accounts.put(acccount.getKey(), name);
+                            }
+                        }
+                    }
+                }
+                ArrayList<Student> students = new ArrayList<>();
+                for (Map.Entry<String, String> entry : accounts.entrySet()) {
+                    UndergradStudent student = new UndergradStudent();
+                    student.setUserName(entry.getKey());
+                    student.setFirstName(entry.getValue().substring(0, entry.getValue().indexOf(" ")));
+                    student.setLastName(entry.getValue().substring(entry.getValue().indexOf(" ") + 1, entry.getValue().length()));
+                    students.add(student);
+                }
+                adviseeSearchViewAdapter = new StudentSearchAdapter(context, advisor, students);
+                adviseeListView.setAdapter(adviseeSearchViewAdapter);
+                adviseeListView.setTextFilterEnabled(false);
+                adviseeListView.setDivider(null);
+                filter = adviseeSearchViewAdapter.getFilter();
+                filter.filter(null);
+
+                advisor.getSearchableAccounts(studentsToSearch, adviseeSearchViewAdapter, context);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private void setupSearchView() {
