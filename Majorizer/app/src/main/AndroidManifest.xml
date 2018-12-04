@@ -35,18 +35,19 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Student.UndergradClassHistoryActivity" />
         <activity android:name=".Student.UndergradClassesNeededActivity" />
-        <activity android:name=".Admin.AddMasterCourseActivity" />
+        <activity android:name=".Admin.ChangeMasterCourseActivity" />
         <activity android:name=".Admin.SelectCourseTypeActivity" />
         <activity android:name=".Admin.RemoveCourseActivity" />
         <activity android:name=".Advisor.AdvisorMyAdviseesTileActivity" />
         <activity android:name=".Advisor.AdviserSearchStudentsTileActivity" />
         <activity android:name=".Advisor.AdvisorDropAdviseeTileActivity" />
         <activity android:name=".Student.UndergradCurrentClassesActivity" />
-        <activity android:name=".Admin.AdminSearchAccountActivity" />
         <activity android:name=".Advisor.StudentInfoActivity" />
         <activity android:name=".Admin.CreateGradCourseActivity" />
         <activity android:name=".Admin.CreateUndergradCourseActivity" />
-        <activity android:name=".Student.UndergradSwitchMajorActivity"></activity>
+        <activity android:name=".Student.UndergradSwitchMajorActivity" />
+        <activity android:name=".Admin.ChangeCurriculumActivity"></activity>
+        <activity android:name=".Admin.SelectCourseActionActivity"></activity>
     </application>
 
 </manifest>

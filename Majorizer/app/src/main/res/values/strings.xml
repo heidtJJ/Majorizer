@@ -8,6 +8,14 @@
     <string name="RemoveNotification">Remove Notification</string>
     <string name="AccountObject">account</string>
     <string name="StudentObject">student</string>
+    <string name="AdminActionType">AdminActionType</string>
+    <string name="AdminAction">AdminAction</string>
+    <string name="ChangeCurriculum">ChangeCurriculum</string>
+    <string name="ChangeMasterCourseList">ChangeMasterCourseList</string>
+    <string name="AddCourse">AddCourse</string>
+    <string name="StudentType">StudentType</string>
+    <string name="RemoveCourse">RemoveCourse</string>
+
 
     <!-- Login Activity Strings -->
     <string name="Login">LOGIN</string>
@@ -21,6 +29,7 @@
     <!-- Database Keys -->
     <string name="AccountType">Account Type</string>
     <string name="MasterCourseList">MasterCourseList</string>
+    <string name="Curriculum">Curriculum</string>
     <string name="Course_History">Course History</string>
     <string name="Courses_Needed">Courses Needed</string>
     <string name="Current_Courses">Current Courses</string>

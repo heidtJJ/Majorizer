@@ -8,8 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.teamrocket.majorizer.Adapters.SectionsPageAdapter;
-import com.teamrocket.majorizer.Admin.ChangeCurriculumActivity;
-import com.teamrocket.majorizer.Admin.AddMasterCourseActivity;
+import com.teamrocket.majorizer.Admin.SelectCourseActionActivity;
 import com.teamrocket.majorizer.Admin.SelectAccountTypeActivity;
 import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
 import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.container);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
@@ -101,16 +100,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeCurriculum(final View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
-        // Pass this Account object to the main activity.
+        Intent selectAccountActivity = new Intent(view.getContext(), SelectCourseActionActivity.class);
+        // Send administrator to the next activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
+
+        selectAccountActivity.putExtra(getText(R.string.AdminActionType).toString(), getText(R.string.ChangeCurriculum).toString());
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void addRemoveCourses(View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), AddMasterCourseActivity.class);
-        // Pass this Account object to the main activity.
+    public void changeMasterCourseList(View view) {
+        Intent selectAccountActivity = new Intent(view.getContext(), SelectCourseActionActivity.class);
+        // Send administrator to the next activity.
         selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
+
+        selectAccountActivity.putExtra(getText(R.string.AdminActionType).toString(), getText(R.string.ChangeMasterCourseList).toString());
         view.getContext().startActivity(selectAccountActivity);
     }
 }

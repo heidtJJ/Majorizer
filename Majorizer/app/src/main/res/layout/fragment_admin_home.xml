@@ -122,7 +122,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
-                    android:text="Edit curriculum"
+                    android:text="Change curriculum"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="2"
-            android:onClick="addRemoveCourses"
+            android:onClick="changeMasterCourseList"
             app:cardCornerRadius="7dp">
 
             <LinearLayout

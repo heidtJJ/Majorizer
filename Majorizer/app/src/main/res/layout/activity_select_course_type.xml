@@ -13,16 +13,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:id="@+id/activityHeader"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:layout_weight="1.0"
-            android:text="Select course type to create."
+            android:text="Select course type to edit."
             android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textSize="25sp" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/undergradCard"
@@ -30,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="2"
-            android:onClick="createUndergradCourse"
+            android:onClick="undergradSelection"
             app:cardCornerRadius="7dp">
 
             <LinearLayout
@@ -55,7 +52,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
-                    android:text="Undergrad"
+                    android:text="Undergraduate"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
@@ -69,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="2"
-            android:onClick="createGradCourse"
+            android:onClick="graduateSelection"
             app:cardCornerRadius="7dp">
 
             <LinearLayout
@@ -94,7 +91,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
-                    android:text="Grad"
+                    android:text="Graduate"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 

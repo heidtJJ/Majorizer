@@ -1,35 +1,31 @@
 package com.teamrocket.majorizer.Admin;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.os.Bundle;
 
 import com.teamrocket.majorizer.R;
 
 public class ChangeCurriculumActivity extends AppCompatActivity {
-    Administrator administrator = null;
+    private Administrator administrator = null;
+    private String adminAction = null;
+    private String adminActionType = null;
+    private String studentType = null;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_curriculum_course_type);
+        setContentView(R.layout.activity_change_undergrad_curriculum);
 
         // Retreive the Account object passed from the LoginManager.
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
-    }
 
-    public void addCourseToCurriculum(final View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), SelectCourseTypeActivity.class);
-        // Pass this Account object to the main activity.
-        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
-        view.getContext().startActivity(selectAccountActivity);
-    }
+        // adminAction is either add course or drop course.
+        adminAction = (String) getIntent().getSerializableExtra(getText(R.string.AdminAction).toString());
 
-    public void removeCourseFromCurriculum(final View view) {
-        Intent selectAccountActivity = new Intent(view.getContext(), RemoveCourseActivity.class);
-        // Pass this Account object to the main activity.
-        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
-        view.getContext().startActivity(selectAccountActivity);
+        // adminActionType is either Curriculum or MasterCourseList.
+        adminActionType = (String) getIntent().getSerializableExtra(getText(R.string.AdminActionType).toString());
+
+        // adminActionType is either grad or undergrad.
+        studentType = (String) getIntent().getSerializableExtra(getText(R.string.StudentType).toString());
     }
 }
