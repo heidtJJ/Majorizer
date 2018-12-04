@@ -14,4 +14,5 @@
     <color name="offWhite">#e7e7e7</color>
     <color name="trans">#000000ff</color>
     <color name="circleYellow">#FFC107</color>
+    <color name="colorDull">#e9f1ff</color>
 </resources>

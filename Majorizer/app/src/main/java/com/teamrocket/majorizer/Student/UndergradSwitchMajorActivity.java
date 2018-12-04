@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.teamrocket.majorizer.Adapters.MajorRecycleAdapter;
+import com.teamrocket.majorizer.Adapters.MRecycleAdapter;
 import com.teamrocket.majorizer.R;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class UndergradSwitchMajorActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         final UndergradStudent student = (UndergradStudent) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
-        final TextView major1View = findViewById(R.id.major1View);
+        final TextView major1View = findViewById(R.id.majorView);
 
         final ArrayList<String> currentMajors = new ArrayList<>();
         currentMajors.add(student.getMajor1());
@@ -50,8 +49,46 @@ public class UndergradSwitchMajorActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> majorSnapshotChildren = majorSnapshot.getChildren();
                 ArrayList<String> majors = new ArrayList<>();
                 for (DataSnapshot major : majorSnapshotChildren) majors.add(major.getKey());
-                final RecyclerView.Adapter classAdapter = new MajorRecycleAdapter(majors, context, currentMajors);
+                final RecyclerView.Adapter classAdapter = new MRecycleAdapter(majors, context, currentMajors, "Major", student);
                 cRecyclerView.setAdapter(classAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        final TextView minorView = findViewById(R.id.minorView);
+
+        final ArrayList<String> currentMinors = new ArrayList<>();
+        String minorText = "";
+        if (student.getMinor1() != null) {
+            currentMinors.add(student.getMinor1());
+            minorText = "Current minor: " + currentMinors.get(0);
+        }
+        else minorText = "You have no minors.";
+        System.out.println("M1: " + student.getMinor1());
+        System.out.println("M2: " + student.getMinor2());
+        if (student.getMinor2() != null) {
+            currentMinors.add(student.getMinor2());
+            minorText = "Current minor:\n" + currentMinors.get(0) + "\n" + currentMinors.get(1);
+        }
+        minorView.setText(minorText);
+
+        final RecyclerView cRecyclerViewM = findViewById(R.id.minorRecycleView);
+        final RecyclerView.LayoutManager cLayoutManagerM = new LinearLayoutManager(this);
+        cRecyclerViewM.setLayoutManager(cLayoutManagerM);
+
+        FirebaseDatabase.getInstance().getReference("/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DataSnapshot minorSnapshot = dataSnapshot.child("Minors");
+                Iterable<DataSnapshot> minorSnapshotChildren = minorSnapshot.getChildren();
+                ArrayList<String> minors = new ArrayList<>();
+                for (DataSnapshot minor : minorSnapshotChildren) minors.add(minor.getKey());
+                final RecyclerView.Adapter classAdapter = new MRecycleAdapter(minors, context, currentMinors, "Minor", student);
+                cRecyclerViewM.setAdapter(classAdapter);
             }
 
             @Override
