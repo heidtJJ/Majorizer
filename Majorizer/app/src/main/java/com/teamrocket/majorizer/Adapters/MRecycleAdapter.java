@@ -2,6 +2,7 @@ package com.teamrocket.majorizer.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -79,6 +80,10 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                                         ref.child("Minor1").setValue(m);
                                         student.setMinor1(m);
                                     }
+                                    Toast.makeText(context, "Please sign in to see major/minor changes.", Toast.LENGTH_SHORT).show();
+                                    Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName() );
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -108,6 +113,10 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                                         student.setMinor2(m);
                                     }
                                 }
+                                Toast.makeText(context, "Please sign in to see major/minor changes.", Toast.LENGTH_SHORT).show();
+                                Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName() );
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                context.startActivity(i);
                             }
                         });
                     }
@@ -121,22 +130,34 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    if (currentMs.size() != 1 && mode.equals("Major")) {
-                                        DatabaseReference ref = database.getReference("Accounts/" + student.getUserName());
-                                        ref.child("Major2").setValue("NULL");
+                                    if (mode.equals("Major")) {
+                                        if (currentMs.size() != 1) {
+                                            DatabaseReference ref = database.getReference("Accounts/" + student.getUserName());
+                                            if (student.getMajor2().equals(m)) ref.child("Major2").setValue("NULL");
+                                            else {
+                                                ref.child("Major1").setValue(student.getMajor2());
+                                                ref.child("Major2").setValue("NULL");
+                                            }
+                                        }
+                                        else Toast.makeText(context, "ERROR: Must have at least one major!", Toast.LENGTH_SHORT).show();
                                     }
                                     else if (mode.equals("Minor")) {
-                                        final DatabaseReference ref = database.getReference("Accounts/" + student.getUserName());
-                                        if (student.getMinor2() == null) ref.setValue("Minor1", "NULL");
+                                        DatabaseReference ref = database.getReference("Accounts/" + student.getUserName());
+                                        if (currentMs.size() == 1) ref.child("Minor1").setValue("NULL");
                                         else {
                                             if (student.getMinor1().equals(m)) {
-                                                ref.setValue("Minor1", student.getMinor2());
-                                                ref.setValue("Minor2", "NULL");
-                                            } else {
-                                                ref.setValue("Minor2", "NULL");
+                                                ref.child("Minor1").setValue(student.getMinor2());
+                                                ref.child("Minor2").setValue("NULL");
+                                            }
+                                            else {
+                                                ref.child("Minor2").setValue("NULL");
                                             }
                                         }
                                     }
+                                    Toast.makeText(context, "Please sign in to see major/minor changes.", Toast.LENGTH_SHORT).show();
+                                    Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName() );
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

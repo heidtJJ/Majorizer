@@ -72,7 +72,7 @@ public class UndergradSwitchMajorActivity extends AppCompatActivity {
         System.out.println("M2: " + student.getMinor2());
         if (student.getMinor2() != null) {
             currentMinors.add(student.getMinor2());
-            minorText = "Current minor:\n" + currentMinors.get(0) + "\n" + currentMinors.get(1);
+            minorText = "Current minors:\n" + currentMinors.get(0) + "\n" + currentMinors.get(1);
         }
         minorView.setText(minorText);
 
