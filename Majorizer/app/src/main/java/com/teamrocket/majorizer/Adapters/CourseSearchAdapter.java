@@ -1,8 +1,7 @@
 package com.teamrocket.majorizer.Adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.teamrocket.majorizer.Admin.Administrator;
-import com.teamrocket.majorizer.Advisor.Advisor;
+import com.teamrocket.majorizer.Admin.DepartmentSelectionActivity;
 import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.Student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +24,22 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
     private List<Course> orig = null;
     private Administrator administrator = null;
 
-    public CourseSearchAdapter(final Context context, final Administrator administrator, final List<Course> coursesToSearch) {
+    private String courseLevel = null;
+    private String adminAction = null;
+
+    public CourseSearchAdapter(final Context context, final Administrator administrator,
+                               final List<Course> coursesToSearch, final String adminActionType,
+                               final String adminAction) {
         super();
         this.context = context;
         this.coursesToSearch = coursesToSearch;
         this.administrator = administrator;
+        this.courseLevel = adminActionType;
+        this.adminAction = adminAction;
     }
 
-    public class AdviseeHolder {
-        TextView nameView = null;
+    public class CourseHolder {
+        private TextView nameView = null;
     }
 
     public Filter getFilter() {
@@ -67,10 +71,6 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
         };
     }
 
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }
-
     @Override
     public int getCount() {
         int size;
@@ -93,47 +93,31 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        AdviseeHolder holder;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        CourseHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.advisee_search_item, parent, false);
-            holder = new AdviseeHolder();
-            holder.nameView = convertView.findViewById(R.id.adviseeNameView);
+            convertView = LayoutInflater.from(context).inflate(R.layout.object_search_item, parent, false);
+            holder = new CourseHolder();
+            holder.nameView = convertView.findViewById(R.id.objectNameView);
             convertView.setTag(holder);
-        } else holder = (AdviseeHolder) convertView.getTag();
-        holder.nameView.setText(coursesToSearch.get(position).getCourseName() + ", " + coursesToSearch.get(position).getCourseCode());
+        } else holder = (CourseHolder) convertView.getTag();
+        holder.nameView.setText(coursesToSearch.get(position).getCourseCode() + ": " + coursesToSearch.get(position).getCourseName());
         holder.nameView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setTitle("Add Student");
-                alertDialogBuilder
-                        .setMessage(String.format("Are you sure you want to add %s to the computer science major?", coursesToSearch.get(position).getCourseName() + ", " + coursesToSearch.get(position).getCourseCode()))
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                /*
+            public void onClick(View view) {
+                Course currentCourse = coursesToSearch.get(position);
 
-                                // Create the advisor-advisee link between the two accounts.
-                                administrator.addStudentToAdvisees(coursesToSearch.get(position), context);
+                // Change curriculum for undergraduate program.
+                final Intent selectAccountActivity = new Intent(context, DepartmentSelectionActivity.class);
 
-                                // Remove the searchable account from memory.
-                                coursesToSearch.remove(position);
-                                notifyDataSetChanged();
-                                */
+                // Send administrator to the next activity.
+                selectAccountActivity.putExtra(context.getText(R.string.AccountObject).toString(), administrator);
+                selectAccountActivity.putExtra(context.getText(R.string.AdminAction).toString(), adminAction);
+                selectAccountActivity.putExtra(context.getText(R.string.CourseType).toString(), courseLevel);
+                selectAccountActivity.putExtra(context.getText(R.string.Course).toString(), currentCourse);
+                view.getContext().startActivity(selectAccountActivity);
 
-                                // Notify the user of successful completion.
-                                Toast.makeText(context, "Successfully added this course to the major", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+
             }
         });
         return convertView;

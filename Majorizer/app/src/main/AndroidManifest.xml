@@ -46,8 +46,9 @@
         <activity android:name=".Admin.CreateGradCourseActivity" />
         <activity android:name=".Admin.CreateUndergradCourseActivity" />
         <activity android:name=".Student.UndergradSwitchMajorActivity" />
-        <activity android:name=".Admin.ChangeCurriculumActivity"></activity>
-        <activity android:name=".Admin.SelectCourseActionActivity"></activity>
+        <activity android:name=".Admin.ChangeCurriculumActivity" />
+        <activity android:name=".Admin.SelectCourseActionActivity" />
+        <activity android:name=".Admin.DepartmentSelectionActivity"></activity>
     </application>
 
 </manifest>

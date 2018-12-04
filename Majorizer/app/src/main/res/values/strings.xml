@@ -10,10 +10,12 @@
     <string name="StudentObject">student</string>
     <string name="AdminActionType">AdminActionType</string>
     <string name="AdminAction">AdminAction</string>
+    <string name="Course">Course</string>
     <string name="ChangeCurriculum">ChangeCurriculum</string>
     <string name="ChangeMasterCourseList">ChangeMasterCourseList</string>
     <string name="AddCourse">AddCourse</string>
     <string name="StudentType">StudentType</string>
+    <string name="CourseType">CourseType</string>
     <string name="RemoveCourse">RemoveCourse</string>
     <string name="Prerequisites">Prerequisites</string>
 

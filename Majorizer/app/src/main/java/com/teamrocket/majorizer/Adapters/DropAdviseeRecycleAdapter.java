@@ -3,7 +3,6 @@ package com.teamrocket.majorizer.Adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,7 +28,7 @@ public class DropAdviseeRecycleAdapter extends RecyclerView.Adapter<DropAdviseeR
 
         DropAdviseeViewHolder(final View view) {
             super(view);
-            nameView = view.findViewById(R.id.adviseeNameView);
+            nameView = view.findViewById(R.id.objectNameView);
         }
     }
 
@@ -42,7 +41,7 @@ public class DropAdviseeRecycleAdapter extends RecyclerView.Adapter<DropAdviseeR
     @NonNull
     @Override
     public DropAdviseeRecycleAdapter.DropAdviseeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.advisee_text_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.object_text_view, parent, false);
         return new DropAdviseeViewHolder(v);
     }
 

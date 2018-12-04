@@ -1,40 +1,30 @@
 package com.teamrocket.majorizer.Admin;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.RelativeSizeSpan;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.teamrocket.majorizer.Adapters.CourseRecycleAdapter;
 import com.teamrocket.majorizer.Adapters.CourseSearchAdapter;
-import com.teamrocket.majorizer.Adapters.StudentSearchAdapter;
 import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
-import com.teamrocket.majorizer.Student.Student;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.locks.Lock;
 
 public class ChangeCurriculumActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     // Data objects from previous activity.
     private Administrator administrator = null;
     private String adminAction = null;
-    private String adminActionType = null;
-    private String studentType = null;
+    private String courseType = null;
 
     // Views in UI
     private SearchView courseSearchView = null;
@@ -48,26 +38,25 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_curriculum);
 
-        // Populate the coursesToSearch list with the master course list.
-        populateCoursesToSearch();
-
         // Retrieve the Account object passed from the LoginManager.
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
         // adminAction is either add course or drop course.
         adminAction = (String) getIntent().getSerializableExtra(getText(R.string.AdminAction).toString());
 
-        // adminActionType is either Curriculum or MasterCourseList.
-        adminActionType = (String) getIntent().getSerializableExtra(getText(R.string.AdminActionType).toString());
-
         // adminActionType is either grad or undergrad.
-        studentType = (String) getIntent().getSerializableExtra(getText(R.string.StudentType).toString());
+        courseType = (String) getIntent().getSerializableExtra(getText(R.string.CourseType).toString());
+
+        // Create a search-view adapter object for searching through master course list.
+        courseSearchViewAdapter = new CourseSearchAdapter(this, administrator, coursesToSearch, courseType, adminAction);
+
+        // Populate the coursesToSearch list with the master course list.
+        populateCoursesToSearch(courseSearchViewAdapter);
 
         // Retrieve views from UI.
         courseSearchView = findViewById(R.id.coursesSearchView);
         courseListView = findViewById(R.id.coursesRecyclerView);
 
-        courseSearchViewAdapter = new CourseSearchAdapter(this, administrator, coursesToSearch);
         courseListView.setAdapter(courseSearchViewAdapter);
         courseListView.setTextFilterEnabled(false);
         courseListView.setDivider(null);
@@ -76,7 +65,7 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
         setupSearchView();
     }
 
-    private void populateCoursesToSearch() {
+    private void populateCoursesToSearch(final CourseSearchAdapter courseSearchAdapter) {
         final String COURSE_NAME = getText(R.string.CourseName).toString();
         final String CREDITS = getText(R.string.Credits).toString();
         final String PRE_REQUISITES = getText(R.string.Prerequisites).toString();
@@ -100,8 +89,8 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
                     }
 
                     coursesToSearch.add(new Course(courseName, courseCode, numCredits, preReqs));
+                    courseSearchAdapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override

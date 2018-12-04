@@ -40,18 +40,16 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
             selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
             view.getContext().startActivity(selectAccountActivity);
 
-        } else if (adminActionType.equals(getText(R.string.ChangeCurriculum)) && adminAction.equals(getText(R.string.AddCourse).toString())) {
-
+        } else if (adminActionType.equals(getText(R.string.ChangeCurriculum))) {
             // Change curriculum for undergraduate program.
             final Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
 
             // Send administrator to the next activity.
             selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
             selectAccountActivity.putExtra(getText(R.string.AdminAction).toString(), adminAction);
-            selectAccountActivity.putExtra(getText(R.string.AdminAction).toString(), adminActionType);
-            selectAccountActivity.putExtra(getText(R.string.StudentType).toString(), getText(R.string.Undergrad));
+            selectAccountActivity.putExtra(getText(R.string.CourseType).toString(), getText(R.string.Undergrad));
             view.getContext().startActivity(selectAccountActivity);
-            
+
         } else {
 
         }
@@ -60,7 +58,7 @@ public class SelectCourseTypeActivity extends AppCompatActivity {
 
     public void graduateSelection(final View view) {
         // Check if making change to master course list or a curriculum.
-        if (adminActionType.equals(getText(R.string.ChangeMasterCourseList)) && adminAction.equals(getText(R.string.AddCourse).toString())) {
+        if (adminActionType.equals(getText(R.string.ChangeMasterCourseList))) {
             // Go to next activity to add a graduate course to master course list.
             final Intent selectAccountActivity = new Intent(view.getContext(), CreateGradCourseActivity.class);
             // Send administrator to the next activity.
