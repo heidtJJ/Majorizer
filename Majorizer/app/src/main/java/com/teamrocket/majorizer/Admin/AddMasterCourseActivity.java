@@ -1,19 +1,19 @@
 package com.teamrocket.majorizer.Admin;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 
 import com.teamrocket.majorizer.R;
 
-public class ChangeCurriculumActivity extends AppCompatActivity {
+public class AddMasterCourseActivity extends AppCompatActivity {
     Administrator administrator = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_curriculum_course_type);
+        setContentView(R.layout.activity_choose_master_course_type);
 
         // Retreive the Account object passed from the LoginManager.
         administrator = (Administrator) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());

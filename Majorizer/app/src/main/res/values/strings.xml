@@ -108,6 +108,7 @@
     <string name="InvalidCourseNumber">The entered course number is invalid! Please revise your selections.</string>
     <string name="InvalidNumberCredits">The entered number of course credits is invalid! Please revise your selections.</string>
     <string name="SuccessfulCourseAddition">Successfully added the course to our records!</string>
+    <string name="CourseExists">This course already exists in our records!</string>
 
 
 </resources>

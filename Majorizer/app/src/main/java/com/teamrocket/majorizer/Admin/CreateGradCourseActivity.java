@@ -64,19 +64,15 @@ public class CreateGradCourseActivity extends AppCompatActivity {
         // Retreive the selected second minor option.
         int department = departmentRadioGroup.getCheckedRadioButtonId();
         String classCodePrefix = null;
-        String departmentString = null;
         switch (department) {
             case R.id.radioDepartment_PH:
                 classCodePrefix = getText(R.string.PhysicsCode).toString();
-                departmentString = getText(R.string.Physics).toString();
                 break;
             case R.id.radioDepartment_MA:
                 classCodePrefix = getText(R.string.MathematicsCode).toString();
-                departmentString = getText(R.string.Mathematics).toString();
                 break;
             case R.id.radioDepartment_CS:
                 classCodePrefix = getText(R.string.ComputerScienceCode).toString();
-                departmentString = getText(R.string.ComputerScience).toString();
                 break;
             default:
                 // Department was not selected. Alert the user and leave this method.
@@ -84,12 +80,7 @@ public class CreateGradCourseActivity extends AppCompatActivity {
                 return;
         }
 
-        // Determine whether course is a major or a minor.
-        String courseTypeString = getText(R.string.GradMajors).toString();
-
-
         // Input is valid. Proceed to add class to database.
-        administrator.addCourseToCurriculum(courseName, classCodePrefix + courseNumber, departmentString, numCredits, courseTypeString, this);
-
+        administrator.addCourseToMasterList(courseName, classCodePrefix + courseNumber, numCredits, this);
     }
 }

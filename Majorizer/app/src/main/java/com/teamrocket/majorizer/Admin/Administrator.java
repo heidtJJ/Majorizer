@@ -68,7 +68,7 @@ public class Administrator extends Account {
 
     }
 
-    public void addCourseToCurriculum(final String courseName, final String courseCode, final String department, final String numCourseCredits, final String classType, final Context context) {
+    public void addCourseToMasterList(final String courseName, final String courseCode, final String numCourseCredits, final Context context) {
         final String MASTER_COURSE_LIST = context.getText(R.string.MasterCourseList).toString();
         final String CREDITS = context.getText(R.string.Credits).toString();
         final String COURSE_NAME = context.getText(R.string.CourseName).toString();
@@ -78,29 +78,14 @@ public class Administrator extends Account {
         FirebaseDatabase.getInstance().getReference(masterCourseListURL).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    Toast.makeText(context, context.getText(R.string.CourseExists).toString(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 dataSnapshot.child(CREDITS).getRef().setValue(numCourseCredits);
                 dataSnapshot.child(COURSE_NAME).getRef().setValue(courseName);
-            }
-
-            @Override
-            public void onCancelled(final DatabaseError databaseError) {
-                // Database query was not successful.
-                Toast.makeText(context, context.getText(R.string.TryAgainLater), Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        String curriculumURL = "/" + classType + "/" + department + "/" + courseCode;
-        // Make query to database to add new course to MasterCourseList.
-        FirebaseDatabase.getInstance().getReference(curriculumURL).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                dataSnapshot.child(CREDITS).getRef().setValue(numCourseCredits);
-                dataSnapshot.child(COURSE_NAME).getRef().setValue(courseName);
-
-                // Notify the user that the changes were made. Note, this function is asynchronous.
                 Toast.makeText(context, context.getText(R.string.SuccessfulCourseAddition).toString(), Toast.LENGTH_LONG).show();
-
             }
 
             @Override

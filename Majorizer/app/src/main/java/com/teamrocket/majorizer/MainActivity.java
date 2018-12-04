@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.teamrocket.majorizer.Adapters.SectionsPageAdapter;
 import com.teamrocket.majorizer.Admin.ChangeCurriculumActivity;
+import com.teamrocket.majorizer.Admin.AddMasterCourseActivity;
 import com.teamrocket.majorizer.Admin.SelectAccountTypeActivity;
 import com.teamrocket.majorizer.Admin.UnlockAccountActivity;
 import com.teamrocket.majorizer.Advisor.AdvisorHomeFragment;
@@ -106,7 +107,10 @@ public class MainActivity extends AppCompatActivity {
         view.getContext().startActivity(selectAccountActivity);
     }
 
-    public void viewAcademicProgress(final View view) {
-
+    public void addRemoveCourses(View view) {
+        Intent selectAccountActivity = new Intent(view.getContext(), AddMasterCourseActivity.class);
+        // Pass this Account object to the main activity.
+        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), account);
+        view.getContext().startActivity(selectAccountActivity);
     }
 }
