@@ -13,9 +13,13 @@ import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
 
 public class DepartmentSelectionActivity extends AppCompatActivity {
+    // Objects from previous activity.
     private Administrator administrator = null;
     private String adminAction = null;
     private String courseType = null;
+    private String adminActionType = null;
+
+    // UI elements
     private TextView departmentSelectionTitle = null;
     private RadioGroup courseDepartmentRadioGroup = null;
     private RadioGroup majorOrMinorRadioGroup = null;
@@ -37,6 +41,9 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
 
         // adminAction is either add course or drop course.
         adminAction = (String) getIntent().getSerializableExtra(getText(R.string.AdminAction).toString());
+
+        // adminActionType is either MasterCourseList or Curriculum
+        adminActionType = (String) getIntent().getSerializableExtra(getText(R.string.AdminActionType).toString());
 
         // adminActionType is either grad or undergrad.
         courseType = (String) getIntent().getSerializableExtra(getText(R.string.CourseType).toString());
@@ -91,18 +98,19 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
                     Toast.makeText(this, getText(R.string.MissingCheckBox), Toast.LENGTH_LONG).show();
                     return;
             }
-        } else {
+        } else
             courseLevel = getText(R.string.GradMajors).toString();
-        }
-        // Send administrator to the next activity.
-        final Intent selectAccountActivity = new Intent(view.getContext(), ChangeCurriculumActivity.class);
 
-        selectAccountActivity.putExtra(getText(R.string.AccountObject).toString(), administrator);
-        selectAccountActivity.putExtra(getText(R.string.AdminAction).toString(), adminAction);
-        selectAccountActivity.putExtra(getText(R.string.CourseType).toString(), courseType);
-        selectAccountActivity.putExtra(getText(R.string.CourseLevel).toString(), courseLevel);
-        selectAccountActivity.putExtra(getText(R.string.Department).toString(), departmentName);
-        view.getContext().startActivity(selectAccountActivity);
+        // Send administrator to the next activity.
+        final Intent changeCurriculumIntent = new Intent(view.getContext(), ChangeCurriculumActivity.class);
+
+        changeCurriculumIntent.putExtra(getText(R.string.AccountObject).toString(), administrator);
+        changeCurriculumIntent.putExtra(getText(R.string.AdminAction).toString(), adminAction);
+        changeCurriculumIntent.putExtra(getText(R.string.AdminActionType).toString(), adminActionType);
+        changeCurriculumIntent.putExtra(getText(R.string.CourseType).toString(), courseType);
+        changeCurriculumIntent.putExtra(getText(R.string.CourseLevel).toString(), courseLevel);
+        changeCurriculumIntent.putExtra(getText(R.string.Department).toString(), departmentName);
+        view.getContext().startActivity(changeCurriculumIntent);
     }
 
 

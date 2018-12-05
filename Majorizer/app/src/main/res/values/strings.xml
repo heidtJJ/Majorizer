@@ -33,6 +33,7 @@
     <!-- Database Keys -->
     <string name="AccountType">Account Type</string>
     <string name="MasterCourseList">MasterCourseList</string>
+    <string name="MasterCourseListURL">/MasterCourseList</string>
     <string name="Curriculum">Curriculum</string>
     <string name="Course_History">Course History</string>
     <string name="Courses_Needed">Courses Needed</string>
@@ -122,7 +123,7 @@
     <string name="InvalidNumberCredits">The entered number of course credits is invalid! Please revise your selections.</string>
     <string name="SuccessfulCourseAddition">Successfully added the course to our records!</string>
     <string name="CourseExists">This course already exists in our records!</string>
-    <string name="CourseDNE">We were not able to remove this course from the curriculum because it does not exist!</string>
+    <string name="CourseDNE">We were not able to remove this course because it does not exist! Please try another course.</string>
 
 
 </resources>

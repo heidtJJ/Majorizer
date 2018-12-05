@@ -23,6 +23,9 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
     private List<Course> coursesToSearch = null;
     private List<Course> orig = null;
     private Administrator administrator = null;
+    private final String ADD = "Add";
+    private final String REMOVE = "Remove";
+
 
     // Either Grad or Undergrad
     private String courseType = null;
@@ -46,8 +49,8 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
         this.administrator = administrator;
         this.courseType = courseType;
         this.adminAction = adminAction;
-        this.departmentName = departmentName;
         this.courseLevel = courseLevel;
+        this.departmentName = departmentName;
     }
 
     public class CourseHolder {
@@ -106,6 +109,8 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
+        // Get the course object that was selected.
+        final CourseSearchAdapter courseSearchAdapter = this;
         final Course courseSelected = coursesToSearch.get(position);
         CourseSearchAdapter.CourseHolder holder;
         if (convertView == null) {
@@ -118,34 +123,52 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
         holder.nameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Construct a string for adding or removing a course.
                 String addOrRemove = null;
                 if (adminAction.equals(context.getText(R.string.AddCourse)))
-                    addOrRemove = "add";
+                    addOrRemove = ADD.toLowerCase();
                 else
-                    addOrRemove = "remove";
+                    addOrRemove = REMOVE.toLowerCase();
 
-                String areYouSure = null;
-                if (courseType.equals(context.getText(R.string.Undergrad))) {
-                    areYouSure = String.format("Are you sure that you want to %s this class to the %s ", addOrRemove, courseType);
-                    if (courseLevel.equals(context.getText(R.string.Major)))
-                        areYouSure += "Major of " + departmentName;
-                    else
-                        areYouSure += "Minor of " + departmentName;
-                } else
-                    areYouSure = String.format("Are you sure that you want to %s this class to the Graduate department of %s?", addOrRemove, departmentName);
-
-
+                // Create the "Are you sure that you want to ..." message.
+                String areYouSure = "Are you sure that you want to ";
+                if (courseType != null) {
+                    if (courseType.equals(context.getText(R.string.Undergrad))) {
+                        areYouSure = String.format("%s this class to the %s ", addOrRemove, courseType);
+                        if (courseLevel.equals(context.getText(R.string.Major)))
+                            areYouSure += "Major of " + departmentName;
+                        else
+                            areYouSure += "Minor of " + departmentName;
+                    } else
+                        areYouSure = String.format("%s this class to the Graduate department of %s?", addOrRemove, departmentName);
+                } else {
+                    // The courseType variable is null and the user must be removing a course from the master course list.
+                    areYouSure = "Remove this class from the Master Course List?";
+                }
+                // Notify the user that they can validate or cancel their choice.
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setTitle("Add Course");
+                alertDialogBuilder.setTitle((addOrRemove.equals(ADD) ? ADD : REMOVE) + " Course");
                 alertDialogBuilder
                         .setMessage(areYouSure)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (adminAction.equals(context.getText(R.string.AddCourse)))
-                                    administrator.addCourseToCurriculum(courseSelected, courseType, adminAction, departmentName, courseLevel, context);
-                                else
-                                    administrator.removeCourseFromCurriculum(courseSelected, courseType, adminAction, departmentName, courseLevel, context);
+
+                                String curriculumURL = null;
+                                if (adminAction.equals(context.getText(R.string.AddCourse))) {
+                                    // Must be adding course to curriculum.
+                                    curriculumURL = "/" + courseLevel + "/" + departmentName + "/" + courseSelected.getCourseCode();
+                                    administrator.addCourseToDatabase(coursesToSearch, position, courseSearchAdapter, curriculumURL, context);
+                                } else {
+                                    // Removing course. Could be removing from curriculum or master course list.
+                                    if (departmentName == null) {
+                                        curriculumURL = context.getText(R.string.MasterCourseListURL).toString() + "/" + courseSelected.getCourseCode();
+                                        administrator.removeCourseFromDatabase(coursesToSearch, position, courseSearchAdapter, curriculumURL, context);
+                                    } else {
+                                        curriculumURL = "/" + courseLevel + "/" + departmentName + "/" + courseSelected.getCourseCode();
+                                        administrator.removeCourseFromDatabase(coursesToSearch, position, courseSearchAdapter, curriculumURL, context);
+                                    }
+                                }
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

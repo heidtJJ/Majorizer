@@ -70,10 +70,6 @@ public class Administrator extends Account {
     //********************************************** END OF ACCOUNT LOCKING ********************************************************
     //************************************************ CURRICULUM CHANGES **********************************************************
 
-    public void removeCourseFromCurriculum() {
-
-    }
-
     public void addCourseToMasterList(final String courseName, final String courseCode, final String numCourseCredits, final Context context) {
         final String MASTER_COURSE_LIST = context.getText(R.string.MasterCourseList).toString();
         final String CREDITS = context.getText(R.string.Credits).toString();
@@ -103,14 +99,16 @@ public class Administrator extends Account {
         });
     }
 
-    public void addCourseToCurriculum(final Course course, final String courseType, final String adminAction, final String department, final String courseLevel, final Context context) {
+    public void addCourseToDatabase(final List<Course> coursesToSearch, final int position,
+                                    final CourseSearchAdapter searchAdapter, final String coursesURL,
+                                    final Context context) {
+        final Course course = coursesToSearch.get(position);
         final String CREDITS = context.getText(R.string.Credits).toString();
         final String COURSE_NAME = context.getText(R.string.CourseName).toString();
         final String PREREQUISITES = context.getText(R.string.Prerequisites).toString();
 
-        String masterCourseListURL = "/" + courseLevel + "/" + department + "/" + course.getCourseCode();
         // Make query to database to add new course to Curriculum.
-        FirebaseDatabase.getInstance().getReference(masterCourseListURL).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference(coursesURL).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
@@ -125,7 +123,14 @@ public class Administrator extends Account {
                 for (Course preReqCourseCode : course.getPreRequsites()) {
                     preReqsSnapshot.child(String.valueOf(i++)).getRef().setValue(preReqCourseCode.getCourseCode());
                 }
-                Toast.makeText(context, Utility.getSuccessMessage(courseType, adminAction, department, courseLevel, context), Toast.LENGTH_LONG).show();
+
+                // Notify user of success.
+                Toast.makeText(context, "Successfully added this course to our records!", Toast.LENGTH_LONG).show();
+
+                // Remove this course from the available list in memory.
+                coursesToSearch.remove(position);
+                if (searchAdapter != null)
+                    searchAdapter.notifyDataSetChanged();
                 //((Activity) context).finish();
             }
 
@@ -138,14 +143,12 @@ public class Administrator extends Account {
         });
     }
 
-    public void removeCourseFromCurriculum(final Course course, final String courseType, final String adminAction, final String department, final String courseLevel, final Context context) {
-        final String CREDITS = context.getText(R.string.Credits).toString();
-        final String COURSE_NAME = context.getText(R.string.CourseName).toString();
-        final String PREREQUISITES = context.getText(R.string.Prerequisites).toString();
+    public void removeCourseFromDatabase(final List<Course> coursesToSearch, final int position,
+                                         final CourseSearchAdapter searchAdapter, final String coursesURL,
+                                         final Context context) {
 
-        String masterCourseListURL = "/" + courseLevel + "/" + department + "/" + course.getCourseCode();
         // Make query to database to add new course to Curriculum.
-        FirebaseDatabase.getInstance().getReference(masterCourseListURL).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference(coursesURL).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.hasChildren()) {
@@ -153,9 +156,15 @@ public class Administrator extends Account {
                     return;
                 }
 
+                // Remove the node for this course in the database.
                 dataSnapshot.getRef().removeValue();
-                Toast.makeText(context, Utility.getSuccessMessage(courseType, adminAction, department, courseLevel, context), Toast.LENGTH_LONG).show();
-                //((Activity) context).finish();
+
+                // Notify user of success.
+                Toast.makeText(context, "Successfully removed this course from our records!", Toast.LENGTH_LONG).show();
+
+                // Remove this course from the available list in memory.
+                coursesToSearch.remove(position);
+                searchAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -169,12 +178,12 @@ public class Administrator extends Account {
 
 
     public void populateCoursesForSearch(final Context context, final List<Course> courseToSearch,
-                                         final CourseSearchAdapter courseSearchAdapter, final String urlInDatabase) {
+                                         final CourseSearchAdapter courseSearchAdapter, final String URLInDatabase) {
         final String COURSE_NAME = context.getText(R.string.CourseName).toString();
         final String CREDITS = context.getText(R.string.Credits).toString();
         final String PRE_REQUISITES = context.getText(R.string.Prerequisites).toString();
         // Make asynchronous query to Firebase database to fill classes needed in UI.
-        FirebaseDatabase.getInstance().getReference(urlInDatabase).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference(URLInDatabase).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot courseList) {
                 // Iterate through courseList pulling data for each course.
@@ -189,7 +198,7 @@ public class Administrator extends Account {
                     DataSnapshot preReqSnapshot = course.child(PRE_REQUISITES);
                     for (DataSnapshot preRequisite : preReqSnapshot.getChildren()) {
                         String preReqCourseCode = preRequisite.getValue().toString();
-                        preReqs.add(new Course(null, preReqCourseCode, 4, new HashSet<Course>()));
+                        preReqs.add(new Course(null, preReqCourseCode, 3, new HashSet<Course>()));
                     }
 
                     courseToSearch.add(new Course(courseName, courseCode, numCredits, preReqs));

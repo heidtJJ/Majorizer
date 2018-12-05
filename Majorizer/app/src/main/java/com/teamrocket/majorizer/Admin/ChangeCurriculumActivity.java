@@ -24,6 +24,7 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
     // Data objects from previous activity.
     private Administrator administrator = null;
     private String adminAction = null;
+    private String adminActionType = null;
     private String courseType = null;
     private String courseLevel = null;
     private String departmentName = null;
@@ -47,12 +48,8 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
         // adminAction is either add course or drop course.
         adminAction = (String) getIntent().getSerializableExtra(getText(R.string.AdminAction).toString());
 
-        // adminActionType is either grad or undergrad.
-        courseType = (String) getIntent().getSerializableExtra(getText(R.string.CourseType).toString());
-        if (courseType.equals(getText(R.string.Undergrad).toString()))
-            searchHint += "an Undergraduate course";
-        else
-            searchHint += "a Graduate course";
+        // adminActionType is either MasterCourseList or Curriculum
+        adminActionType = (String) getIntent().getSerializableExtra(getText(R.string.AdminActionType).toString());
 
         // Course level is where in the database to insert/remove this data.
         courseLevel = (String) getIntent().getSerializableExtra(getText(R.string.CourseLevel).toString());
@@ -60,15 +57,26 @@ public class ChangeCurriculumActivity extends AppCompatActivity implements Searc
         // Department name is name of department.
         departmentName = (String) getIntent().getSerializableExtra(getText(R.string.Department).toString());
 
+        // courseType is either grad or undergrad. This is null if user wants to remove a master course.
+        courseType = (String) getIntent().getSerializableExtra(getText(R.string.CourseType).toString());
+
+        if (courseType == null)
+            searchHint += "an course";
+        else if (courseLevel != null && courseType.equals(getText(R.string.Undergrad).toString()))
+            searchHint += "an Undergraduate course";
+        else
+            searchHint += "a Graduate course";
+
         // Create a search-view adapter object for searching through master course list.
         courseSearchViewAdapter = new CourseSearchAdapter(this, administrator, coursesToSearch, courseType, adminAction, courseLevel, departmentName);
 
         // Populate the coursesToSearch list with the correct courses. Construct the proper URL first.
         String URLinDatabase = null;
-        if (adminAction.equals(getText(R.string.AddCourse)) && courseLevel.equals(getText(R.string.Undergrad)))
+        if (adminActionType.equals(getText(R.string.ChangeMasterCourseList)) ||
+                (adminActionType.equals(getText(R.string.ChangeCurriculum)) && adminAction.equals(getText(R.string.AddCourse))))
             URLinDatabase = "/" + getText(R.string.MasterCourseList).toString();
         else
-            URLinDatabase = "/" + courseLevel + "/" + departmentName + "";
+            URLinDatabase = "/" + courseLevel + "/" + departmentName;
         administrator.populateCoursesForSearch(this, coursesToSearch, courseSearchViewAdapter, URLinDatabase);
 
         // Retrieve views from UI.

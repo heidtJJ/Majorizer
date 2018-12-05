@@ -7,8 +7,13 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.AppUtility.Utility;
 import com.teamrocket.majorizer.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class CreateUndergradCourseActivity extends AppCompatActivity {
     private EditText courseNumberEditText = null;
@@ -80,6 +85,12 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
         }
 
         // Input is valid. Proceed to add class to database.
-        administrator.addCourseToMasterList(courseName, classCodePrefix + courseNumber, numCredits, this);
+        final String courseId = classCodePrefix + courseNumber;
+        final Course course = new Course(courseName, courseId, Integer.valueOf(numCredits), new HashSet<Course>());
+
+        // Construct URL to new course location in database.
+        final String masterCourseListURL = getText(R.string.MasterCourseListURL).toString() + "/" + courseId;
+        administrator.addCourseToDatabase(new ArrayList<>(Arrays.asList(course)), 0, null, masterCourseListURL, this);
+        Utility.hideKeyboard(this, view);
     }
 }
