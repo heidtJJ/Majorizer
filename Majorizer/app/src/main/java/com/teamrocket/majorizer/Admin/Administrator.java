@@ -164,7 +164,8 @@ public class Administrator extends Account {
 
                 // Remove this course from the available list in memory.
                 coursesToSearch.remove(position);
-                searchAdapter.notifyDataSetChanged();
+                if (searchAdapter != null)
+                    searchAdapter.notifyDataSetChanged();
             }
 
             @Override
