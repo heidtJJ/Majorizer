@@ -69,36 +69,7 @@ public class Administrator extends Account {
     }
     //********************************************** END OF ACCOUNT LOCKING ********************************************************
     //************************************************ CURRICULUM CHANGES **********************************************************
-
-    public void addCourseToMasterList(final String courseName, final String courseCode, final String numCourseCredits, final Context context) {
-        final String MASTER_COURSE_LIST = context.getText(R.string.MasterCourseList).toString();
-        final String CREDITS = context.getText(R.string.Credits).toString();
-        final String COURSE_NAME = context.getText(R.string.CourseName).toString();
-
-        String masterCourseListURL = "/" + MASTER_COURSE_LIST + "/" + courseCode;
-        // Make query to database to add new course to MasterCourseList.
-        FirebaseDatabase.getInstance().getReference(masterCourseListURL).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    Toast.makeText(context, context.getText(R.string.CourseExists).toString(), Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                dataSnapshot.child(CREDITS).getRef().setValue(numCourseCredits);
-                dataSnapshot.child(COURSE_NAME).getRef().setValue(courseName);
-                Toast.makeText(context, context.getText(R.string.SuccessfulCourseAddition).toString(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(final DatabaseError databaseError) {
-                // Database query was not successful.
-                Toast.makeText(context, context.getText(R.string.TryAgainLater), Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    }
-
+    
     public void addCourseToDatabase(final List<Course> coursesToSearch, final int position,
                                     final CourseSearchAdapter searchAdapter, final String coursesURL,
                                     final Context context) {
@@ -176,7 +147,6 @@ public class Administrator extends Account {
 
         });
     }
-
 
     public void populateCoursesForSearch(final Context context, final List<Course> courseToSearch,
                                          final CourseSearchAdapter courseSearchAdapter, final String URLInDatabase) {
