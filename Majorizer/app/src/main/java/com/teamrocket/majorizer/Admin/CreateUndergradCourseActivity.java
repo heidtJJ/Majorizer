@@ -78,6 +78,15 @@ public class CreateUndergradCourseActivity extends AppCompatActivity {
             case R.id.radioDepartment_CS:
                 classCodePrefix = getText(R.string.ComputerScienceCode).toString();
                 break;
+            case R.id.radioDepartment_STAT:
+                classCodePrefix = getText(R.string.StatisticsCode).toString();
+                break;
+            case R.id.radioDepartment_EE:
+                classCodePrefix = getText(R.string.ElectricalEngineeringCode).toString();
+                break;
+            case R.id.radioDepartment_CE:
+                classCodePrefix = getText(R.string.CivilEngineeringCode).toString();
+                break;
             default:
                 // Department was not selected. Alert the user and leave this method.
                 Toast.makeText(this, getText(R.string.MissingCheckBox), Toast.LENGTH_LONG).show();

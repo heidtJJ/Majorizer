@@ -9,7 +9,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.teamrocket.majorizer.AppUtility.Course;
 import com.teamrocket.majorizer.R;
 
 public class DepartmentSelectionActivity extends AppCompatActivity {
@@ -75,6 +74,15 @@ public class DepartmentSelectionActivity extends AppCompatActivity {
                 break;
             case R.id.radioDepartment_CS:
                 departmentName = getText(R.string.ComputerScience).toString();
+                break;
+            case R.id.radioDepartment_STAT:
+                departmentName = getText(R.string.Statistics).toString();
+                break;
+            case R.id.radioDepartment_EE:
+                departmentName = getText(R.string.ElectricalEngineering).toString();
+                break;
+            case R.id.radioDepartment_CE:
+                departmentName = getText(R.string.CivilEngineering).toString();
                 break;
             default:
                 // Department was not selected. Alert the user and leave this method.
