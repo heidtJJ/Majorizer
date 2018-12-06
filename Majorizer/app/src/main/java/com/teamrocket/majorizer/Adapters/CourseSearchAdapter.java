@@ -25,6 +25,8 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
     private Administrator administrator = null;
     private final String ADD = "Add";
     private final String REMOVE = "Remove";
+    private final String TO = "to";
+    private final String FROM = "from";
 
 
     // Either Grad or Undergrad
@@ -125,22 +127,25 @@ public class CourseSearchAdapter extends BaseAdapter implements Filterable {
             public void onClick(View v) {
                 // Construct a string for adding or removing a course.
                 String addOrRemove = null;
-                if (adminAction.equals(context.getText(R.string.AddCourse)))
-                    addOrRemove = ADD.toLowerCase();
-                else
-                    addOrRemove = REMOVE.toLowerCase();
-
+                String toOrFrom = null;
+                if (adminAction.equals(context.getText(R.string.AddCourse))) {
+                    addOrRemove = ADD;
+                    toOrFrom = TO;
+                } else {
+                    addOrRemove = REMOVE;
+                    toOrFrom = FROM;
+                }
                 // Create the "Are you sure that you want to ..." message.
                 String areYouSure = "Are you sure that you want to ";
                 if (courseType != null) {
                     if (courseType.equals(context.getText(R.string.Undergrad))) {
-                        areYouSure = String.format("%s this class to the %s ", addOrRemove, courseType);
-                        if (courseLevel.equals(context.getText(R.string.Major)))
-                            areYouSure += "Major of " + departmentName;
+                        areYouSure = String.format("%s this class %s the %s ", addOrRemove, toOrFrom, courseType);
+                        if (courseLevel.equals(context.getText(R.string.UndergradMajors)))
+                            areYouSure += "Major of " + departmentName + "?";
                         else
-                            areYouSure += "Minor of " + departmentName;
+                            areYouSure += "Minor of " + departmentName + "?";
                     } else
-                        areYouSure = String.format("%s this class to the Graduate department of %s?", addOrRemove, departmentName);
+                        areYouSure = String.format("%s this class %s the Graduate department of %s?", addOrRemove, toOrFrom, departmentName);
                 } else {
                     // The courseType variable is null and the user must be removing a course from the master course list.
                     areYouSure = "Remove this class from the Master Course List?";
