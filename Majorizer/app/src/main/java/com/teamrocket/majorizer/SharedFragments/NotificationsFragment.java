@@ -32,7 +32,7 @@ public class NotificationsFragment extends Fragment {
         notificationRecyclerView.setLayoutManager(cLayoutManager);
 
         // Create RecyclerView with data.
-        RecyclerView.Adapter notificationsAdapter = new NotificationAdapter(account);
+        RecyclerView.Adapter notificationsAdapter = new NotificationAdapter(account, getActivity());
         notificationRecyclerView.setAdapter(notificationsAdapter);
 
         return view;

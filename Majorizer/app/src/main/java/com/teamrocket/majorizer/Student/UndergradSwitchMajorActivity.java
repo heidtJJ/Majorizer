@@ -49,7 +49,12 @@ public class UndergradSwitchMajorActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> majorSnapshotChildren = majorSnapshot.getChildren();
                 ArrayList<String> majors = new ArrayList<>();
                 for (DataSnapshot major : majorSnapshotChildren) majors.add(major.getKey());
-                final RecyclerView.Adapter classAdapter = new MRecycleAdapter(majors, context, currentMajors, "Major", student);
+                DataSnapshot advisorUserName = dataSnapshot.child("Accounts/" + student.getUserName() + "/Advisors");
+                Iterable<DataSnapshot> advisorSnapshotChildren = advisorUserName.getChildren();
+                ArrayList<String> advisors = new ArrayList<>();
+                for (DataSnapshot advisor : advisorSnapshotChildren) advisors.add(advisor.getKey());
+                String advisor = advisors.get(0);
+                final RecyclerView.Adapter classAdapter = new MRecycleAdapter(majors, context, currentMajors, "Major", student, advisor);
                 cRecyclerView.setAdapter(classAdapter);
             }
 
@@ -87,7 +92,12 @@ public class UndergradSwitchMajorActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> minorSnapshotChildren = minorSnapshot.getChildren();
                 ArrayList<String> minors = new ArrayList<>();
                 for (DataSnapshot minor : minorSnapshotChildren) minors.add(minor.getKey());
-                final RecyclerView.Adapter classAdapter = new MRecycleAdapter(minors, context, currentMinors, "Minor", student);
+                DataSnapshot advisorUserName = dataSnapshot.child("Accounts/" + student.getUserName() + "/Advisors");
+                Iterable<DataSnapshot> advisorSnapshotChildren = advisorUserName.getChildren();
+                ArrayList<String> advisors = new ArrayList<>();
+                for (DataSnapshot advisor : advisorSnapshotChildren) advisors.add(advisor.getKey());
+                String advisor = advisors.get(0);
+                final RecyclerView.Adapter classAdapter = new MRecycleAdapter(minors, context, currentMinors, "Minor", student, advisor);
                 cRecyclerViewM.setAdapter(classAdapter);
             }
 
