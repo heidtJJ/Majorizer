@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.teamrocket.majorizer.AppUtility.LoginManager;
 import com.teamrocket.majorizer.AppUtility.Notification;
 import com.teamrocket.majorizer.AppUtility.NotificationManager;
 import com.teamrocket.majorizer.R;
@@ -105,19 +107,51 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                             });
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
+                } else if (header.contains("Locked")) {
+                    final String addMessage = message;
+                    final String userName = header.substring(header.indexOf("-") + 2, header.length());
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                    alertDialogBuilder.setTitle(String.format("Unlock account - %s?", userName));
+                    alertDialogBuilder.setMessage(String.format("Approve to unlock the account of %s?", userName))
+                            .setPositiveButton("Unlock Account", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String loginAttemptsLocation = "/Accounts/" + userName;
+                                    FirebaseDatabase.getInstance().getReference("/Accounts/" + userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            LoginManager.resetLoginAttempts(dataSnapshot, userName, context);
+                                            Toast.makeText(context, "Successfully reset login attempts for this user!", Toast.LENGTH_LONG).show();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
                 } else if (header.contains("Add")) {
-                    final String addM = message;
+                    final String addMessage = message;
                     final String userName = header.substring(header.indexOf("from") + 5, header.length());
                     final String mode = header.contains("minor") ? "Minor" : "Major";
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                     alertDialogBuilder.setTitle(String.format("Approve %s Add", mode));
-                    alertDialogBuilder.setMessage(String.format("Approve %s to add %s %s?", userName, mode, addM))
+                    alertDialogBuilder.setMessage(String.format("Approve %s to add %s %s?", userName, mode, addMessage))
                             .setPositiveButton("Approve", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference ref = database.getReference("Accounts/" + userName + "/" + mode + "2");
-                                    ref.setValue(addM);
+                                    ref.setValue(addMessage);
                                 }
                             })
                             .setNegativeButton("Deny", new DialogInterface.OnClickListener() {

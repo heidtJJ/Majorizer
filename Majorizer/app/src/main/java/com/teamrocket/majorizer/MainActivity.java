@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Add notifications fragment.
         // TO-DO: Make notification fragments for each account if necessary.
-        sectionsPageAdapter.addFragment(new NotificationsFragment(), getResources().getString(R.string.TitleToDoList));
+        sectionsPageAdapter.addFragment(new NotificationsFragment(), getResources().getString(R.string.Notifications));
 
         // Admins will not have account tab. They do not have any personal information.
         if (!(account instanceof Administrator))

@@ -4,7 +4,7 @@
     <string name="AppName">Majorizer</string>
     <string name="TitleHome">Home</string>
     <string name="TitleAccount">Account</string>
-    <string name="TitleToDoList">To-Do List</string>
+    <string name="Notifications">Notifications</string>
     <string name="RemoveNotification">Remove Notification</string>
     <string name="AccountObject">account</string>
     <string name="StudentObject">student</string>
