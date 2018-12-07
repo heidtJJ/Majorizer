@@ -192,6 +192,7 @@ public class Administrator extends Account {
     public static void createNewUndergradStudentAccount(final Context context, final String username, final String password,
                                                         final String firstName, final String lastName, final String major1,
                                                         final String major2, final String minor1, final String minor2) {
+
         // Make query to Firebase database to validate user.
         FirebaseDatabase.getInstance().getReference("/" + context.getText(R.string.Accounts)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

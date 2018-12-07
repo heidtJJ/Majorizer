@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.teamrocket.majorizer.AppUtility.Utility;
 import com.teamrocket.majorizer.R;
 
 import static com.teamrocket.majorizer.AppUtility.Utility.isValidName;
@@ -80,9 +81,12 @@ public class CreateAdvisorAccountActivity extends AppCompatActivity {
             return;
         }
 
-
-        // TO-DO: Validate the password
-
+        // Check if password is valid
+        if (!Utility.isValidPassword(password)){
+            // The password is invalid. Alert the user and leave this method.
+            Toast.makeText(this, "The password which you entered is invalid!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         // Check if the username is valid (6 lowercase letters).
         if (!isValidUserName(username)) {

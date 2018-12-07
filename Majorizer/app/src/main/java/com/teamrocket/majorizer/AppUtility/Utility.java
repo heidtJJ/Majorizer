@@ -101,8 +101,27 @@ public final class Utility {
     }
 
     public static boolean isValidPassword(final String password) {
-
-        return false;
+        // Check if password is valid
+        boolean hasLower = false;
+        boolean hasUpper = false;
+        boolean hasNumber = false;
+        boolean hasSpecial = false;
+        String specialCharacters = "/*!@#$%^&*()\"{}_[]|\\?/<>,.";
+        for(int i = 0; i < password.length(); i++){
+            if(Character.isLowerCase(password.charAt(i)))
+                hasLower = true;
+            else if(Character.isUpperCase(password.charAt(i)))
+                hasUpper = true;
+            else if(Character.isDigit(password.charAt(i)))
+                hasNumber = true;
+            else if(specialCharacters.contains(String.valueOf(password.charAt(i))))
+                hasSpecial = true;
+        }
+        if (!hasLower || !hasUpper || !hasNumber || !hasSpecial ||
+                password.length() < 6 || password.length() > 12){
+            return false;
+        }
+        return true;
     }
 
     public static boolean isNumber(final String str) {

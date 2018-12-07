@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.teamrocket.majorizer.AppUtility.Utility;
 import com.teamrocket.majorizer.R;
 
 import static com.teamrocket.majorizer.AppUtility.Utility.isValidName;
@@ -73,6 +74,13 @@ public class CreateUndergradAccountActivity extends AppCompatActivity {
         if (!(password).equals(passwordRetry)) {
             // The passwords do not match. Alert the user and leave this method.
             Toast.makeText(this, getText(R.string.PasswordMismatch), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Check if password is valid
+        if (!Utility.isValidPassword(password)) {
+            // The password is invalid. Alert the user and leave this method.
+            Toast.makeText(this, "The password which you entered is invalid!", Toast.LENGTH_LONG).show();
             return;
         }
 
