@@ -86,7 +86,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             @Override
             public void onClick(View v) {
                 if (header.contains("Switch")) {
-                    String fromM = message.substring(0, message.indexOf(" to"));
+                    final String fromM = message.substring(0, message.indexOf(" to"));
                     final String toM = message.substring(message.indexOf(" to ") + 4, message.length());
                     final String userName = header.substring(header.indexOf("from") + 5, header.length());
                     final String mode = header.contains("minor") ? "Minor" : "Major";
@@ -99,11 +99,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference ref = database.getReference("Accounts/" + userName + "/" + mode + "1");
                                     ref.setValue(toM);
+                                    String uuid = String.valueOf(UUID.randomUUID());
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Header").setValue(mode + " switch request approved!");
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Message").setValue(mode + " has been switched from " + fromM + " to " + toM + ".");
                                 }
                             })
                             .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    String uuid = String.valueOf(UUID.randomUUID());
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Header").setValue(mode + " switch request denied!");
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Message").setValue(mode + " remains " + toM + ".");
                                     dialog.cancel();
                                 }
                             });
@@ -124,6 +131,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             LoginManager.resetLoginAttempts(dataSnapshot, userName, context);
                                             Toast.makeText(context, "Successfully reset login attempts for this user!", Toast.LENGTH_LONG).show();
+
+
                                         }
 
                                         @Override
@@ -154,13 +163,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                 public void onClick(DialogInterface dialog, int which) {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference ref = database.getReference("Accounts/" + userName + "/" + mode + num);
-                                    ref.setValue(addMessage.substring(0, addMessage.length() - 1));
+                                    ref.setValue(addMessage.substring(0, addMessage.length() - 2));
+
+                                    String uuid = String.valueOf(UUID.randomUUID());
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Header").setValue(mode + " add request approved!");
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Message").setValue(mode + " " + addMessage.substring(0, addMessage.length() - 1) + " has been added.");
                                 }
                             })
                             .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    String uuid = String.valueOf(UUID.randomUUID());
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Header").setValue(mode + " add request denied!");
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Message").setValue(mode + " " + addMessage.substring(0, addMessage.length() - 1) + " has been denied.");
                                 }
                             });
                     AlertDialog alertDialog = alertDialogBuilder.create();
@@ -196,11 +212,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
                                             }
                                         });
+                                    String uuid = String.valueOf(UUID.randomUUID());
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Header").setValue(mode + " drop request approved!");
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Message").setValue(mode + " " + dropM + " has been dropped.");
                                 }
                             })
                             .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    String uuid = String.valueOf(UUID.randomUUID());
+                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Header").setValue(mode + " drop request denied!");
+                                    database.getReference("Accounts/" + userName + "/" + "Notifications/" + uuid + "/Message").setValue(mode + " " + dropM + " has been denied.");
                                     dialog.cancel();
                                 }
                             });
@@ -209,9 +232,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 }
             }
         };
+        holder.notificationMessageView.setText(notifications.get(position).getMessage());
         holder.notificationHeaderView.setOnClickListener(myClick);
         holder.notificationMessageView.setOnClickListener(myClick);
-        holder.notificationMessageView.setText(notifications.get(position).getMessage());
         holder.notificationId.setText(notifications.get(position).getId());
     }
 

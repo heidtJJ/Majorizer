@@ -91,6 +91,8 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                                     String uuid = String.valueOf(UUID.randomUUID());
                                     database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Header").setValue("Switch " + mode.toLowerCase() + " request from " + student.getUserName());
                                     database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Message").setValue((mode.equals("Major") ? student.getMajor1() : student.getMinor1()) + " to " + m);
+
+                                    Toast.makeText(context, "Request sent to advisor!", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -129,7 +131,9 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                                     } else num = "2";
                                 }
                                 database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Header").setValue("Add " + mode.toLowerCase() + " request from " + student.getUserName());
-                                database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Message").setValue(m + num);
+                                database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Message").setValue(m + " " + num);
+
+                                Toast.makeText(context, "Request sent to advisor!", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -158,6 +162,8 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                                     String uuid = String.valueOf(UUID.randomUUID());
                                     database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Header").setValue("Drop " + mode.toLowerCase() + " request from " + student.getUserName());
                                     database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Message").setValue(m + " (" + (String.valueOf(mNum)) + ")");
+
+                                    Toast.makeText(context, "Request sent to advisor!", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
