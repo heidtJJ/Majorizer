@@ -25,15 +25,14 @@ StudentInfoActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_info);
-
+        getSupportActionBar().hide();
 
         student = (Student) getIntent().getSerializableExtra(getText(R.string.StudentObject).toString());
         LoginManager.getStudentData(student, this);
         advisor = (Advisor) getIntent().getSerializableExtra(getText(R.string.AccountObject).toString());
 
-        adviseeActivityHeader = findViewById(R.id.adviseeActivityHeader);
-        adviseeActivityHeader.setText(adviseeActivityHeader.getText() + " " + student.getFirstName() + " " + student.getLastName());
-
+        TextView header = findViewById(R.id.toolbar_title);
+        header.setText("Info for: " + student.getFirstName() + " " + student.getLastName());
     }
 
     public void SeeCoursesTaken(final View view) {

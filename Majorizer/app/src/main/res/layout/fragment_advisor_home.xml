@@ -17,8 +17,8 @@
             android:id="@+id/myAdviseeCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="2"
+            android:layout_margin="5dp"
             android:onClick="undergradSelection"
             app:cardCornerRadius="7dp">
 
@@ -45,6 +45,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
                     android:text="My Advisees"
+                    android:gravity="center"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
@@ -56,7 +57,9 @@
             android:id="@+id/addAdviseeCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="2"
             android:onClick="undergradSelection"
             app:cardCornerRadius="7dp">
@@ -84,6 +87,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
                     android:text="Add Advisee"
+                    android:gravity="center"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 
@@ -96,7 +100,9 @@
             android:id="@+id/dropAdviseeCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="2"
             android:onClick="undergradSelection"
             app:cardCornerRadius="7dp">
@@ -124,6 +130,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
                     android:text="Drop Advisee"
+                    android:gravity="center"
                     android:textAlignment="center"
                     android:textSize="25sp" />
 

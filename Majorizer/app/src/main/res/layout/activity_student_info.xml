@@ -7,22 +7,34 @@
     android:background="@color/offWhite"
     tools:context="Advisor.StudentInfoActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="My Advisees"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/adviseeActivityHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/StudentInformationFor"
-            android:textAlignment="center"
-            android:textSize="27dp"
-            android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <android.support.v7.widget.CardView
             android:id="@+id/seeCoursesTakenCard"
@@ -55,6 +67,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
+                    android:gravity="center"
                     android:text="Courses Taken"
                     android:textAlignment="center"
                     android:textSize="25sp" />
@@ -67,7 +80,9 @@
             android:id="@+id/currentCoursesTakenCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="2"
             android:onClick="SeeCoursesTaking"
             app:cardCornerRadius="7dp">
@@ -94,6 +109,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
+                    android:gravity="center"
                     android:text="Current Courses Taking"
                     android:textAlignment="center"
                     android:textSize="25sp" />
@@ -106,7 +122,9 @@
             android:id="@+id/coursesNeededCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="2"
             android:onClick="SeeCoursesNeeded"
             app:cardCornerRadius="7dp">
@@ -133,6 +151,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="3"
+                    android:gravity="center"
                     android:text="Courses Needed"
                     android:textAlignment="center"
                     android:textSize="25sp" />

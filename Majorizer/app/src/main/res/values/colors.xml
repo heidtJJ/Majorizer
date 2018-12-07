@@ -3,7 +3,9 @@
 
     <color name="colorPrimary">#4286f4</color>
     <color name="colorPrimaryDark">#3973d1</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#ff3c83</color>
+    <color name="colorAccentEnd">#ff649d</color>
+    <color name="colorAccentFade">#ff7dae</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="circleRed">#F44336</color>

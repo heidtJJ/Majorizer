@@ -72,7 +72,7 @@ public class UndergradSwitchMajorActivity extends AppCompatActivity {
             currentMinors.add(student.getMinor1());
             minorText = "Current minor: " + currentMinors.get(0);
         }
-        else minorText = "You have no minors.";
+        else minorText = "No enrolled minors.";
         System.out.println("M1: " + student.getMinor1());
         System.out.println("M2: " + student.getMinor2());
         if (student.getMinor2() != null) {

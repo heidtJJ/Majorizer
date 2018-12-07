@@ -118,8 +118,18 @@ public class MRecycleAdapter extends RecyclerView.Adapter<MRecycleAdapter.MViewH
                             public void onClick(DialogInterface dialog, int which) {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 String uuid = String.valueOf(UUID.randomUUID());
+                                String num;
+                                if (mode.equals("Minor")) {
+                                    if (student.getMinor1() == null) {
+                                        num = "1";
+                                    } else num = "2";
+                                } else {
+                                    if (student.getMajor1() == null) {
+                                        num = "1";
+                                    } else num = "2";
+                                }
                                 database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Header").setValue("Add " + mode.toLowerCase() + " request from " + student.getUserName());
-                                database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Message").setValue(m);
+                                database.getReference("Accounts/" + advisor + "/" + "Notifications/" + uuid + "/Message").setValue(m + num);
                             }
                         });
                     }

@@ -24,7 +24,7 @@
     <!-- Login Activity Strings -->
     <string name="Login">LOGIN</string>
     <string name="PasswordKey">Password</string>
-    <string name="ClarksonUsername">Clarkson Username</string>
+    <string name="ClarksonUsername">Username</string>
     <string name="GradCap">Graduation Cap</string>
     <string name="Accounts">Accounts</string>
     <string name="Advisors">Advisors</string>

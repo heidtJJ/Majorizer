@@ -22,6 +22,7 @@ import com.teamrocket.majorizer.Student.UndergradStudent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,14 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
         // Retrieve views from UI.
         adviseeSearchView = findViewById(R.id.studentsSearchView);
         adviseeListView = findViewById(R.id.studentsRecyclerView);
+
+        Iterator it = advisor.getStudents().entrySet().iterator();
+        final ArrayList<String> currentStudents = new ArrayList<>();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            currentStudents.add((((UndergradStudent) pair.getValue()).getLastName()) + " " + ((UndergradStudent) pair.getValue()).getFirstName());
+        }
+        System.out.println("Fsf " +  currentStudents);
         setupSearchView();
 
         final Context context = this;
@@ -75,7 +84,13 @@ public class AdviserSearchStudentsTileActivity extends AppCompatActivity impleme
                     student.setUserName(entry.getKey());
                     student.setFirstName(entry.getValue().substring(0, entry.getValue().indexOf(" ")));
                     student.setLastName(entry.getValue().substring(entry.getValue().indexOf(" ") + 1, entry.getValue().length()));
-                    students.add(student);
+                    boolean already = false;
+                    for (String currentAdvisee : currentStudents) {
+                        if (currentAdvisee.toLowerCase().contains(student.getLastName().toLowerCase()) &&
+                                currentAdvisee.toLowerCase().contains(student.getFirstName().toLowerCase())) already = true;
+                        else already = false;
+                    }
+                    if (!already) students.add(student);
                 }
                 adviseeSearchViewAdapter = new StudentSearchAdapter(context, advisor, students);
                 adviseeListView.setAdapter(adviseeSearchViewAdapter);

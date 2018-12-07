@@ -3,6 +3,7 @@ package com.teamrocket.majorizer.Adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,12 +76,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final NotificationHolder holder, final int position) {
         List<Notification> notifications = account.getNotifications();
         holder.notificationHeaderView.setText(notifications.get(position).getHeader());
         final String header = notifications.get(position).getHeader();
         final String message = notifications.get(position).getMessage();
-        holder.notificationHeaderView.setOnClickListener(new View.OnClickListener() {
+        Toast.makeText(context, "You have notifications!", Toast.LENGTH_SHORT).show();
+        View.OnClickListener myClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (header.contains("Switch")) {
@@ -143,6 +145,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     final String addMessage = message;
                     final String userName = header.substring(header.indexOf("from") + 5, header.length());
                     final String mode = header.contains("minor") ? "Minor" : "Major";
+                    final String num = addMessage.substring(addMessage.length() - 1, addMessage.length());
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                     alertDialogBuilder.setTitle(String.format("Approve %s Add", mode));
                     alertDialogBuilder.setMessage(String.format("Approve %s to add %s %s?", userName, mode, addMessage))
@@ -150,8 +153,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference ref = database.getReference("Accounts/" + userName + "/" + mode + "2");
-                                    ref.setValue(addMessage);
+                                    DatabaseReference ref = database.getReference("Accounts/" + userName + "/" + mode + num);
+                                    ref.setValue(addMessage.substring(0, addMessage.length() - 1));
                                 }
                             })
                             .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
@@ -175,12 +178,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                 public void onClick(DialogInterface dialog, int which) {
                                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     final DatabaseReference ref = database.getReference("Accounts/" + userName + "/" + mode + dropI);
-                                    if (dropI.equals("1")) {
                                         FirebaseDatabase.getInstance().getReference("Accounts/" + userName + "/" + mode + "2").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 if (!dataSnapshot.getValue().equals("NULL")) {
-                                                    DatabaseReference ref1 = database.getReference("Accounts/" + userName + "/" + mode + "2");
+                                                    DatabaseReference ref1 = database.getReference("Accounts/" + userName + "/" + mode + dropI);
                                                     ref.setValue(dataSnapshot.getValue());
                                                     ref1.setValue("NULL");
 
@@ -194,7 +196,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
                                             }
                                         });
-                                    }
                                 }
                             })
                             .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
@@ -207,7 +208,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     alertDialog.show();
                 }
             }
-        });
+        };
+        holder.notificationHeaderView.setOnClickListener(myClick);
+        holder.notificationMessageView.setOnClickListener(myClick);
         holder.notificationMessageView.setText(notifications.get(position).getMessage());
         holder.notificationId.setText(notifications.get(position).getId());
     }
