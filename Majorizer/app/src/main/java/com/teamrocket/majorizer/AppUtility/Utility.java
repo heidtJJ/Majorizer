@@ -152,6 +152,11 @@ public final class Utility {
         return courseNumInt >= 500 && courseNumInt < 1000;
     }
 
+    /**
+     * Checks if the input number of credits as a string is a valid amount.
+     * @param numberOfCredits a string representing a number (of credits).
+     * @return True if the string is a valid number of credits. False otherwise.
+     */
     public static boolean isValidNumberCredits(final String numberOfCredits) {
         if (!isNumber(numberOfCredits))
             return false;
