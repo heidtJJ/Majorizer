@@ -25,4 +25,8 @@ public class Notification implements Serializable {
         return this.id;
     }
 
+    @Override
+    public String toString() {
+        return header + ": " + message;
+    }
 }

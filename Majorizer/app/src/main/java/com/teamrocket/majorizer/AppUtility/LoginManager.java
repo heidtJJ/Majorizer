@@ -32,6 +32,7 @@ public class LoginManager implements Serializable {
     private static final String BAD_CREDENTIALS = "Your username and/or password was incorrect!";
     private static final String COULD_NOT_GET_ACCOUNT = "We could not retrieve this user's information!";
     private static final String EMPTY_FIELD = "Your username and/or password was empty!";
+    private static final String INVALID_CHARACTER = "Your input cannot include '.', '#', '$', '[', or ']'";
     private static final String BAD_QUERY = "Could not verify your credentials!";
     private static final int MAX_LOGIN_ATTEMPTS = 3;
 
@@ -72,23 +73,23 @@ public class LoginManager implements Serializable {
             String numLoginAttemptsString = numLoginAttemptsDataSnap.getValue().toString();
 
             // Increment and update the number of LoginAttempts for this user.
-            int numLoginAttemptsInt = Integer.parseInt(numLoginAttemptsString) + 1;
+            int newNumLoginAttemptsInt = Integer.parseInt(numLoginAttemptsString) + 1;
             mDatabase.child("/" + resources.getText(R.string.Accounts) + "/" + enteredClarksonId + "/" +
-                    resources.getString(R.string.LoginAttempts)).setValue(String.valueOf(numLoginAttemptsInt));
-            if (numLoginAttemptsInt == MAX_LOGIN_ATTEMPTS) {
+                    resources.getString(R.string.LoginAttempts)).setValue(String.valueOf(newNumLoginAttemptsInt));
+            if (newNumLoginAttemptsInt == MAX_LOGIN_ATTEMPTS) {
                 NotificationManager.notifyAdminLockedUser(dataSnapshot.getKey());
+                Toast.makeText(view.getContext(), resources.getText(R.string.UserLockedOut), Toast.LENGTH_SHORT).show();
             }
 
         }
     }
 
-    public void resetLoginAttempts(final DataSnapshot dataSnapshot, final String enteredClarksonId, final View view) {
-        Resources resources = view.getResources();
+    public static void resetLoginAttempts(final DataSnapshot dataSnapshot, final String enteredClarksonId, final Context context) {
         // Check if database has a LoginAttempts field for this user. Admins will not have this field.
-        if (dataSnapshot.hasChild(resources.getString(R.string.LoginAttempts))) {
+        if (dataSnapshot.hasChild(context.getString(R.string.LoginAttempts))) {
             // Reset the number of LoginAttempts for this user.
-            mDatabase.child("/" + resources.getText(R.string.Accounts) + "/" + enteredClarksonId + "/" +
-                    resources.getString(R.string.LoginAttempts)).setValue(String.valueOf(0));
+            mDatabase.child("/" + context.getText(R.string.Accounts) + "/" + enteredClarksonId + "/" +
+                    context.getString(R.string.LoginAttempts)).setValue(String.valueOf(0));
         }
     }
 
@@ -105,7 +106,7 @@ public class LoginManager implements Serializable {
         account.setUserName(clarksonUserName);
 
         // Load the user's notifications into their Account.
-        DataSnapshot notificationSnapShot = dataSnapshot.child(resources.getText(R.string.TitleToDoList).toString());
+        DataSnapshot notificationSnapShot = dataSnapshot.child(resources.getText(R.string.Notifications).toString());
         NotificationManager.getNotifications(notificationSnapShot, resources, account);
 
         String clarksonId = dataSnapshot.child(resources.getText(R.string.Id).toString()).getValue().toString();
@@ -119,7 +120,7 @@ public class LoginManager implements Serializable {
                 String fullName = advisor.getValue().toString();
                 ((Student) account).addAdvisor(advisorUsername, fullName);
             }
-            
+
             // Load the student's course history.
             DataSnapshot courseHistory = dataSnapshot.child(resources.getText(R.string.CourseHistory).toString());
             for (DataSnapshot course : courseHistory.getChildren()) {
@@ -134,7 +135,6 @@ public class LoginManager implements Serializable {
             DataSnapshot coursesTaking = dataSnapshot.child(resources.getText(R.string.CurrentCourses).toString());
             for (DataSnapshot course : coursesTaking.getChildren()) {
                 String courseCode = course.getKey();
-                System.out.println("FUCK " + courseCode);
                 String courseName = course.child(resources.getText(R.string.CourseName).toString()).getValue().toString();
                 Integer numCredits = Integer.valueOf(course.child(resources.getText(R.string.Credits).toString()).getValue().toString());
                 ((Student) account).addCourseCurTaking(courseName, courseCode, numCredits);
@@ -244,7 +244,15 @@ public class LoginManager implements Serializable {
 
         // Check if either user field is empty.
         if (enteredClarksonUsername.isEmpty() || enteredPassword.isEmpty()) {
-            Toast.makeText(view.getContext(), EMPTY_FIELD, Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), EMPTY_FIELD, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Validate password. Password cannot contain '.', '#', '$', '[', or ']'
+        if (enteredClarksonUsername.contains(".") || enteredClarksonUsername.contains(".") ||
+                enteredClarksonUsername.contains(".") || enteredClarksonUsername.contains(".") ||
+                enteredClarksonUsername.contains(".")) {
+            Toast.makeText(view.getContext(), INVALID_CHARACTER, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -256,7 +264,7 @@ public class LoginManager implements Serializable {
                 // Check if this clarkson ID exists in the database under /Accounts.
                 if (dataSnapshot.getChildrenCount() == 0) {
                     // Entered clarkson ID was incorrect. Notify user.
-                    Toast.makeText(context, BAD_CREDENTIALS, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, BAD_CREDENTIALS, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -269,7 +277,7 @@ public class LoginManager implements Serializable {
                     Intent mainActivity = new Intent(context, MainActivity.class);
 
                     // Reset the user's number of login attempts.
-                    resetLoginAttempts(dataSnapshot, enteredClarksonUsername, view);
+                    resetLoginAttempts(dataSnapshot, enteredClarksonUsername, view.getContext());
 
                     // This account object will be passed to the MainActivity.
                     Account account = null;
@@ -307,7 +315,7 @@ public class LoginManager implements Serializable {
             @Override
             public void onCancelled(final DatabaseError databaseError) {
                 // Database query was not successful.
-                Toast.makeText(view.getContext(), BAD_QUERY, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), BAD_QUERY, Toast.LENGTH_LONG).show();
             }
 
         });

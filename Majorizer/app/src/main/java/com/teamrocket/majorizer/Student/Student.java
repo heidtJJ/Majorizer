@@ -1,10 +1,7 @@
 package com.teamrocket.majorizer.Student;
 
-
-import com.teamrocket.majorizer.Advisor.Advisor;
 import com.teamrocket.majorizer.AppUtility.ClassData;
 import com.teamrocket.majorizer.AppUtility.Course;
-import com.teamrocket.majorizer.AppUtility.Schedule;
 import com.teamrocket.majorizer.Account;
 
 import java.text.DecimalFormat;
@@ -18,7 +15,6 @@ import java.util.Set;
 public abstract class Student extends Account {
 
     // DATA MEMBERS
-    private Schedule schedule = null;
 
     // First string is Advisor username, second string is full name.
     private Map<String, String> advisors = new HashMap<>();
@@ -34,10 +30,6 @@ public abstract class Student extends Account {
 
     public Set<String> getAdvisors() {
         return new HashSet<>(advisors.values());
-    }
-
-    public Schedule getSchedule() {
-        return this.schedule;
     }
 
     public int numCoursesTaken() {
@@ -102,11 +94,6 @@ public abstract class Student extends Account {
     // SET METHODS
     public void addAdvisor(final String username, final String fullName) {
         advisors.put(username, fullName);
-    }
-
-
-    public void setSchedule(final Schedule schedule) {
-        this.schedule = schedule;
     }
 
     public void addCoursePrevTaken(final String courseName, final String courseCode, final String courseGrade, final Integer numCredits) {

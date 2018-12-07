@@ -41,7 +41,7 @@
                 android:id="@+id/profileTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/TitleToDoList"
+                android:text="@string/Notifications"
                 app:tabMode="scrollable" />
 
             <android.support.design.widget.TabItem
