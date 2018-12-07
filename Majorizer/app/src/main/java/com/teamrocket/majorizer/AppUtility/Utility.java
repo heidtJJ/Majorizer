@@ -67,7 +67,7 @@ public final class Utility {
      * Checks if a string is lowercase and alphabetic.
      *
      * @param name the name of the string to check.
-     * @return whether the input string is lowercase and alphabetic or not.
+     * @return True if the input string is lowercase and alphabetic. False otherwise
      */
     public static boolean isLowerAlpha(String name) {
         char[] chars = name.toCharArray();
@@ -79,6 +79,11 @@ public final class Utility {
         return true;
     }
 
+    /**
+     * Checks if the input name is valid. Cannot contain numbers or special characters.
+     * @param name
+     * @return True if the name is valid. False otherwise.
+     */
     public static boolean isValidName(final String name) {
         char[] chars = name.toCharArray();
 
@@ -89,6 +94,11 @@ public final class Utility {
         return true;
     }
 
+    /**
+     * Retrieves the activity of the passed view.
+     * @param view the current view passed this function.
+     * @return the activity of the view.
+     */
     public static Activity getActivity(final View view) {
         Context context = view.getContext();
         while (context instanceof ContextWrapper) {
@@ -100,16 +110,20 @@ public final class Utility {
         return null;
     }
 
-    public static boolean isValidPassword(final String password) {
-
-        return false;
-    }
-
+    /**
+     * Checks if the input string is in the form of a number.
+     * @param str
+     * @return True if the input is in the form of a number. False otherwise.
+     */
     public static boolean isNumber(final String str) {
         return str.replaceAll("[0-9]", "").length() == 0;
     }
 
-
+    /**
+     * Checks if the input was a valid undergraduate course number.
+     * @param courseNumber an input string course number.
+     * @return True if the string is valid. False otherwise.
+     */
     public static boolean isValidUndergradCourseNumber(final String courseNumber) {
         if (!isNumber(courseNumber))
             return false;
@@ -117,6 +131,11 @@ public final class Utility {
         return courseNumInt > 0 && courseNumInt < 500;
     }
 
+    /**
+     * Checks if the input is a valid graduate course number.
+     * @param courseNumber a input string course number.
+     * @return True if the string is valid. False otherwise.
+     */
     public static boolean isValidGradCourseNumber(final String courseNumber) {
         if (!isNumber(courseNumber))
             return false;
@@ -129,30 +148,6 @@ public final class Utility {
             return false;
         Integer numberOfCreditsInt = Integer.valueOf(numberOfCredits);
         return numberOfCreditsInt >= 3 && numberOfCreditsInt <= 4;
-    }
-
-
-    public static String getSuccessMessage(final String courseType, final String adminAction,
-                                           final String departmentName, final String courseMajorOrMinor,
-                                           final Context context) {
-        String pageTitle = "Successfully ";
-        if (adminAction.equals(context.getText(R.string.AddCourse))) {
-            pageTitle += "added this course to ";
-        } else {
-            pageTitle += "removed this course from ";
-        }
-        if (courseType.equals(context.getText(R.string.Undergrad))) {
-            pageTitle += "the Undergraduate ";
-            if (courseMajorOrMinor.equals(context.getText(R.string.UndergradMajors)))
-                pageTitle += context.getText(R.string.Major).toString();
-            else
-                pageTitle += context.getText(R.string.Minor).toString();
-
-            pageTitle += " of ";
-        } else {
-            pageTitle += "the Graduate department of ";
-        }
-        return pageTitle + departmentName;
     }
 
 }
