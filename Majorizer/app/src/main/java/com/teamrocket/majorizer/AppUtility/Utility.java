@@ -17,6 +17,10 @@ import static com.teamrocket.majorizer.Account.AccountType.UNDERGRAD;
 import static java.lang.String.valueOf;
 
 // Final so that this class cannot be extended.
+
+/**
+ * This class is used as a standard utility class throughout the application.
+ */
 public final class Utility {
     private static final String databaseAdminKey = "admin";
     private static final String databaseAdvisorKey = "advisor";
@@ -81,6 +85,7 @@ public final class Utility {
 
     /**
      * Checks if the input name is valid. Cannot contain numbers or special characters.
+     *
      * @param name
      * @return True if the name is valid. False otherwise.
      */
@@ -96,6 +101,7 @@ public final class Utility {
 
     /**
      * Retrieves the activity of the passed view.
+     *
      * @param view the current view passed this function.
      * @return the activity of the view.
      */
@@ -112,6 +118,7 @@ public final class Utility {
 
     /**
      * Checks if the input string is in the form of a number.
+     *
      * @param str
      * @return True if the input is in the form of a number. False otherwise.
      */
@@ -121,6 +128,7 @@ public final class Utility {
 
     /**
      * Checks if the input was a valid undergraduate course number.
+     *
      * @param courseNumber an input string course number.
      * @return True if the string is valid. False otherwise.
      */
@@ -133,6 +141,7 @@ public final class Utility {
 
     /**
      * Checks if the input is a valid graduate course number.
+     *
      * @param courseNumber a input string course number.
      * @return True if the string is valid. False otherwise.
      */
